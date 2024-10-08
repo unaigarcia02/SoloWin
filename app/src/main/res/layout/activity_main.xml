@@ -22,6 +22,15 @@
             tools:layout_editor_absoluteX="-60dp"
             tools:layout_editor_absoluteY="0dp" />
 
+        <VideoView
+            android:id="@+id/videoView"
+            android:layout_width="1110dp"
+            android:layout_height="581dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView6" />
+
         <ImageView
             android:id="@+id/imageView8"
             android:layout_width="600dp"
