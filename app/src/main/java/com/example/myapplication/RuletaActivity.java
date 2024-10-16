@@ -1,16 +1,20 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.R;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RuletaActivity extends BaseActivity {
@@ -19,6 +23,21 @@ public class RuletaActivity extends BaseActivity {
     private Button spinButton;
     private float currentDegree = 0f;
     private final int totalSections = 37;  // 37 secciones para la ruleta (0-36)
+    private float dX, dY;
+    private float[][] buttonCoordinates = new float[37][2];
+
+
+
+    int[] buttonIds = {
+            R.id.num_0, R.id.num_1, R.id.num_2, R.id.num_3, R.id.num_4, R.id.num_5,
+            R.id.num_6, R.id.num_7, R.id.num_8, R.id.num_9, R.id.num_10, R.id.num_11,
+            R.id.num_12, R.id.num_13, R.id.num_14, R.id.num_15, R.id.num_16, R.id.num_17,
+            R.id.num_18, R.id.num_19, R.id.num_20, R.id.num_21, R.id.num_22, R.id.num_23,
+            R.id.num_24, R.id.num_25, R.id.num_26, R.id.num_27, R.id.num_28, R.id.num_29,
+            R.id.num_30, R.id.num_31, R.id.num_32, R.id.num_33, R.id.num_34, R.id.num_35,
+            R.id.num_36, R.id.black, R.id.red, R.id.even, R.id.odd
+    };
+    ImageButton[] botones = new ImageButton[37]; // Crear un array para almacenar los botones
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +46,14 @@ public class RuletaActivity extends BaseActivity {
 
         rouletteImage = findViewById(R.id.ruleta);
         spinButton = findViewById(R.id.spinButton);
+        ImageView ficha1 = findViewById(R.id.ficha10);
+        setupDraggableFicha(ficha1);
+        inicializarBotones();
 
         spinButton.setOnClickListener(v -> spinRoulette());
+
+
+
     }
 
     private void spinRoulette() {
@@ -101,4 +126,121 @@ public class RuletaActivity extends BaseActivity {
 
         return resultMapping[resultMapping.length-section];
     }
+
+    //SECCION PARA GESTIOAR LOS BOTONES DE LA RULETA
+
+    private void inicializarBotones() {
+        // Iterar y asignar botones al array
+        for (int i = 0; i <= 36; i++) {
+            int resID = getResources().getIdentifier("num_" + i, "id", getPackageName());
+            botones[i] = findViewById(resID);
+        }
+
+        // Asegúrate de que las coordenadas se obtengan después del layout
+        final View rootView = findViewById(android.R.id.content);
+        rootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                for (int i = 0; i <= 36; i++) {
+                    // Guardar las coordenadas del botón
+                    int[] location = new int[2];
+                    botones[i].getLocationOnScreen(location);
+                    buttonCoordinates[i][0] = location[0]; // Coordenada X
+                    buttonCoordinates[i][1] = location[1]; // Coordenada Y
+                }
+                // Quitar el listener para evitar llamar esto repetidamente
+                rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void setupDraggableFicha(ImageView ficha) {
+        ficha.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        dX = view.getX() - motionEvent.getRawX();
+                        dY = view.getY() - motionEvent.getRawY();
+                        break;
+
+                    case MotionEvent.ACTION_MOVE:
+                        view.animate()
+                                .x(motionEvent.getRawX() + dX)
+                                .y(motionEvent.getRawY() + dY)
+                                .setDuration(0)
+                                .start();
+                        break;
+
+                    case MotionEvent.ACTION_UP:
+                        // Obtener las dimensiones de la ficha
+                        int fichaWidth = view.getWidth();
+                        int fichaHeight = view.getHeight();
+
+                        // Verifica qué botones están debajo de la ficha
+                        List<Integer> buttonIndices = getButtonsIndicesAtPosition(motionEvent.getRawX(), motionEvent.getRawY(), fichaWidth, fichaHeight);
+                        if (!buttonIndices.isEmpty()) {
+                            StringBuilder message = new StringBuilder("Ficha colocada sobre los botones: ");
+                            for (Integer index : buttonIndices) {
+                                message.append(index).append(" ");
+                            }
+                            Toast.makeText(RuletaActivity.this, message.toString(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(RuletaActivity.this, "No se colocó la ficha sobre ningún botón.", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        });
+    }
+
+    private List<Integer> getButtonsIndicesAtPosition(float x, float y, int fichaWidth, int fichaHeight) {
+        List<Integer> buttonIndices = new ArrayList<>(); // Lista para almacenar los índices de los botones
+
+        for (int i = 0; i <= 36; i++) {
+            // Obtener el botón correspondiente
+            View button = findViewById(getResources().getIdentifier("num_" + i, "id", getPackageName()));
+            if (button != null) {
+                // Obtener las coordenadas y tamaño del botón
+                int[] buttonLocation = new int[2];
+                button.getLocationOnScreen(buttonLocation);
+                int buttonX = buttonLocation[0];
+                int buttonY = buttonLocation[1];
+                int buttonWidth = button.getWidth();
+                int buttonHeight = button.getHeight();
+
+                // Comprobar si la ficha intersecta con el botón
+                if (isRectanglesIntersecting(buttonX, buttonY, buttonWidth, buttonHeight, x, y, fichaWidth, fichaHeight)) {
+                    buttonIndices.add(i); // Agregar el índice del botón a la lista
+                }
+            }
+        }
+
+        // Para depuración: Imprimir los índices de los botones detectados
+        Log.d("RuletaActivity", "Botones detectados: " + buttonIndices.toString());
+
+        return buttonIndices; // Retorna la lista de botones detectados
+    }
+
+    private boolean isRectanglesIntersecting(int buttonX, int buttonY, int buttonWidth, int buttonHeight, float fichaX, float fichaY, int fichaWidth, int fichaHeight) {
+        // Comprobar si hay intersección entre el botón y la ficha
+        return !(buttonX > fichaX + fichaWidth ||
+                buttonX + buttonWidth < fichaX ||
+                buttonY > fichaY + fichaHeight ||
+                buttonY + buttonHeight < fichaY);
+    }
+
+    private boolean isPointInsideButton(float pointX, float pointY, float buttonX, float buttonY, int buttonWidth, int buttonHeight) {
+        return (pointX >= buttonX && pointX <= buttonX + buttonWidth) &&
+                (pointY >= buttonY && pointY <= buttonY + buttonHeight);
+    }
+
+
+
 }
+

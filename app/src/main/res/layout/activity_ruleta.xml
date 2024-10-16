@@ -69,6 +69,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -98,6 +99,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/tex6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -127,6 +129,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/tex9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -155,6 +158,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -183,6 +187,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text15"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -211,6 +216,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text18"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -239,6 +245,7 @@
                 android:contentDescription="Número 21" />
 
             <TextView
+                android:id="@+id/text21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -267,6 +274,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -295,6 +303,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -323,6 +332,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -351,6 +361,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text33"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -379,6 +390,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/tex36"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -410,6 +422,7 @@
                 tools:visibility="invisible" />
 
             <TextView
+                android:id="@+id/tex2to1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -454,6 +467,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -483,6 +497,7 @@
                 android:contentDescription="Número 21" />
 
             <TextView
+                android:id="@+id/text5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -511,6 +526,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -539,6 +555,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -567,6 +584,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -595,6 +613,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -623,6 +642,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text20"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -651,6 +671,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -679,6 +700,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -707,6 +729,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -735,6 +758,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text32"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -763,6 +787,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text35"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -794,6 +819,7 @@
                 tools:visibility="invisible" />
 
             <TextView
+                android:id="@+id/text2to2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -832,6 +858,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -860,6 +887,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -889,6 +917,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -917,6 +946,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -945,6 +975,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -973,6 +1004,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1001,6 +1033,7 @@
                 android:contentDescription="Número 21" />
 
             <TextView
+                android:id="@+id/text19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1029,6 +1062,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text22"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1057,6 +1091,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1085,6 +1120,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1113,6 +1149,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1141,6 +1178,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text34"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1172,6 +1210,7 @@
                 tools:visibility="invisible" />
 
             <TextView
+                android:id="@+id/text2to3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1212,6 +1251,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text1st12"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
@@ -1242,6 +1282,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text2d12"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
@@ -1271,6 +1312,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text3rd12"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
@@ -1300,6 +1342,7 @@
                 android:contentDescription="Número 6" />
 
             <TextView
+                android:id="@+id/text0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -1339,6 +1382,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/text1to18"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:gravity="center"
@@ -1369,6 +1413,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/texteven"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:gravity="center"
@@ -1398,6 +1443,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/textred"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:gravity="center"
@@ -1427,6 +1473,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/textblack"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:gravity="center"
@@ -1456,6 +1503,7 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/textodd"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:gravity="center"
@@ -1485,13 +1533,15 @@
                 android:contentDescription="Número 3" />
 
             <TextView
+                android:id="@+id/textView"
                 android:layout_width="80dp"
                 android:layout_height="30dp"
                 android:gravity="center"
                 android:text="19to36"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="DuplicateIds" />
         </FrameLayout>
 
         <View
@@ -1502,6 +1552,15 @@
 
     </androidx.gridlayout.widget.GridLayout>
 
+    <ImageView
+        android:id="@+id/ficha10"
+        android:layout_width="25dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="344dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ficha10" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
