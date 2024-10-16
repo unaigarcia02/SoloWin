@@ -39,19 +39,22 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/tableroRuleta"
-        android:layout_width="571dp"
-        android:layout_height="217dp"
+        android:layout_width="580dp"
+        android:layout_height="118dp"
+        android:layout_marginStart="396dp"
         android:layout_marginTop="16dp"
-        app:columnCount="13"
         android:background="@drawable/grid_borders"
+        app:columnCount="25"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.455"
-        app:rowCount="4"
+        app:rowCount="5"
         tools:ignore="MissingConstraints">
 
         <!-- Números en la primera fila -->
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -75,6 +78,11 @@
                 android:textStyle="bold" />
 
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -100,6 +108,11 @@
 
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -122,6 +135,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -146,6 +164,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -168,6 +191,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -192,6 +220,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -214,6 +247,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -238,6 +276,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -260,6 +303,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -284,6 +332,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -306,6 +359,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -330,6 +388,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -352,8 +415,250 @@
                 android:layout_gravity="center"
                 android:text="2to1"
                 android:textColor="#FFFFFF"
-                android:textSize="16.5sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
         </FrameLayout>
 
         <FrameLayout
@@ -361,6 +666,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:layout_columnWeight="1">
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:background="?android:attr/listDivider" />
 
             <ImageButton
                 android:id="@+id/num_2"
@@ -378,6 +689,12 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
 
         <FrameLayout
             android:layout_width="0dp"
@@ -402,6 +719,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -424,6 +746,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -448,6 +775,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -470,6 +802,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -494,6 +831,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -516,6 +858,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -540,6 +887,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -562,6 +914,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -586,6 +943,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -608,6 +970,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -632,6 +999,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -654,8 +1026,250 @@
                 android:layout_gravity="center"
                 android:text="2to1"
                 android:textColor="#FFFFFF"
-                android:textSize="16.5sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#FFFFFF" />
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            app:layout_columnWeight="1">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="3dp"
+                android:background="#FFFFFF"
+                android:rotation="0" />
+
         </FrameLayout>
 
         <FrameLayout
@@ -681,6 +1295,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -703,6 +1322,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -727,6 +1351,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -749,6 +1378,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -773,6 +1407,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -795,6 +1434,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -819,6 +1463,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -841,6 +1490,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -865,6 +1519,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -887,6 +1546,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </FrameLayout>
+
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -911,6 +1575,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -934,6 +1603,11 @@
                 android:textStyle="bold" />
         </FrameLayout>
 
+        <View
+            android:layout_width="3dp"
+            android:layout_height="37dp"
+            android:background="#FFFFFF" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -956,9 +1630,50 @@
                 android:layout_gravity="center"
                 android:text="2to1"
                 android:textColor="#FFFFFF"
-                android:textSize="16.5sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
+
         </FrameLayout>
+
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="538dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="396dp"
+        android:layout_marginTop="260dp"
+        app:columnCount="3"
+        app:layout_constraintStart_toStartOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rowCount="1">
+
+        <Button
+            android:id="@+id/st1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="#00000000"
+            android:text="1ST12"
+            app:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/st2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="#00000000"
+            android:text="2ND12"
+            app:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/st3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="#00000000"
+            android:text="3RD12"
+            app:layout_columnWeight="1" />
 
 
     </androidx.gridlayout.widget.GridLayout>
