@@ -412,12 +412,11 @@
             app:layout_columnWeight="1">
 
             <ImageButton
-                android:id="@+id/num_kk"
+                android:id="@+id/num_37"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
                 android:contentDescription="Número 6"
-                android:rotation="-90"
                 android:visibility="invisible"
                 tools:visibility="invisible" />
 
@@ -809,12 +808,11 @@
             app:layout_columnWeight="1">
 
             <ImageButton
-                android:id="@+id/num_kk2"
+                android:id="@+id/num_38"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
                 android:contentDescription="Número 6"
-                android:rotation="-90"
                 android:visibility="invisible"
                 tools:visibility="invisible" />
 
@@ -1200,12 +1198,11 @@
             app:layout_columnWeight="1">
 
             <ImageButton
-                android:id="@+id/num_kk3"
+                android:id="@+id/num_39"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
                 android:contentDescription="Número 6"
-                android:rotation="-90"
                 android:visibility="invisible"
                 tools:visibility="invisible" />
 
@@ -1243,11 +1240,13 @@
             app:layout_columnSpan="7"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/num_1st12"
+            <ImageButton
+                android:id="@+id/num_40"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
@@ -1274,11 +1273,13 @@
             app:layout_columnSpan="7"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/num_2nd12"
+            <ImageButton
+                android:id="@+id/num_41"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
@@ -1304,11 +1305,13 @@
             app:layout_columnSpan="7"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/num_3rd12"
+            <ImageButton
+                android:id="@+id/num_42"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
@@ -1374,11 +1377,13 @@
             app:layout_columnSpan="3"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/num_1to18"
+            <ImageButton
+                android:id="@+id/num_43"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
@@ -1405,11 +1410,13 @@
             app:layout_columnSpan="3"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/even"
+            <ImageButton
+                android:id="@+id/num_44"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
@@ -1435,11 +1442,13 @@
             app:layout_columnSpan="3"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/red"
+            <ImageButton
+                android:id="@+id/num_45"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
@@ -1465,11 +1474,13 @@
             app:layout_columnSpan="3"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/black"
+            <ImageButton
+                android:id="@+id/num_46"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
@@ -1495,11 +1506,13 @@
             app:layout_columnSpan="3"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/odd"
+            <ImageButton
+                android:id="@+id/num_47"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
@@ -1525,11 +1538,13 @@
             app:layout_columnSpan="3"
             app:layout_columnWeight="1">
 
-            <Button
-                android:id="@+id/num_19to36"
+            <ImageButton
+                android:id="@+id/num_48"
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
+                android:visibility="invisible"
+                tools:visibility="invisible"
                 android:contentDescription="Número 3" />
 
             <TextView
