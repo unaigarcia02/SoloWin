@@ -20,9 +20,7 @@ import java.util.Random;
 public class RuletaActivity extends BaseActivity {
 
     private ImageView rouletteImage;
-    private Button spinButton;
     private float currentDegree = 0f;
-    private final int totalSections = 37;  // 37 secciones para la ruleta (0-36)
     private float dX, dY;
     private float[][] buttonCoordinates = new float[49][2];
 
@@ -34,7 +32,7 @@ public class RuletaActivity extends BaseActivity {
         setContentView(R.layout.activity_ruleta);
 
         rouletteImage = findViewById(R.id.ruleta);
-        spinButton = findViewById(R.id.spinButton);
+        Button spinButton = findViewById(R.id.spinButton);
         ImageView ficha1 = findViewById(R.id.ficha10);
         setupDraggableFicha(ficha1);
         inicializarBotones();
@@ -91,6 +89,8 @@ public class RuletaActivity extends BaseActivity {
         float degreeNormalized = degree % 360;  // Asegurarse de que el ángulo esté dentro de 0-360
 
         // Calcular el tamaño de cada sección
+        // 37 secciones para la ruleta (0-36)
+        int totalSections = 37;
         float sectionAngle = 360f / totalSections;  // Ángulo por sección: 360 / 37 ≈ 9.73°
 
         // Determinar en qué sección cae la ruleta
@@ -201,8 +201,8 @@ public class RuletaActivity extends BaseActivity {
                 // Obtener las coordenadas y tamaño del botón
                 int[] buttonLocation = new int[2];
                 button.getLocationOnScreen(buttonLocation);
-                int buttonX = buttonLocation[0]+17;
-                int buttonY = buttonLocation[1]+20;
+                int buttonX = buttonLocation[0]+27;
+                int buttonY = buttonLocation[1]+30;
                 int buttonWidth = button.getWidth();
                 int buttonHeight = button.getHeight();
 
