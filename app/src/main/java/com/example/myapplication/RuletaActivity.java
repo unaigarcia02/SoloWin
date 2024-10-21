@@ -1,17 +1,23 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.DisplayCutout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +28,9 @@ public class RuletaActivity extends BaseActivity {
     private ImageView rouletteImage;
     private float currentDegree = 0f;
     private float dX, dY;
+    private boolean isOriginalFicha;
+    private ImageView ficha1;
+    private float saldo;
     private float[][] buttonCoordinates = new float[49][2];
 
     ImageButton[] botones = new ImageButton[49]; // Crear un array para almacenar los botones
@@ -31,14 +40,16 @@ public class RuletaActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ruleta);
 
+
         rouletteImage = findViewById(R.id.ruleta);
         Button spinButton = findViewById(R.id.spinButton);
-        ImageView ficha1 = findViewById(R.id.ficha10);
+        ficha1 = findViewById(R.id.ficha10);
         setupDraggableFicha(ficha1);
         inicializarBotones();
-
         spinButton.setOnClickListener(v -> spinRoulette());
 
+        TextView saldoTextView = findViewById(R.id.Saldo);
+        saldo = Integer.parseInt(saldoTextView.getText().toString());
 
 
     }
@@ -153,8 +164,28 @@ public class RuletaActivity extends BaseActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        dX = view.getX() - motionEvent.getRawX();
-                        dY = view.getY() - motionEvent.getRawY();
+                        // Verificar si el saldo es suficiente antes de crear una nueva ficha
+                        if (saldo >= 10) {
+                            List<Integer> buttonIndices = getButtonsIndicesAtPosition(motionEvent.getRawX(), motionEvent.getRawY(), view.getWidth(), view.getHeight());
+
+                            // Si está sobre un botón, solo se arrastra la ficha existente
+                            if (!buttonIndices.isEmpty()) {
+                                dX = view.getX() - motionEvent.getRawX();
+                                dY = view.getY() - motionEvent.getRawY();
+                            } else {
+
+                                // Crear una nueva ficha
+                                ImageView newFicha = createNewFicha(view);
+                                setupDraggableFicha(newFicha);
+                                dX = newFicha.getX() - motionEvent.getRawX();
+                                dY = newFicha.getY() - motionEvent.getRawY();
+                            }
+                        } else {
+                            // Mostrar un mensaje si no hay suficiente saldo
+                            ImageView newFicha = createNewFicha(view);
+                            setupDraggableFicha(newFicha);
+                            Toast.makeText(RuletaActivity.this, "Saldo insuficiente", Toast.LENGTH_SHORT).show();
+                        }
                         break;
 
                     case MotionEvent.ACTION_MOVE:
@@ -166,22 +197,33 @@ public class RuletaActivity extends BaseActivity {
                         break;
 
                     case MotionEvent.ACTION_UP:
-                        // Obtener las dimensiones de la ficha
                         int fichaWidth = view.getWidth();
                         int fichaHeight = view.getHeight();
+                        List<Integer> buttonIndicesOnRelease = getButtonsIndicesAtPosition(motionEvent.getRawX(), motionEvent.getRawY(), fichaWidth, fichaHeight);
 
-                        // Verifica qué botones están debajo de la ficha
-                        List<Integer> buttonIndices = getButtonsIndicesAtPosition(motionEvent.getRawX(), motionEvent.getRawY(), fichaWidth, fichaHeight);
-                        if (!buttonIndices.isEmpty()) {
-                            StringBuilder message = new StringBuilder("Ficha colocada sobre los botones: ");
-                            for (Integer index : buttonIndices) {
-                                message.append(index).append(" ");
+                        if (!buttonIndicesOnRelease.isEmpty()) {
+                            // Verificar si el saldo es suficiente antes de permitir que la ficha se coloque
+                            if (saldo >= 10) {
+                                // Restar 10 del saldo al soltar la ficha sobre un botón válido
+                                saldo -= 10;
+                                actualizarSaldo();  // Actualiza el saldo en la interfaz de usuario
+
+                                StringBuilder message = new StringBuilder("Ficha colocada sobre los botones: ");
+                                for (Integer index : buttonIndicesOnRelease) {
+                                    message.append(index).append(" ");
+                                }
+                                Toast.makeText(RuletaActivity.this, message.toString(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                // Mostrar un mensaje si no hay suficiente saldo
+                                Toast.makeText(RuletaActivity.this, "Saldo insuficiente", Toast.LENGTH_SHORT).show();
+                                view.setVisibility(View.GONE);  // Eliminar la ficha si no hay saldo
                             }
-                            Toast.makeText(RuletaActivity.this, message.toString(), Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(RuletaActivity.this, "No se colocó la ficha sobre ningún botón.", Toast.LENGTH_SHORT).show();
+                            view.setVisibility(View.GONE);
+                            Toast.makeText(RuletaActivity.this, "Ficha no colocada sobre ningún botón. Ficha desaparece.", Toast.LENGTH_SHORT).show();
                         }
                         break;
+
 
                     default:
                         return false;
@@ -190,6 +232,11 @@ public class RuletaActivity extends BaseActivity {
             }
         });
     }
+
+
+
+
+
 
     private List<Integer> getButtonsIndicesAtPosition(float x, float y, int fichaWidth, int fichaHeight) {
         List<Integer> buttonIndices = new ArrayList<>(); // Lista para almacenar los índices de los botones
@@ -228,12 +275,40 @@ public class RuletaActivity extends BaseActivity {
                 buttonY + buttonHeight < fichaY);
     }
 
-    private boolean isPointInsideButton(float pointX, float pointY, float buttonX, float buttonY, int buttonWidth, int buttonHeight) {
-        return (pointX >= buttonX && pointX <= buttonX + buttonWidth) &&
-                (pointY >= buttonY && pointY <= buttonY + buttonHeight);
+
+
+    private ImageView createNewFicha(View originalFicha) {
+        RelativeLayout layout = findViewById(R.id.fichas_container);
+
+        ImageView newFicha = new ImageView(RuletaActivity.this);
+        newFicha.setImageResource(R.drawable.ficha10);
+
+        int originalWidth = originalFicha.getWidth();
+        int originalHeight = originalFicha.getHeight();
+
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(originalWidth, originalHeight);
+        newFicha.setLayoutParams(params);
+
+        int[] locationOriginal = new int[2];
+        originalFicha.getLocationOnScreen(locationOriginal);
+
+        int[] locationLayout = new int[2];
+        layout.getLocationOnScreen(locationLayout);
+
+        int relativeX = locationOriginal[0] - locationLayout[0];
+        int relativeY = locationOriginal[1] - locationLayout[1];
+
+        newFicha.setX(relativeX);
+        newFicha.setY(relativeY);
+
+        layout.addView(newFicha);
+
+        return newFicha;
     }
 
-
-
+    private void actualizarSaldo() {
+        TextView saldoTextView = findViewById(R.id.Saldo); // Asegúrate de que tienes un TextView con id "Saldo"
+        saldoTextView.setText(String.valueOf(saldo));  // Actualiza el texto del saldo
+    }
 }
 

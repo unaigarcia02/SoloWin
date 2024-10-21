@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.VideoView;
 
+
 public class MainActivity extends BaseActivity  {
     private VideoView video;
     @Override
@@ -23,6 +24,8 @@ public class MainActivity extends BaseActivity  {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+
 
         video=(VideoView) findViewById(R.id.videoView);
         String path = "android.resource://" + getPackageName() + "/" + R.raw.casin;

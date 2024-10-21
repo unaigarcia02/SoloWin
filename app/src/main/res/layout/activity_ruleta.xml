@@ -5,6 +5,8 @@
     android:id="@+id/main"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".RuletaActivity">
 
     <ImageView
@@ -26,10 +28,24 @@
         android:layout_height="407dp"
         android:contentDescription=""
         tools:ignore="ContentDescription"
-        android:src="@drawable/ruleta"
+        app:srcCompat="@drawable/ruleta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/Saldo"
+        android:layout_width="80dp"
+        android:layout_height="58dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="25"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/spinButton"
@@ -1670,16 +1686,27 @@
 
     </androidx.gridlayout.widget.GridLayout>
 
-    <ImageView
-        android:id="@+id/ficha10"
-        android:layout_width="29dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="344dp"
-        android:layout_marginBottom="16dp"
+    <RelativeLayout
+        android:id="@+id/fichas_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ficha10"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+    </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/ficha10"
+            android:layout_width="29dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="344dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ficha10"
+            tools:ignore="ContentDescription" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
