@@ -27,11 +27,23 @@
         android:layout_width="310dp"
         android:layout_height="407dp"
         android:contentDescription=""
-        tools:ignore="ContentDescription"
-        app:srcCompat="@drawable/ruleta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ruleta"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="140dp"
+        app:layout_constraintEnd_toEndOf="@+id/ruleta"
+        app:layout_constraintStart_toStartOf="@+id/ruleta"
+        app:layout_constraintTop_toTopOf="@+id/ruleta"
+        app:srcCompat="@drawable/flecha" />
 
     <TextView
         android:id="@+id/Saldo"
@@ -39,10 +51,10 @@
         android:layout_height="58dp"
         android:gravity="center"
         android:padding="16dp"
-        android:text="25"
-        android:textStyle="bold"
+        android:text="125"
         android:textColor="#000000"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
@@ -51,8 +63,8 @@
         android:id="@+id/spinButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="372dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="172dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -60,8 +72,8 @@
 
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/tableroRuleta"
-        android:layout_width="573dp"
-        android:layout_height="207dp"
+        android:layout_width="576dp"
+        android:layout_height="243dp"
         android:layout_marginStart="396dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/grid_borders"
@@ -118,9 +130,9 @@
                 android:id="@+id/num_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="ContentDescription,HardcodedText"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Numero 6" />
+                android:contentDescription="Numero 6"
+                tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
                 android:id="@+id/tex6"
@@ -150,9 +162,9 @@
                 android:id="@+id/num_9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="ContentDescription,HardcodedText"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3" />
+                android:contentDescription="Número 3"
+                tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
                 android:id="@+id/tex9"
@@ -181,9 +193,9 @@
                 android:id="@+id/num_12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="ContentDescription,HardcodedText"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6" />
+                android:contentDescription="Número 6"
+                tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
                 android:id="@+id/text12"
@@ -212,9 +224,9 @@
                 android:id="@+id/num_15"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="ContentDescription,HardcodedText"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3" />
+                android:contentDescription="Número 3"
+                tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
                 android:id="@+id/text15"
@@ -243,9 +255,9 @@
                 android:id="@+id/num_18"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="ContentDescription,HardcodedText"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6" />
+                android:contentDescription="Número 6"
+                tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
                 android:id="@+id/text18"
@@ -274,9 +286,9 @@
                 android:id="@+id/num_21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="ContentDescription,HardcodedText"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 21" />
+                android:contentDescription="Número 21"
+                tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
                 android:id="@+id/text21"
@@ -463,8 +475,8 @@
                 android:background="@drawable/button_red_background"
                 android:contentDescription="Número 6"
                 android:visibility="invisible"
-                tools:visibility="invisible"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/tex2to1"
@@ -653,7 +665,8 @@
         <View
             android:layout_width="3dp"
             android:layout_height="37dp"
-            android:background="#FFFFFF" />
+            android:background="#FFFFFF"
+            tools:ignore="TooManyViews" />
 
         <FrameLayout
             android:layout_width="0dp"
@@ -886,8 +899,8 @@
                 android:background="@drawable/button_red_background"
                 android:contentDescription="Número 6"
                 android:visibility="invisible"
-                tools:visibility="invisible"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/text2to2"
@@ -1053,7 +1066,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/text13"
@@ -1084,7 +1097,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
                 android:contentDescription="Número 6"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
 
             <TextView
                 android:id="@+id/text16"
@@ -1095,7 +1108,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:ignore="HardcodedText"/>
+                tools:ignore="HardcodedText" />
         </FrameLayout>
 
         <View
@@ -1302,8 +1315,8 @@
                 android:background="@drawable/button_red_background"
                 android:contentDescription="Número 6"
                 android:visibility="invisible"
-                tools:visibility="invisible"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/text2to3"
@@ -1345,10 +1358,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/text1st12"
@@ -1380,10 +1393,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/text2d12"
@@ -1414,10 +1427,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/text3rd12"
@@ -1490,10 +1503,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/text1to18"
@@ -1525,10 +1538,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/texteven"
@@ -1559,10 +1572,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/textred"
@@ -1593,10 +1606,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/textblack"
@@ -1627,10 +1640,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/textodd"
@@ -1661,10 +1674,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:visibility="invisible"
-                tools:visibility="invisible"
                 android:contentDescription="Número 3"
-                tools:ignore="HardcodedText" />
+                android:visibility="invisible"
+                tools:ignore="HardcodedText"
+                tools:visibility="invisible" />
 
             <TextView
                 android:id="@+id/textView"
@@ -1697,16 +1710,60 @@
 
     </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/ficha10"
-            android:layout_width="29dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="344dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ficha10"
-            tools:ignore="ContentDescription" />
+    <ImageView
+        android:id="@+id/ficha10"
+        android:layout_width="35dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="350dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ficha10"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/ficha20"
+        android:layout_width="35dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="400dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ficha20"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/ficha50"
+        android:layout_width="35dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="450dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ficha50"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/ficha100"
+        android:layout_width="35dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="500dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ficha100"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/ficha500"
+        android:layout_width="35dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="550dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ficha500"
+        tools:ignore="ContentDescription" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
