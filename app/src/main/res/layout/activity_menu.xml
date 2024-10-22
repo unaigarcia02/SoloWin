@@ -19,9 +19,10 @@
             android:layout_height="679dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintHorizontal_bias="0.393"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.414"
             app:srcCompat="@drawable/tapete"
             tools:ignore="ContentDescription" />
 
@@ -29,8 +30,8 @@
             android:id="@+id/RuletaBTN"
             android:layout_width="250dp"
             android:layout_height="125dp"
-            android:layout_marginEnd="144dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="116dp"
             android:text="Ruleta"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,8 +41,8 @@
             android:id="@+id/button3"
             android:layout_width="250dp"
             android:layout_height="125dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginStart="248dp"
+            android:layout_marginTop="32dp"
             android:text="Blackjack"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -51,23 +52,21 @@
             android:id="@+id/button4"
             android:layout_width="250dp"
             android:layout_height="125dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="144dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="248dp"
             android:text="Slot"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/BuscaminasBTN"
             android:layout_width="250dp"
             android:layout_height="125dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginBottom="40dp"
-            android:text="Caja"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
+            android:text="Buscaminas"
+            tools:ignore="HardcodedText"
+            tools:layout_editor_absoluteX="36dp"
+            tools:layout_editor_absoluteY="566dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

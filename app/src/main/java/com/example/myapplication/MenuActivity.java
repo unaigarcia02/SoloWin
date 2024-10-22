@@ -21,6 +21,7 @@ public class MenuActivity extends BaseActivity  {
 
 
         Button ruletaBtn = findViewById(R.id.RuletaBTN);
+        Button buscaminasBtn=findViewById(R.id.BuscaminasBTN);
 
         // Configurar el clic en el botón
         ruletaBtn.setOnClickListener(view -> {
@@ -29,6 +30,11 @@ public class MenuActivity extends BaseActivity  {
             startActivity(intent);
         });
 
+        //Click en Busca Minas
+        buscaminasBtn.setOnClickListener(view -> {
+            Intent intentbuscaminas = new Intent(MenuActivity.this, BuscaMinasActivity.class);
+            startActivity(intentbuscaminas);
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
