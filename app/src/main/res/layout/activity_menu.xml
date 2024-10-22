@@ -59,12 +59,12 @@
             tools:ignore="HardcodedText" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/BuscaminasBTN"
             android:layout_width="250dp"
             android:layout_height="125dp"
             android:layout_marginStart="160dp"
             android:layout_marginBottom="40dp"
-            android:text="Caja"
+            android:text="Buscaminas"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="HardcodedText" />
