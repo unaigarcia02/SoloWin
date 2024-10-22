@@ -43,7 +43,8 @@
         app:layout_constraintEnd_toEndOf="@+id/ruleta"
         app:layout_constraintStart_toStartOf="@+id/ruleta"
         app:layout_constraintTop_toTopOf="@+id/ruleta"
-        app:srcCompat="@drawable/flecha" />
+        app:srcCompat="@drawable/flecha"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/Saldo"
@@ -99,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Numero 3"
+                android:contentDescription="3"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -131,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Numero 6"
+                android:contentDescription="6"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
@@ -163,7 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="9"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
@@ -194,7 +195,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="12"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
@@ -225,7 +226,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="15"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
@@ -256,7 +257,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="18"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
@@ -287,7 +288,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 21"
+                android:contentDescription="21"
                 tools:ignore="ContentDescription,HardcodedText" />
 
             <TextView
@@ -318,7 +319,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="24"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -349,7 +350,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="27"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -380,7 +381,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Numero 6"
+                android:contentDescription="30"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -411,7 +412,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Numero 3"
+                android:contentDescription="33"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -442,7 +443,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="36"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -473,7 +474,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="2 to 1"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -522,7 +523,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="2"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -554,7 +555,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 21"
+                android:contentDescription="5"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -585,7 +586,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="8"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -616,7 +617,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="11"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -647,7 +648,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="14"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -659,7 +660,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:ignore="HardcodedText" />
+                tools:ignore="HardcodedText,TooManyViews" />
         </FrameLayout>
 
         <View
@@ -680,7 +681,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="17"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -711,7 +712,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="20"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -742,7 +743,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="23"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -773,7 +774,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="26"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -804,7 +805,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="29"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -835,7 +836,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="32"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -866,7 +867,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="35"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -897,7 +898,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="2 to 1"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -940,7 +941,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="1"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -971,7 +972,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="4"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1003,7 +1004,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="7"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1034,7 +1035,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="10"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1065,7 +1066,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="13"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1096,7 +1097,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="16"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1127,7 +1128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 21"
+                android:contentDescription="19"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1158,7 +1159,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="22"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1189,7 +1190,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="25"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1220,7 +1221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="28"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1251,7 +1252,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_black_background"
-                android:contentDescription="Número 3"
+                android:contentDescription="31"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1282,7 +1283,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="34"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1313,7 +1314,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_red_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="2 to 1"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1358,7 +1359,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="1 st 12"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1393,7 +1394,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="2 nd 12"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1427,7 +1428,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="3 rd 12"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1461,7 +1462,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_green_background"
-                android:contentDescription="Número 6"
+                android:contentDescription="0"
                 tools:ignore="HardcodedText" />
 
             <TextView
@@ -1503,7 +1504,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="1 to 18"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1538,7 +1539,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="even"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1565,6 +1566,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:layout_columnSpan="3"
+            android:background="#FF0000"
             app:layout_columnWeight="1">
 
             <ImageButton
@@ -1572,7 +1574,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="red"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1599,6 +1601,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             app:layout_columnSpan="3"
+            android:background="@color/black"
             app:layout_columnWeight="1">
 
             <ImageButton
@@ -1606,7 +1609,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="black"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1640,7 +1643,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="odd"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />
@@ -1674,7 +1677,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="25dp"
                 android:background="@android:color/transparent"
-                android:contentDescription="Número 3"
+                android:contentDescription="19 to 36"
                 android:visibility="invisible"
                 tools:ignore="HardcodedText"
                 tools:visibility="invisible" />

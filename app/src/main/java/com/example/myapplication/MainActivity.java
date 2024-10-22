@@ -26,7 +26,6 @@ public class MainActivity extends BaseActivity  {
         setContentView(R.layout.activity_main);
 
 
-
         video=(VideoView) findViewById(R.id.videoView);
         String path = "android.resource://" + getPackageName() + "/" + R.raw.casin;
         video.setVideoURI(Uri.parse(path));

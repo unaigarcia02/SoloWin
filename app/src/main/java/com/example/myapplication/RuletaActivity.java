@@ -29,6 +29,7 @@ public class RuletaActivity extends BaseActivity {
     private float dX, dY;
     private boolean isOriginalFicha;
     private float saldo;
+    private Map<String, Integer> apuestasPorBoton = new HashMap<>();  // Mapa para almacenar las apuestas por botón
     private float[][] buttonCoordinates = new float[49][2];
     ImageButton[] botones = new ImageButton[49]; // Crear un array para almacenar los botones
     private Map<ImageView, Integer> fichaCostMap = new HashMap<>();
@@ -65,6 +66,8 @@ public class RuletaActivity extends BaseActivity {
     }
 
     private void spinRoulette() {
+        // Mostrar el resumen de apuestas antes de iniciar el giro
+        mostrarResumenApuestas();
         // Generar un ángulo aleatorio para que la ruleta se detenga
         Random random = new Random();
         int randomDegree = random.nextInt(360) + 1080;  // +720 para que gire varias veces
@@ -211,10 +214,11 @@ public class RuletaActivity extends BaseActivity {
                         // Obtener las dimensiones de la ficha
                         int fichaWidth = view.getWidth();
                         int fichaHeight = view.getHeight();
-                        // Obtener los botones en los que se ha soltado la ficha
-                        List<Integer> buttonIndicesOnRelease = getButtonsIndicesAtPosition(motionEvent.getRawX(), motionEvent.getRawY(), fichaWidth, fichaHeight);
 
-                        if (!buttonIndicesOnRelease.isEmpty()) {
+                        // Obtener los textos de los botones en los que se ha soltado la ficha
+                        List<String> buttonTextsOnRelease = getButtonsTextsAtPosition(motionEvent.getRawX(), motionEvent.getRawY(), fichaWidth, fichaHeight);
+
+                        if (!buttonTextsOnRelease.isEmpty()) {
                             // Verificar si el saldo es suficiente antes de descontar
                             if (saldo >= costo) {
                                 // Comprobar si esta es la primera vez que se suelta la ficha
@@ -223,17 +227,31 @@ public class RuletaActivity extends BaseActivity {
                                     saldo -= costo;
                                     actualizarSaldo();  // Actualiza el saldo en la interfaz de usuario
                                     view.setTag(true);  // Marcamos la ficha como ya soltada
+
+                                    // Actualizar el mapa de apuestas por botón
+                                    for (String buttonText : buttonTextsOnRelease) {
+                                        int apuestaActual = apuestasPorBoton.getOrDefault(buttonText, 0);
+                                        apuestasPorBoton.put(buttonText, apuestaActual + costo);  // Sumar el costo de la ficha a las apuestas actuales
+                                    }
+
                                     StringBuilder message = new StringBuilder("Ficha colocada sobre los botones: ");
-                                    for (Integer index : buttonIndicesOnRelease) {
-                                        message.append(index).append(" ");
+                                    for (String buttonText : buttonTextsOnRelease) {
+                                        message.append(buttonText).append(" ");
                                     }
                                     Toast.makeText(RuletaActivity.this, message.toString(), Toast.LENGTH_SHORT).show();
                                 } else {
-                                    StringBuilder message2 = new StringBuilder("Ficha colocada sobre los botones: ");
-                                    for (Integer index : buttonIndicesOnRelease) {
-                                        message2.append(index).append(" ");
+                                    // Solo actualizar el mapa si la ficha ya ha sido soltada antes
+                                    for (String buttonText : buttonTextsOnRelease) {
+                                        int apuestaActual = apuestasPorBoton.getOrDefault(buttonText, 0);
+                                        apuestasPorBoton.put(buttonText, apuestaActual + costo);
                                     }
-                                    Toast.makeText(RuletaActivity.this, message2.toString(), Toast.LENGTH_SHORT).show();                                                                    }
+
+                                    StringBuilder message2 = new StringBuilder("Ficha colocada sobre los botones: ");
+                                    for (String buttonText : buttonTextsOnRelease) {
+                                        message2.append(buttonText).append(" ");
+                                    }
+                                    Toast.makeText(RuletaActivity.this, message2.toString(), Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 // Mostrar mensaje si no hay saldo suficiente
                                 Toast.makeText(RuletaActivity.this, "Saldo insuficiente", Toast.LENGTH_SHORT).show();
@@ -339,5 +357,52 @@ public class RuletaActivity extends BaseActivity {
         TextView saldoTextView = findViewById(R.id.Saldo);
         saldoTextView.setText(String.valueOf(saldo));
     }
+
+    private List<String> getButtonsTextsAtPosition(float x, float y, int fichaWidth, int fichaHeight) {
+        List<String> buttonTexts = new ArrayList<>(); // Lista para almacenar los textos de los botones
+
+        for (int i = 0; i <= 48; i++) {
+            // Obtener el botón correspondiente
+            ImageButton button = findViewById(getResources().getIdentifier("num_" + i, "id", getPackageName()));
+            if (button != null) {
+                // Obtener las coordenadas y tamaño del botón
+                int[] buttonLocation = new int[2];
+                button.getLocationOnScreen(buttonLocation);
+                int buttonX = buttonLocation[0];
+                int buttonY = buttonLocation[1];
+                int buttonWidth = button.getWidth();
+                int buttonHeight = button.getHeight();
+
+                // Comprobar si la ficha intersecta con el botón
+                if (isRectanglesIntersecting(buttonX, buttonY, buttonWidth, buttonHeight, x, y, fichaWidth, fichaHeight)) {
+                    // Obtener el texto del botón si es un ImageButton con texto asignado
+                    String buttonText = (String) button.getContentDescription(); // Usar el atributo "contentDescription" o un método similar
+                    if (buttonText != null) {
+                        buttonTexts.add(buttonText); // Agregar el texto del botón a la lista
+                    }
+                }
+            }
+        }
+
+        // Para depuración: Imprimir los textos de los botones detectados
+        Log.d("RuletaActivity", "Botones detectados: " + buttonTexts.toString());
+
+        return buttonTexts; // Retorna la lista de textos de los botones detectados
+    }
+
+    private void mostrarResumenApuestas() {
+        StringBuilder resumen = new StringBuilder("");
+
+        for (Map.Entry<String, Integer> entry : apuestasPorBoton.entrySet()) {
+            String boton = entry.getKey();
+            int totalApostado = entry.getValue();
+            resumen.append("").append(boton).append(": ").append(totalApostado).append(" de");
+        }
+
+        // Mostrar el resumen en la consola o en un Toast
+        Log.d("RuletaActivity", resumen.toString());
+        Toast.makeText(RuletaActivity.this, resumen.toString(), Toast.LENGTH_LONG).show();
+    }
+
 }
 
