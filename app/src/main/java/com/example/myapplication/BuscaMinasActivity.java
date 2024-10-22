@@ -21,5 +21,4 @@ public class BuscaMinasActivity extends BaseActivity {
             return insets;
         });
     }
-
 }

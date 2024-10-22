@@ -30,7 +30,6 @@ public class MenuActivity extends BaseActivity  {
             startActivity(intent);
         });
 
-
         buscaminasBtn.setOnClickListener(view -> {
             // Crear un intent para navegar a RuletaActivity
             Intent intent = new Intent(MenuActivity.this, BuscaMinasActivity.class);

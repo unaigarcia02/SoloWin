@@ -70,5 +70,4 @@
             tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </LinearLayout>
