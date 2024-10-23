@@ -23,7 +23,6 @@
             android:name=".MenuActivity"
             android:resizeableActivity="true"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:usesCleartextTraffic="true"
             android:windowSoftInputMode="adjustResize">
             <meta-data
