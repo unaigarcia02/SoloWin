@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -27,12 +28,18 @@ public class RuletaActivity extends BaseActivity {
     private ImageView rouletteImage;
     private float currentDegree = 0f;
     private float dX, dY;
-    private boolean isOriginalFicha;
+    private boolean original1, original2, original3, original4, original5;
     private float saldo;
     private Map<String, Integer> apuestasPorBoton = new HashMap<>();  // Mapa para almacenar las apuestas por botón
     private float[][] buttonCoordinates = new float[49][2];
     ImageButton[] botones = new ImageButton[49]; // Crear un array para almacenar los botones
     private Map<ImageView, Integer> fichaCostMap = new HashMap<>();
+    private List<ImageView> fichasEnLaMesa = new ArrayList<>(); // Lista para almacenar las fichas en la mesa
+    ImageView ficha10;
+    ImageView ficha20;
+    ImageView ficha50;
+    ImageView ficha100;
+    ImageView ficha500;
 
 
     @Override
@@ -44,18 +51,24 @@ public class RuletaActivity extends BaseActivity {
         rouletteImage = findViewById(R.id.ruleta);
         Button spinButton = findViewById(R.id.spinButton);
 
-        ImageView ficha10 = findViewById(R.id.ficha10);
-        ImageView ficha20 = findViewById(R.id.ficha20);
-        ImageView ficha50 = findViewById(R.id.ficha50);
-        ImageView ficha100 = findViewById(R.id.ficha100);
-        ImageView ficha500 = findViewById(R.id.ficha500);
-
+        ficha10 = findViewById(R.id.ficha10);
+        ficha20 = findViewById(R.id.ficha20);
+        ficha50 = findViewById(R.id.ficha50);
+        ficha100 = findViewById(R.id.ficha100);
+        ficha500 = findViewById(R.id.ficha500);
 
         setupDraggableFicha(ficha10, 10);
         setupDraggableFicha(ficha20, 20);
         setupDraggableFicha(ficha50, 50);
         setupDraggableFicha(ficha100, 100);
         setupDraggableFicha(ficha500, 500);
+
+        original1 = true;
+        original2 = true;
+        original3 = true;
+        original4 = true;
+        original5 = true;
+
         inicializarBotones();
         spinButton.setOnClickListener(v -> spinRoulette());
 
@@ -68,10 +81,10 @@ public class RuletaActivity extends BaseActivity {
     private void spinRoulette() {
         // Mostrar el resumen de apuestas antes de iniciar el giro
         mostrarResumenApuestas();
+
         // Generar un ángulo aleatorio para que la ruleta se detenga
         Random random = new Random();
-        int randomDegree = random.nextInt(360) + 1080;  // +720 para que gire varias veces
-
+        int randomDegree = random.nextInt(360) + 1080;  // +1080 para que gire varias veces
 
         // Crear una animación de rotación
         RotateAnimation rotateAnimation = new RotateAnimation(
@@ -95,6 +108,10 @@ public class RuletaActivity extends BaseActivity {
                 // Obtener el resultado cuando la ruleta se detenga
                 String result = getRouletteResult(currentDegree);
                 Toast.makeText(RuletaActivity.this, "Resultado: " + result, Toast.LENGTH_LONG).show();
+
+                // Realizar las apuestas basadas en el resultado
+                realizarApuestas(result);
+                eliminarFichasDeLaMesa();
             }
 
             @Override
@@ -108,6 +125,89 @@ public class RuletaActivity extends BaseActivity {
 
         // Actualizar el ángulo actual
         currentDegree  = ((currentDegree + randomDegree)+5) % 360;
+    }
+    private void eliminarFichasDeLaMesa() {
+        RelativeLayout layout = findViewById(R.id.fichas_container);
+
+        for (ImageView ficha : fichasEnLaMesa) {
+            if(ficha.equals(ficha10)){
+                if(original1){
+                    ViewGroup parent = (ViewGroup) ficha10.getParent();
+                    parent.removeView(ficha10);
+                    original1 = false;
+                    layout.removeView(ficha);
+                }else{
+                    layout.removeView(ficha);
+                }
+            }
+            if(ficha.equals(ficha20)){
+                if(original2){
+                    ViewGroup parent = (ViewGroup) ficha20.getParent();
+                    parent.removeView(ficha20);
+                    original2 = false;
+                    layout.removeView(ficha);
+                }else{
+                    layout.removeView(ficha);
+                }
+            }
+            if(ficha.equals(ficha50)){
+                if(original3){
+                    ViewGroup parent = (ViewGroup) ficha50.getParent();
+                    parent.removeView(ficha50);
+                    original3 = false;
+                    layout.removeView(ficha);
+                }else{
+                    layout.removeView(ficha);
+                }
+            }
+            if(ficha.equals(ficha100)){
+                if(original4){
+                    ViewGroup parent = (ViewGroup) ficha100.getParent();
+                    parent.removeView(ficha100);
+                    original4 = false;
+                    layout.removeView(ficha);
+                }else{
+                    layout.removeView(ficha);
+                }
+            }
+            if(ficha.equals(ficha500)){
+                if(original5){
+                    ViewGroup parent = (ViewGroup) ficha500.getParent();
+                    parent.removeView(ficha500);
+                    original5 = false;
+                    layout.removeView(ficha);
+                }else{
+                    layout.removeView(ficha);
+                }
+            }
+            layout.removeView(ficha);  // Eliminar la ficha del layout
+        }
+        fichasEnLaMesa.clear();  // Limpiar la lista después de eliminar las fichas
+        Toast.makeText(RuletaActivity.this, "Todas las fichas eliminadas de la mesa", Toast.LENGTH_SHORT).show();
+    }
+
+    private void realizarApuestas(String resultado) {
+        // Convertir el resultado a un número para comparar con las apuestas
+        int numeroGanador = Integer.parseInt(resultado);
+
+        // Verificar si el jugador ha apostado en este número
+        if (apuestasPorBoton.containsKey(String.valueOf(numeroGanador))) {
+            int apuestaGanadora = apuestasPorBoton.get(String.valueOf(numeroGanador));
+            int ganancia = apuestaGanadora * 36;  // La ganancia es 36 veces la apuesta original
+
+            // Añadir la ganancia al saldo del jugador
+            saldo += ganancia;
+            actualizarSaldo();
+
+            // Mostrar un mensaje con la cantidad ganada
+            Toast.makeText(RuletaActivity.this, "¡Has ganado " + ganancia + " de saldo!", Toast.LENGTH_LONG).show();
+        } else {
+            // Mostrar mensaje si no hubo apuestas ganadoras
+            Toast.makeText(RuletaActivity.this, "No hubo apuestas ganadoras.", Toast.LENGTH_SHORT).show();
+        }
+
+        // Limpiar las apuestas después de cada giro
+        apuestasPorBoton.clear();
     }
 
     private String getRouletteResult(float degree) {
@@ -227,6 +327,7 @@ public class RuletaActivity extends BaseActivity {
                                     saldo -= costo;
                                     actualizarSaldo();  // Actualiza el saldo en la interfaz de usuario
                                     view.setTag(true);  // Marcamos la ficha como ya soltada
+                                    fichasEnLaMesa.add((ImageView) view);
 
                                     // Actualizar el mapa de apuestas por botón
                                     for (String buttonText : buttonTextsOnRelease) {
@@ -322,7 +423,6 @@ public class RuletaActivity extends BaseActivity {
 
         // Crear una nueva ficha
         ImageView newFicha = new ImageView(RuletaActivity.this);
-
         // Obtener el recurso de imagen de la ficha original
         newFicha.setImageDrawable(((ImageView) originalFicha).getDrawable());
 
