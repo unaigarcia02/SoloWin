@@ -99,7 +99,7 @@
                 android:id="@+id/num_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="3"
                 tools:ignore="HardcodedText" />
 
@@ -131,7 +131,7 @@
                 android:id="@+id/num_6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="6"
                 tools:ignore="ContentDescription,HardcodedText" />
 
@@ -163,7 +163,7 @@
                 android:id="@+id/num_9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="9"
                 tools:ignore="ContentDescription,HardcodedText" />
 
@@ -287,7 +287,7 @@
                 android:id="@+id/num_21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="21"
                 tools:ignore="ContentDescription,HardcodedText" />
 
@@ -318,7 +318,7 @@
                 android:id="@+id/num_24"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="24"
                 tools:ignore="HardcodedText" />
 
@@ -349,7 +349,7 @@
                 android:id="@+id/num_27"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="27"
                 tools:ignore="HardcodedText" />
 
@@ -522,7 +522,7 @@
                 android:id="@+id/num_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="2"
                 tools:ignore="HardcodedText" />
 
@@ -554,7 +554,7 @@
                 android:id="@+id/num_5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="5"
                 tools:ignore="HardcodedText" />
 
@@ -585,7 +585,7 @@
                 android:id="@+id/num_8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="8"
                 tools:ignore="HardcodedText" />
 
@@ -711,7 +711,7 @@
                 android:id="@+id/num_20"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="20"
                 tools:ignore="HardcodedText" />
 
@@ -742,7 +742,7 @@
                 android:id="@+id/num_23"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="23"
                 tools:ignore="HardcodedText" />
 
@@ -773,7 +773,7 @@
                 android:id="@+id/num_26"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="26"
                 tools:ignore="HardcodedText" />
 
@@ -940,7 +940,7 @@
                 android:id="@+id/num_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="1"
                 tools:ignore="HardcodedText" />
 
@@ -971,7 +971,7 @@
                 android:id="@+id/num_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="4"
                 tools:ignore="HardcodedText" />
 
@@ -1003,7 +1003,7 @@
                 android:id="@+id/num_7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="7"
                 tools:ignore="HardcodedText" />
 
@@ -1034,7 +1034,7 @@
                 android:id="@+id/num_10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="10"
                 tools:ignore="HardcodedText" />
 
@@ -1127,7 +1127,7 @@
                 android:id="@+id/num_19"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="19"
                 tools:ignore="HardcodedText" />
 
@@ -1158,7 +1158,7 @@
                 android:id="@+id/num_22"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="22"
                 tools:ignore="HardcodedText" />
 
@@ -1189,7 +1189,7 @@
                 android:id="@+id/num_25"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_black_background"
+                android:background="@drawable/button_red_background"
                 android:contentDescription="25"
                 tools:ignore="HardcodedText" />
 
@@ -1220,7 +1220,7 @@
                 android:id="@+id/num_28"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_red_background"
+                android:background="@drawable/button_black_background"
                 android:contentDescription="28"
                 tools:ignore="HardcodedText" />
 

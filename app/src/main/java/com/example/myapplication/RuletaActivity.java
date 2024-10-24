@@ -315,16 +315,24 @@ public class RuletaActivity extends BaseActivity {
                             }
                         }
                         else if(button.getContentDescription().equals("red")){
-                            if (numeroGanador % 2 == 0)
+                            if (numeroGanador == 1  || numeroGanador == 3 || numeroGanador == 5 || numeroGanador == 7 ||
+                                    numeroGanador == 9  || numeroGanador == 12 || numeroGanador == 14 || numeroGanador == 16 ||
+                                    numeroGanador == 18  || numeroGanador == 19 || numeroGanador == 21 || numeroGanador == 23 ||
+                                    numeroGanador == 25  || numeroGanador == 27 || numeroGanador == 30 || numeroGanador == 32 ||
+                                    numeroGanador == 34 || numeroGanador == 36)
                             {
-                                saldo = saldo + ((2 * costo));
+                                saldo = saldo + (((2 * costo) + costo));
                                 actualizarSaldo();
                             }
                         }
                         else if(button.getContentDescription().equals("black")){
-                            if (numeroGanador % 2 != 0)
+                            if (numeroGanador == 2  || numeroGanador == 4 || numeroGanador == 6 || numeroGanador == 8 ||
+                                    numeroGanador == 10  || numeroGanador == 11 || numeroGanador == 13 || numeroGanador == 15 ||
+                                    numeroGanador == 17  || numeroGanador == 20 || numeroGanador == 22 || numeroGanador == 24 ||
+                                    numeroGanador == 26  || numeroGanador == 28 || numeroGanador == 29 || numeroGanador == 31 ||
+                                    numeroGanador == 33 || numeroGanador == 35)
                             {
-                                saldo = saldo + ((2 * costo));
+                                saldo = saldo + (((2 * costo) + costo));
                                 actualizarSaldo();
                             }
                         }else if(Integer.parseInt(button.getContentDescription().toString()) == numeroGanador){
@@ -422,14 +430,22 @@ public class RuletaActivity extends BaseActivity {
                             }
                         }
                         else if(button.getContentDescription().equals("red")){
-                            if (numeroGanador % 2 == 0)
+                            if (numeroGanador == 1  || numeroGanador == 3 || numeroGanador == 5 || numeroGanador == 7 ||
+                                    numeroGanador == 9  || numeroGanador == 12 || numeroGanador == 14 || numeroGanador == 16 ||
+                                    numeroGanador == 18  || numeroGanador == 19 || numeroGanador == 21 || numeroGanador == 23 ||
+                                    numeroGanador == 25  || numeroGanador == 27 || numeroGanador == 30 || numeroGanador == 32 ||
+                                    numeroGanador == 34 || numeroGanador == 36)
                             {
                                 saldo = saldo + ((float) (2 * costo) /2);
                                 actualizarSaldo();
                             }
                         }
                         else if(button.getContentDescription().equals("black")){
-                            if (numeroGanador % 2 != 0)
+                            if (numeroGanador == 2  || numeroGanador == 4 || numeroGanador == 6 || numeroGanador == 8 ||
+                                    numeroGanador == 10  || numeroGanador == 11 || numeroGanador == 13 || numeroGanador == 15 ||
+                                    numeroGanador == 17  || numeroGanador == 20 || numeroGanador == 22 || numeroGanador == 24 ||
+                                    numeroGanador == 26  || numeroGanador == 28 || numeroGanador == 29 || numeroGanador == 31 ||
+                                    numeroGanador == 33 || numeroGanador == 35)
                             {
                                 saldo = saldo + ((float) (2 * costo) /2);
                                 actualizarSaldo();
@@ -542,14 +558,22 @@ public class RuletaActivity extends BaseActivity {
                             }
                         }
                         else if(button.getContentDescription().equals("red")){
-                            if (numeroGanador % 2 == 0)
+                            if (numeroGanador == 1  || numeroGanador == 3 || numeroGanador == 5 || numeroGanador == 7 ||
+                                    numeroGanador == 9  || numeroGanador == 12 || numeroGanador == 14 || numeroGanador == 16 ||
+                                    numeroGanador == 18  || numeroGanador == 19 || numeroGanador == 21 || numeroGanador == 23 ||
+                                    numeroGanador == 25  || numeroGanador == 27 || numeroGanador == 30 || numeroGanador == 32 ||
+                                    numeroGanador == 34 || numeroGanador == 36)
                             {
                                 saldo = saldo + ((float) (2 * costo) /4);
                                 actualizarSaldo();
                             }
                         }
                         else if(button.getContentDescription().equals("black")){
-                            if (numeroGanador % 2 != 0)
+                            if (numeroGanador == 2  || numeroGanador == 4 || numeroGanador == 6 || numeroGanador == 8 ||
+                                    numeroGanador == 10  || numeroGanador == 11 || numeroGanador == 13 || numeroGanador == 15 ||
+                                    numeroGanador == 17  || numeroGanador == 20 || numeroGanador == 22 || numeroGanador == 24 ||
+                                    numeroGanador == 26  || numeroGanador == 28 || numeroGanador == 29 || numeroGanador == 31 ||
+                                    numeroGanador == 33 || numeroGanador == 35)
                             {
                                 saldo = saldo + ((float) (2 * costo) /4);
                                 actualizarSaldo();
