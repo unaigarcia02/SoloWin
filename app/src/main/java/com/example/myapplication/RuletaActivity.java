@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 public class RuletaActivity extends BaseActivity {
@@ -33,8 +35,7 @@ public class RuletaActivity extends BaseActivity {
     private Map<String, Integer> apuestasPorBoton = new HashMap<>();  // Mapa para almacenar las apuestas por botón
     private float[][] buttonCoordinates = new float[49][2];
     ImageButton[] botones = new ImageButton[49]; // Crear un array para almacenar los botones
-    private Map<ImageView, Integer> fichaCostMap = new HashMap<>();
-    private List<ImageView> fichasEnLaMesa = new ArrayList<>(); // Lista para almacenar las fichas en la mesa
+    private Map<ImageView, Integer> fichasEnLaMesa = new HashMap<>(); // Lista para almacenar las fichas en la mesa
     ImageView ficha10;
     ImageView ficha20;
     ImageView ficha50;
@@ -56,6 +57,7 @@ public class RuletaActivity extends BaseActivity {
         ficha50 = findViewById(R.id.ficha50);
         ficha100 = findViewById(R.id.ficha100);
         ficha500 = findViewById(R.id.ficha500);
+
 
         setupDraggableFicha(ficha10, 10);
         setupDraggableFicha(ficha20, 20);
@@ -129,7 +131,7 @@ public class RuletaActivity extends BaseActivity {
     private void eliminarFichasDeLaMesa() {
         RelativeLayout layout = findViewById(R.id.fichas_container);
 
-        for (ImageView ficha : fichasEnLaMesa) {
+        for (ImageView ficha : fichasEnLaMesa.keySet()) {
             if(ficha.equals(ficha10)){
                 if(original1){
                     ViewGroup parent = (ViewGroup) ficha10.getParent();
@@ -187,27 +189,109 @@ public class RuletaActivity extends BaseActivity {
     }
 
     private void realizarApuestas(String resultado) {
-        // Convertir el resultado a un número para comparar con las apuestas
         int numeroGanador = Integer.parseInt(resultado);
+        Map<Integer, List<ImageButton>> fichaApuestas = new HashMap<>(); // HashMap para almacenar el costo de la ficha y los botones
+        apuestasPorBoton.clear();
 
-        // Verificar si el jugador ha apostado en este número
-        if (apuestasPorBoton.containsKey(String.valueOf(numeroGanador))) {
-            int apuestaGanadora = apuestasPorBoton.get(String.valueOf(numeroGanador));
-            int ganancia = apuestaGanadora * 36;  // La ganancia es 36 veces la apuesta original
+        for (ImageView ficha : fichasEnLaMesa.keySet()) {
+            List<ImageButton> buttonsUnderFicha = getButtonsUnderFicha(ficha); // Obtener botones debajo de la ficha
+            if (!buttonsUnderFicha.isEmpty()) {
+                int costo = costoFicha(ficha); // Obtener el costo de la ficha
 
-            // Añadir la ganancia al saldo del jugador
-            saldo += ganancia;
-            actualizarSaldo();
+                // Si no existe una entrada para este costo, inicializa una nueva lista
+                fichaApuestas.putIfAbsent(costo, new ArrayList<>());
 
-            // Mostrar un mensaje con la cantidad ganada
-            Toast.makeText(RuletaActivity.this, "¡Has ganado " + ganancia + " de saldo!", Toast.LENGTH_LONG).show();
-        } else {
-            // Mostrar mensaje si no hubo apuestas ganadoras
-            Toast.makeText(RuletaActivity.this, "No hubo apuestas ganadoras.", Toast.LENGTH_SHORT).show();
+                // Añadir los botones a la lista correspondiente
+                fichaApuestas.get(costo).addAll(buttonsUnderFicha);
+
+                // Procesar las apuestas para los botones sobre los que está la ficha
+                for (ImageButton button : buttonsUnderFicha) {
+                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
+                    int apuestaActual = apuestasPorBoton.getOrDefault(buttonText, 0);
+                    apuestasPorBoton.put(buttonText, apuestaActual + costo); // Asumir que 'costo' es el costo de la ficha
+                }
+            }
+        }
+        for (Map.Entry<Integer, List<ImageButton>> entry : fichaApuestas.entrySet()) {
+            int costo = entry.getKey();
+            List<ImageButton> botones = entry.getValue();
+            int size = botones.size(); // Obtener el tamaño de la lista asociada
+
+            if (size == 1) {
+                Log.d("Apuesta", "Costo: " + costo + " tiene 1 botón asociado.");
+                // Imprimir el botón asociado
+                for (ImageButton button : botones) {
+                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
+                    if(Objects.equals(buttonText.toLowerCase(), "2 to 1 (1)")){
+                        Log.d("Apuesta", "KAKAKAKAKAKAKAKAKAKAKAKAKA: " + buttonText);
+                        if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
+                            numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
+                            numeroGanador == 27  || numeroGanador == 30 || numeroGanador == 33 || numeroGanador == 36)
+                        {
+                            saldo = saldo + (((2 * costo) + costo));
+                            actualizarSaldo();
+                        }
+                    }
+                    else if(Objects.equals(buttonText.toLowerCase(), "2 to 1 (2)")){
+                        Log.d("Apuesta", "KAKAKAKAKAKAKAKAKAKAKAKAKA: " + buttonText);
+                        if (numeroGanador == 2  || numeroGanador == 5 || numeroGanador == 8 || numeroGanador == 11 ||
+                                numeroGanador == 14  || numeroGanador == 17 || numeroGanador == 20 || numeroGanador == 23 ||
+                                numeroGanador == 26  || numeroGanador == 39 || numeroGanador == 32 || numeroGanador == 35)
+                        {
+                            saldo = saldo + (((2 * costo) + costo));
+                            actualizarSaldo();
+                        }
+                    }
+                    else if(Objects.equals(buttonText.toLowerCase(), "2 to 1 (3)")){
+                        Log.d("Apuesta", "KAKAKAKAKAKAKAKAKAKAKAKAKA: " + buttonText);
+                        if (numeroGanador == 1  || numeroGanador == 4 || numeroGanador == 7 || numeroGanador == 10 ||
+                                numeroGanador == 13  || numeroGanador == 16 || numeroGanador == 19 || numeroGanador == 22 ||
+                                numeroGanador == 25  || numeroGanador == 28 || numeroGanador == 31 || numeroGanador == 34)
+                        {
+                            saldo = saldo + (((2 * costo) + costo));
+                            actualizarSaldo();
+                        }
+                    }
+                    Log.d("Apuesta", "Botón asociado: " + buttonText);
+                }
+            } else if (size == 2) {
+                Log.d("Apuesta", "Costo: " + costo + " tiene 2 botones asociados.");
+                // Imprimir los botones asociados
+                for (ImageButton button : botones) {
+                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
+                    Log.d("Apuesta", "Botón asociado: " + buttonText);
+                }
+            } else if (size == 3) {
+                Log.d("Apuesta", "Costo: " + costo + " tiene 3 botones asociados.");
+                // Imprimir los botones asociados
+                for (ImageButton button : botones) {
+                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
+                    Log.d("Apuesta", "Botón asociado: " + buttonText);
+                }
+            } else if (size == 4) {
+                Log.d("Apuesta", "Costo: " + costo + " tiene 4 botones asociados.");
+                // Imprimir los botones asociados
+                for (ImageButton button : botones) {
+                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
+                    Log.d("Apuesta", "Botón asociado: " + buttonText);
+                }
+            }
+            // Aquí puedes agregar más condiciones si necesitas manejar más casos
         }
 
-        // Limpiar las apuestas después de cada giro
-        apuestasPorBoton.clear();
+        // Aquí puedes usar fichaApuestas según sea necesario
+    }
+
+    // Método auxiliar para obtener el costo de la ficha
+    private int costoFicha(ImageView ficha) {
+        // Verifica si la ficha está en el HashMap
+        if (fichasEnLaMesa.containsKey(ficha)) {
+            // Devuelve el costo asociado a la ficha
+            return fichasEnLaMesa.get(ficha);
+        } else {
+            // Si la ficha no está en el HashMap, devuelve 0 o el valor que prefieras
+            return 0;
+        }
     }
 
     private String getRouletteResult(float degree) {
@@ -326,8 +410,9 @@ public class RuletaActivity extends BaseActivity {
                                     // Si es la primera vez, descontamos el saldo
                                     saldo -= costo;
                                     actualizarSaldo();  // Actualiza el saldo en la interfaz de usuario
-                                    view.setTag(true);  // Marcamos la ficha como ya soltada
-                                    fichasEnLaMesa.add((ImageView) view);
+                                    view.setTag(true);
+                                    // Marcamos la ficha como ya soltada
+                                    fichasEnLaMesa.put((ImageView) view, costo);
 
                                     // Actualizar el mapa de apuestas por botón
                                     for (String buttonText : buttonTextsOnRelease) {
@@ -340,6 +425,7 @@ public class RuletaActivity extends BaseActivity {
                                         message.append(buttonText).append(" ");
                                     }
                                     Toast.makeText(RuletaActivity.this, message.toString(), Toast.LENGTH_SHORT).show();
+
                                 } else {
                                     // Solo actualizar el mapa si la ficha ya ha sido soltada antes
                                     for (String buttonText : buttonTextsOnRelease) {
@@ -420,13 +506,14 @@ public class RuletaActivity extends BaseActivity {
 
     private ImageView createNewFicha(View originalFicha, int costo) {
         RelativeLayout layout = findViewById(R.id.fichas_container);
-
         // Crear una nueva ficha
         ImageView newFicha = new ImageView(RuletaActivity.this);
         // Obtener el recurso de imagen de la ficha original
         newFicha.setImageDrawable(((ImageView) originalFicha).getDrawable());
-
         // Mantener el tamaño original de la ficha
+        newFicha.setTag(costo);
+
+
         int originalWidth = originalFicha.getWidth();
         int originalHeight = originalFicha.getHeight();
 
@@ -502,6 +589,41 @@ public class RuletaActivity extends BaseActivity {
         // Mostrar el resumen en la consola o en un Toast
         Log.d("RuletaActivity", resumen.toString());
         Toast.makeText(RuletaActivity.this, resumen.toString(), Toast.LENGTH_LONG).show();
+    }
+
+    private List<ImageButton> getButtonsUnderFicha(ImageView ficha) {
+        List<ImageButton> buttonsUnderFicha = new ArrayList<>(); // Lista para almacenar los botones sobre los que está la ficha
+
+        // Obtener las coordenadas de la ficha
+        int[] fichaLocation = new int[2];
+        ficha.getLocationOnScreen(fichaLocation);
+        float fichaX = fichaLocation[0];
+        float fichaY = fichaLocation[1];
+        int fichaWidth = ficha.getWidth();
+        int fichaHeight = ficha.getHeight();
+
+        // Iterar sobre todos los botones
+        for (int i = 0; i <= 48; i++) {
+            // Obtener el botón correspondiente
+            ImageButton button = botones[i];
+            if (button != null) {
+                // Obtener las coordenadas y tamaño del botón
+                int[] buttonLocation = new int[2];
+                button.getLocationOnScreen(buttonLocation);
+                float buttonX = buttonLocation[0];
+                float buttonY = buttonLocation[1];
+                float buttonWidth = button.getWidth();
+                float buttonHeight = button.getHeight();
+
+                // Comprobar si la ficha intersecta con el botón
+                if (isRectanglesIntersecting((int) buttonX, (int) buttonY, (int) buttonWidth, (int) buttonHeight, fichaX, fichaY, fichaWidth, fichaHeight)) {
+                    buttonsUnderFicha.add(button); // Agregar el botón a la lista
+                }
+            }
+        }
+
+
+        return buttonsUnderFicha; // Retorna la lista de botones detectados
     }
 
 }
