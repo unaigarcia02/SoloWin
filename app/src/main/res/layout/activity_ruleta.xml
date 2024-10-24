@@ -1768,5 +1768,18 @@
         app:srcCompat="@drawable/ficha500"
         tools:ignore="ContentDescription" />
 
+    <ImageView
+        android:id="@+id/kuala"
+        android:layout_width="1220dp"
+        android:layout_height="643dp"
+        android:visibility="gone"
+        android:contentDescription=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/solog"
+        tools:ignore="ContentDescription" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

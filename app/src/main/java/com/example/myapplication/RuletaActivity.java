@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.media.MediaPlayer;
 
 
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ public class RuletaActivity extends BaseActivity {
     private ImageView rouletteImage;
     private float currentDegree = 0f;
     private float dX, dY;
+    private ImageView kuala;
+    private MediaPlayer mediaPlayer;
     private boolean original1, original2, original3, original4, original5;
     private float saldo;
     private Map<String, Integer> apuestasPorBoton = new HashMap<>();  // Mapa para almacenar las apuestas por botón
@@ -48,6 +52,8 @@ public class RuletaActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ruleta);
 
+        kuala = findViewById(R.id.kuala);
+        mediaPlayer = MediaPlayer.create(this, R.raw.boom);
 
         rouletteImage = findViewById(R.id.ruleta);
         Button spinButton = findViewById(R.id.spinButton);
@@ -86,7 +92,7 @@ public class RuletaActivity extends BaseActivity {
 
         // Generar un ángulo aleatorio para que la ruleta se detenga
         Random random = new Random();
-        int randomDegree = random.nextInt(360) + 1080;  // +1080 para que gire varias veces
+        int randomDegree =  random.nextInt(360) + 1080;  // +1080 para que gire varias veces
 
         // Crear una animación de rotación
         RotateAnimation rotateAnimation = new RotateAnimation(
@@ -190,7 +196,7 @@ public class RuletaActivity extends BaseActivity {
 
     private void realizarApuestas(String resultado) {
         int numeroGanador = Integer.parseInt(resultado);
-        Map<Integer, List<ImageButton>> fichaApuestas = new HashMap<>(); // HashMap para almacenar el costo de la ficha y los botones
+        Map<Integer, List<List<ImageButton>>> fichaApuestas = new HashMap<>(); // HashMap para almacenar el costo y listas de listas de botones
         apuestasPorBoton.clear();
 
         for (ImageView ficha : fichasEnLaMesa.keySet()) {
@@ -201,8 +207,8 @@ public class RuletaActivity extends BaseActivity {
                 // Si no existe una entrada para este costo, inicializa una nueva lista
                 fichaApuestas.putIfAbsent(costo, new ArrayList<>());
 
-                // Añadir los botones a la lista correspondiente
-                fichaApuestas.get(costo).addAll(buttonsUnderFicha);
+                // Añadir la lista de botones actual a la lista correspondiente
+                fichaApuestas.get(costo).add(buttonsUnderFicha);
 
                 // Procesar las apuestas para los botones sobre los que está la ficha
                 for (ImageButton button : buttonsUnderFicha) {
@@ -212,74 +218,354 @@ public class RuletaActivity extends BaseActivity {
                 }
             }
         }
-        for (Map.Entry<Integer, List<ImageButton>> entry : fichaApuestas.entrySet()) {
+        for (Map.Entry<Integer, List<List<ImageButton>>> entry : fichaApuestas.entrySet()) {
             int costo = entry.getKey();
-            List<ImageButton> botones = entry.getValue();
-            int size = botones.size(); // Obtener el tamaño de la lista asociada
+            List<List<ImageButton>> listasBotones = entry.getValue();
 
-            if (size == 1) {
-                Log.d("Apuesta", "Costo: " + costo + " tiene 1 botón asociado.");
-                // Imprimir el botón asociado
-                for (ImageButton button : botones) {
-                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
-                    if(Objects.equals(buttonText.toLowerCase(), "2 to 1 (1)")){
-                        Log.d("Apuesta", "KAKAKAKAKAKAKAKAKAKAKAKAKA: " + buttonText);
-                        if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
-                            numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
-                            numeroGanador == 27  || numeroGanador == 30 || numeroGanador == 33 || numeroGanador == 36)
-                        {
-                            saldo = saldo + (((2 * costo) + costo));
+            // Procesar y imprimir cada lista de botones
+            for (List<ImageButton> lista : listasBotones) {
+                // Imprimir costo en Logcat
+
+                // Verifica la cantidad de botones en la lista
+                if (lista.size() == 1) {
+
+                    for (ImageButton button : lista) {
+                        Log.d("Apuestas", "ESTA EN 11111111: " + costo);
+                        Log.d("Apuestas", "ESTA EN 11111111: " + button.getContentDescription());// Imprimir el contenido de descripción del botón
+                        if(button.getContentDescription().equals("2 to 1 (1)")){
+                            if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
+                                    numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
+                                    numeroGanador == 27  || numeroGanador == 30 || numeroGanador == 33 || numeroGanador == 36)
+                            {
+                                saldo = saldo + (((2 * costo) + costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 to 1 (2)")){
+                            if (numeroGanador == 2  || numeroGanador == 5 || numeroGanador == 8 || numeroGanador == 11 ||
+                                    numeroGanador == 14  || numeroGanador == 17 || numeroGanador == 20 || numeroGanador == 23 ||
+                                    numeroGanador == 26  || numeroGanador == 29 || numeroGanador == 32 || numeroGanador == 35)
+                            {
+                                saldo = saldo + (((2 * costo) + costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 to 1 (3)")){
+                            if (numeroGanador == 1  || numeroGanador == 4 || numeroGanador == 7 || numeroGanador == 10 ||
+                                    numeroGanador == 13  || numeroGanador == 15 || numeroGanador == 19 || numeroGanador == 22 ||
+                                    numeroGanador == 20  || numeroGanador == 28 || numeroGanador == 31 || numeroGanador == 34)
+                            {
+                                saldo = saldo + (((2 * costo) + costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("1 st 12")){
+                            if (numeroGanador == 1  || numeroGanador == 2 || numeroGanador == 3 || numeroGanador == 4 ||
+                                    numeroGanador == 5  || numeroGanador == 6 || numeroGanador == 7 || numeroGanador == 8 ||
+                                    numeroGanador == 9  || numeroGanador == 10 || numeroGanador == 11 || numeroGanador == 12)
+                            {
+                                saldo = saldo + (((2 * costo) + costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 nd 12")){
+                            if (numeroGanador == 13  || numeroGanador == 14 || numeroGanador == 15 || numeroGanador == 16 ||
+                                    numeroGanador == 17  || numeroGanador == 18 || numeroGanador == 19 || numeroGanador == 20 ||
+                                    numeroGanador == 21  || numeroGanador == 22 || numeroGanador == 23 || numeroGanador == 24)
+                            {
+                                saldo = saldo + (((2 * costo) + costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("3 rd 12")){
+                            if (numeroGanador == 25  || numeroGanador == 26 || numeroGanador == 27 || numeroGanador == 28 ||
+                                    numeroGanador == 29  || numeroGanador == 30 || numeroGanador == 31 || numeroGanador == 32 ||
+                                    numeroGanador == 33  || numeroGanador == 34 || numeroGanador == 35 || numeroGanador == 36)
+                            {
+                                saldo = saldo + (((2 * costo) + costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("1 to 18")){
+                            if (numeroGanador >= 1 && numeroGanador <= 18)
+                            {
+                                saldo = saldo + ((2 * costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("19 to 36")){
+                            if (numeroGanador >= 19 && numeroGanador <= 36)
+                            {
+                                saldo = saldo + ((2 * costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("even")){
+                            if (numeroGanador % 2 == 0)
+                            {
+                                saldo = saldo + ((2 * costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("odd")){
+                            if (numeroGanador % 2 != 0)
+                            {
+                                saldo = saldo + ((2 * costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("red")){
+                            if (numeroGanador % 2 == 0)
+                            {
+                                saldo = saldo + ((2 * costo));
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("black")){
+                            if (numeroGanador % 2 != 0)
+                            {
+                                saldo = saldo + ((2 * costo));
+                                actualizarSaldo();
+                            }
+                        }else if(Integer.parseInt(button.getContentDescription().toString()) == numeroGanador){
+                            saldo = saldo + (((35 * costo) + costo));
                             actualizarSaldo();
                         }
+
                     }
-                    else if(Objects.equals(buttonText.toLowerCase(), "2 to 1 (2)")){
-                        Log.d("Apuesta", "KAKAKAKAKAKAKAKAKAKAKAKAKA: " + buttonText);
-                        if (numeroGanador == 2  || numeroGanador == 5 || numeroGanador == 8 || numeroGanador == 11 ||
-                                numeroGanador == 14  || numeroGanador == 17 || numeroGanador == 20 || numeroGanador == 23 ||
-                                numeroGanador == 26  || numeroGanador == 39 || numeroGanador == 32 || numeroGanador == 35)
-                        {
-                            saldo = saldo + (((2 * costo) + costo));
+
+                }if (lista.size() == 2) {
+
+                    for (ImageButton button : lista) {
+                        Log.d("Apuestas", "ESTA EN 22222222: " + costo);
+                        Log.d("Apuestas", "ESTA EN 222222222: " + button.getContentDescription());// Imprimir el contenido de descripción del botón
+                        if(button.getContentDescription().equals("2 to 1 (1)")){
+                            if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
+                                    numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
+                                    numeroGanador == 27  || numeroGanador == 30 || numeroGanador == 33 || numeroGanador == 36)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 to 1 (2)")){
+                            if (numeroGanador == 2  || numeroGanador == 5 || numeroGanador == 8 || numeroGanador == 11 ||
+                                    numeroGanador == 14  || numeroGanador == 17 || numeroGanador == 20 || numeroGanador == 23 ||
+                                    numeroGanador == 26  || numeroGanador == 29 || numeroGanador == 32 || numeroGanador == 35)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 to 1 (3)")){
+                            if (numeroGanador == 1  || numeroGanador == 4 || numeroGanador == 7 || numeroGanador == 10 ||
+                                    numeroGanador == 13  || numeroGanador == 15 || numeroGanador == 19 || numeroGanador == 22 ||
+                                    numeroGanador == 20  || numeroGanador == 28 || numeroGanador == 31 || numeroGanador == 34)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("1 st 12")){
+                            if (numeroGanador == 1  || numeroGanador == 2 || numeroGanador == 3 || numeroGanador == 4 ||
+                                    numeroGanador == 5  || numeroGanador == 6 || numeroGanador == 7 || numeroGanador == 8 ||
+                                    numeroGanador == 9  || numeroGanador == 10 || numeroGanador == 11 || numeroGanador == 12)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 nd 12")){
+                            if (numeroGanador == 13  || numeroGanador == 14 || numeroGanador == 15 || numeroGanador == 16 ||
+                                    numeroGanador == 17  || numeroGanador == 18 || numeroGanador == 19 || numeroGanador == 20 ||
+                                    numeroGanador == 21  || numeroGanador == 22 || numeroGanador == 23 || numeroGanador == 24)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("3 rd 12")){
+                            if (numeroGanador == 25  || numeroGanador == 26 || numeroGanador == 27 || numeroGanador == 28 ||
+                                    numeroGanador == 29  || numeroGanador == 30 || numeroGanador == 31 || numeroGanador == 32 ||
+                                    numeroGanador == 33  || numeroGanador == 34 || numeroGanador == 35 || numeroGanador == 36)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("1 to 18")){
+                            if (numeroGanador >= 1 && numeroGanador <= 18)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("19 to 36")){
+                            if (numeroGanador >= 19 && numeroGanador <= 36)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("even")){
+                            if (numeroGanador % 2 == 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("odd")){
+                            if (numeroGanador % 2 != 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("red")){
+                            if (numeroGanador % 2 == 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /2);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("black")){
+                            if (numeroGanador % 2 != 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /2);
+                                actualizarSaldo();
+                            }
+                        }else if(Integer.parseInt(button.getContentDescription().toString()) == numeroGanador){
+                            saldo = saldo + (((35 * costo) + costo)/2);
                             actualizarSaldo();
                         }
+
                     }
-                    else if(Objects.equals(buttonText.toLowerCase(), "2 to 1 (3)")){
-                        Log.d("Apuesta", "KAKAKAKAKAKAKAKAKAKAKAKAKA: " + buttonText);
-                        if (numeroGanador == 1  || numeroGanador == 4 || numeroGanador == 7 || numeroGanador == 10 ||
-                                numeroGanador == 13  || numeroGanador == 16 || numeroGanador == 19 || numeroGanador == 22 ||
-                                numeroGanador == 25  || numeroGanador == 28 || numeroGanador == 31 || numeroGanador == 34)
-                        {
-                            saldo = saldo + (((2 * costo) + costo));
+
+                } else if (lista.size() == 3) {
+
+                    Log.d("Apuestas", "ESTA EN 33333333: " + costo);
+                    kuala.setVisibility(View.VISIBLE);
+                    if (mediaPlayer != null) {
+                        mediaPlayer.start();
+                    }
+                    saldo = saldo + costo;
+                    actualizarSaldo();
+                    // Espera un tiempo antes de desvanecer (fade out)
+                    kuala.postDelayed(this::fadeOutImage, 10);
+                    Toast.makeText(RuletaActivity.this, "ESA APUESTA ESTA PROHIBIDA", Toast.LENGTH_SHORT).show();
+
+                } else if (lista.size() == 4) {
+
+                    for (ImageButton button : lista) {
+                        Log.d("Apuestas", "ESTA EN 22222222: " + costo);
+                        Log.d("Apuestas", "ESTA EN 222222222: " + button.getContentDescription());// Imprimir el contenido de descripción del botón
+                        if(button.getContentDescription().equals("2 to 1 (1)")){
+                            if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
+                                    numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
+                                    numeroGanador == 27  || numeroGanador == 30 || numeroGanador == 33 || numeroGanador == 36)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 to 1 (2)")){
+                            if (numeroGanador == 2  || numeroGanador == 5 || numeroGanador == 8 || numeroGanador == 11 ||
+                                    numeroGanador == 14  || numeroGanador == 17 || numeroGanador == 20 || numeroGanador == 23 ||
+                                    numeroGanador == 26  || numeroGanador == 29 || numeroGanador == 32 || numeroGanador == 35)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 to 1 (3)")){
+                            if (numeroGanador == 1  || numeroGanador == 4 || numeroGanador == 7 || numeroGanador == 10 ||
+                                    numeroGanador == 13  || numeroGanador == 15 || numeroGanador == 19 || numeroGanador == 22 ||
+                                    numeroGanador == 20  || numeroGanador == 28 || numeroGanador == 31 || numeroGanador == 34)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("1 st 12")){
+                            if (numeroGanador == 1  || numeroGanador == 2 || numeroGanador == 3 || numeroGanador == 4 ||
+                                    numeroGanador == 5  || numeroGanador == 6 || numeroGanador == 7 || numeroGanador == 8 ||
+                                    numeroGanador == 9  || numeroGanador == 10 || numeroGanador == 11 || numeroGanador == 12)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 nd 12")){
+                            if (numeroGanador == 13  || numeroGanador == 14 || numeroGanador == 15 || numeroGanador == 16 ||
+                                    numeroGanador == 17  || numeroGanador == 18 || numeroGanador == 19 || numeroGanador == 20 ||
+                                    numeroGanador == 21  || numeroGanador == 22 || numeroGanador == 23 || numeroGanador == 24)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("3 rd 12")){
+                            if (numeroGanador == 25  || numeroGanador == 26 || numeroGanador == 27 || numeroGanador == 28 ||
+                                    numeroGanador == 29  || numeroGanador == 30 || numeroGanador == 31 || numeroGanador == 32 ||
+                                    numeroGanador == 33  || numeroGanador == 34 || numeroGanador == 35 || numeroGanador == 36)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("1 to 18")){
+                            if (numeroGanador >= 1 && numeroGanador <= 18)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("19 to 36")){
+                            if (numeroGanador >= 19 && numeroGanador <= 36)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("even")){
+                            if (numeroGanador % 2 == 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("odd")){
+                            if (numeroGanador % 2 != 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("red")){
+                            if (numeroGanador % 2 == 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /4);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("black")){
+                            if (numeroGanador % 2 != 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /4);
+                                actualizarSaldo();
+                            }
+                        }else if(Integer.parseInt(button.getContentDescription().toString()) == numeroGanador){
+                            saldo = saldo + (((35 * costo) + costo)/4);
                             actualizarSaldo();
                         }
+
                     }
-                    Log.d("Apuesta", "Botón asociado: " + buttonText);
+
                 }
-            } else if (size == 2) {
-                Log.d("Apuesta", "Costo: " + costo + " tiene 2 botones asociados.");
-                // Imprimir los botones asociados
-                for (ImageButton button : botones) {
-                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
-                    Log.d("Apuesta", "Botón asociado: " + buttonText);
-                }
-            } else if (size == 3) {
-                Log.d("Apuesta", "Costo: " + costo + " tiene 3 botones asociados.");
-                // Imprimir los botones asociados
-                for (ImageButton button : botones) {
-                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
-                    Log.d("Apuesta", "Botón asociado: " + buttonText);
-                }
-            } else if (size == 4) {
-                Log.d("Apuesta", "Costo: " + costo + " tiene 4 botones asociados.");
-                // Imprimir los botones asociados
-                for (ImageButton button : botones) {
-                    String buttonText = (String) button.getContentDescription(); // Obtener el texto del botón
-                    Log.d("Apuesta", "Botón asociado: " + buttonText);
-                }
+
             }
-            // Aquí puedes agregar más condiciones si necesitas manejar más casos
         }
 
-        // Aquí puedes usar fichaApuestas según sea necesario
     }
 
     // Método auxiliar para obtener el costo de la ficha
@@ -292,6 +578,29 @@ public class RuletaActivity extends BaseActivity {
             // Si la ficha no está en el HashMap, devuelve 0 o el valor que prefieras
             return 0;
         }
+    }
+
+    private void fadeOutImage() {
+        // Animación de desvanecimiento (fade out)
+        AlphaAnimation fadeOut = new AlphaAnimation(1.0f, 0.0f);
+        fadeOut.setDuration(1000); // 500 milisegundos
+        fadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                // No hacer nada
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                kuala.setVisibility(View.GONE); // Oculta la imagen después del desvanecimiento
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+                // No hacer nada
+            }
+        });
+        kuala.startAnimation(fadeOut);
     }
 
     private String getRouletteResult(float degree) {
@@ -460,11 +769,6 @@ public class RuletaActivity extends BaseActivity {
     }
 
 
-
-
-
-
-
     private List<Integer> getButtonsIndicesAtPosition(float x, float y, int fichaWidth, int fichaHeight) {
         List<Integer> buttonIndices = new ArrayList<>(); // Lista para almacenar los índices de los botones
 
@@ -624,6 +928,15 @@ public class RuletaActivity extends BaseActivity {
 
 
         return buttonsUnderFicha; // Retorna la lista de botones detectados
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        // Libera el MediaPlayer cuando ya no se necesite
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
 }
