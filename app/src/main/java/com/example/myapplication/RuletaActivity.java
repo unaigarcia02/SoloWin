@@ -12,6 +12,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -24,8 +25,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.View;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class RuletaActivity extends BaseActivity {
 
@@ -45,7 +52,9 @@ public class RuletaActivity extends BaseActivity {
     ImageView ficha50;
     ImageView ficha100;
     ImageView ficha500;
-
+    private CountDownTimer countdownTimer;
+    private float remainingAngle = 360f; // Ángulo restante del círculo, comenzando desde 360 grados
+    private Paint paint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +65,6 @@ public class RuletaActivity extends BaseActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.boom);
 
         rouletteImage = findViewById(R.id.ruleta);
-        Button spinButton = findViewById(R.id.spinButton);
 
         ficha10 = findViewById(R.id.ficha10);
         ficha20 = findViewById(R.id.ficha20);
@@ -78,13 +86,65 @@ public class RuletaActivity extends BaseActivity {
         original5 = true;
 
         inicializarBotones();
-        spinButton.setOnClickListener(v -> spinRoulette());
 
         TextView saldoTextView = findViewById(R.id.Saldo);
         saldo = Integer.parseInt(saldoTextView.getText().toString());
 
+        inicializarreloj();
 
     }
+
+    private void inicializarreloj(){
+        paint = new Paint();
+        paint.setColor(Color.WHITE); // Color blanco
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(12f); // Ancho del borde más grueso
+        paint.setAntiAlias(true);
+
+        // Crear la vista personalizada en línea para dibujar el círculo
+        View countdownView = new View(this) {
+            @Override
+            protected void onDraw(Canvas canvas) {
+                super.onDraw(canvas);
+                // Dibujar el arco del círculo usando el ángulo restante
+                float radius = getWidth() / 3.5f; // Radio reducido para un círculo más pequeño
+                float cx = getWidth() / 2f;
+                float cy = getHeight() / 2f;
+                canvas.drawArc(
+                        cx - radius, cy - radius, cx + radius, cy + radius,
+                        -90f, remainingAngle, false, paint
+                );
+            }
+        };
+
+        // Añadir la vista personalizada al FrameLayout del XML
+        FrameLayout container = findViewById(R.id.circleContainer);
+        container.addView(countdownView);
+
+        // Definir y configurar el temporizador de cuenta regresiva en un método separado para reiniciar fácilmente
+        startCountdown(countdownView); // Iniciar el temporizador
+    }
+
+    private void startCountdown(View countdownView) {
+        countdownTimer = new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                // Calcular el nuevo ángulo restante, reduciéndolo en 12 grados cada segundo en sentido antihorario
+                remainingAngle = -(millisUntilFinished / 1000f * (360f / 30));
+                countdownView.invalidate(); // Redibujar la vista
+            }
+
+            @Override
+            public void onFinish() {
+                // Reiniciar la cuenta regresiva al finalizar
+                remainingAngle = -360f;
+                countdownView.invalidate();
+                startCountdown(countdownView); // Llamar de nuevo para hacer loop
+            }
+        };
+        countdownTimer.start(); // Iniciar el temporizador
+    }
+
 
     private void spinRoulette() {
         // Mostrar el resumen de apuestas antes de iniciar el giro
