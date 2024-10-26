@@ -1,8 +1,14 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
-import android.graphics.Rect;
+import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.AlignmentSpan;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,7 +17,6 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -29,10 +34,10 @@ import java.util.Random;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.View;
-import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.appcompat.app.AlertDialog;
+
 
 public class RuletaActivity extends BaseActivity {
 
@@ -52,9 +57,15 @@ public class RuletaActivity extends BaseActivity {
     ImageView ficha50;
     ImageView ficha100;
     ImageView ficha500;
+    private TextView texto;
+    private boolean isSpinning = false;
+    private ImageButton infobtn;
+
+    private float remainingAngle = -360f; // Ángulo restante del círculo, comenzando desde -360 para que gire al revés
+    private Paint circlePaint;
+    private Paint textPaint;
     private CountDownTimer countdownTimer;
-    private float remainingAngle = 360f; // Ángulo restante del círculo, comenzando desde 360 grados
-    private Paint paint;
+    private int secondsRemaining = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +76,7 @@ public class RuletaActivity extends BaseActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.boom);
 
         rouletteImage = findViewById(R.id.ruleta);
+        texto = findViewById(R.id.textView3);
 
         ficha10 = findViewById(R.id.ficha10);
         ficha20 = findViewById(R.id.ficha20);
@@ -91,59 +103,73 @@ public class RuletaActivity extends BaseActivity {
         saldo = Integer.parseInt(saldoTextView.getText().toString());
 
         inicializarreloj();
+        startCountdown();
 
     }
 
-    private void inicializarreloj(){
-        paint = new Paint();
-        paint.setColor(Color.WHITE); // Color blanco
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(12f); // Ancho del borde más grueso
-        paint.setAntiAlias(true);
+    private void inicializarreloj() {
+        circlePaint = new Paint();
+        circlePaint.setColor(Color.WHITE); // Color blanco
+        circlePaint.setStyle(Paint.Style.STROKE);
+        circlePaint.setStrokeWidth(12f); // Ancho del borde más grueso
+        circlePaint.setAntiAlias(true);
 
-        // Crear la vista personalizada en línea para dibujar el círculo
+        // Inicializar Paint para el texto
+        textPaint = new Paint();
+        textPaint.setColor(Color.WHITE); // Color del texto
+        textPaint.setTextSize(64f); // Tamaño del texto
+        textPaint.setTextAlign(Paint.Align.CENTER); // Centrar el texto horizontalmente
+        textPaint.setAntiAlias(true);
+
+        // Crear la vista personalizada para dibujar el círculo y el texto
         View countdownView = new View(this) {
             @Override
             protected void onDraw(Canvas canvas) {
                 super.onDraw(canvas);
-                // Dibujar el arco del círculo usando el ángulo restante
-                float radius = getWidth() / 3.5f; // Radio reducido para un círculo más pequeño
+                float radius = getWidth() / 3.5f;
                 float cx = getWidth() / 2f;
                 float cy = getHeight() / 2f;
-                canvas.drawArc(
-                        cx - radius, cy - radius, cx + radius, cy + radius,
-                        -90f, remainingAngle, false, paint
-                );
+
+                // Dibujar el arco
+                canvas.drawArc(cx - radius, cy - radius, cx + radius, cy + radius,
+                        -90f, remainingAngle, false, circlePaint);
+
+                // Dibujar el texto en el centro
+                canvas.drawText(String.valueOf(secondsRemaining), cx, cy + (textPaint.getTextSize() / 3), textPaint);
             }
         };
 
         // Añadir la vista personalizada al FrameLayout del XML
         FrameLayout container = findViewById(R.id.circleContainer);
         container.addView(countdownView);
-
-        // Definir y configurar el temporizador de cuenta regresiva en un método separado para reiniciar fácilmente
-        startCountdown(countdownView); // Iniciar el temporizador
     }
 
-    private void startCountdown(View countdownView) {
+    private void startCountdown() {
+        // Obtiene el FrameLayout que contiene la vista de cuenta regresiva
+        FrameLayout container = findViewById(R.id.circleContainer);
+        View countdownView = container.getChildAt(0);
+
+        // Crear e iniciar el temporizador
         countdownTimer = new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-                // Calcular el nuevo ángulo restante, reduciéndolo en 12 grados cada segundo en sentido antihorario
                 remainingAngle = -(millisUntilFinished / 1000f * (360f / 30));
+                secondsRemaining = (int) (millisUntilFinished / 1000);
                 countdownView.invalidate(); // Redibujar la vista
             }
 
             @Override
             public void onFinish() {
-                // Reiniciar la cuenta regresiva al finalizar
-                remainingAngle = -360f;
-                countdownView.invalidate();
-                startCountdown(countdownView); // Llamar de nuevo para hacer loop
+                remainingAngle = 0f;
+                secondsRemaining = 0;
+                countdownView.invalidate(); // Redibujar para mostrar el círculo desaparecido
+
+                // Llamar a spinRoulette cuando el temporizador llegue a 0
+                spinRoulette();
             }
-        };
-        countdownTimer.start(); // Iniciar el temporizador
+        }.start(); // Iniciar el temporizador
     }
+
 
 
     private void spinRoulette() {
@@ -152,7 +178,7 @@ public class RuletaActivity extends BaseActivity {
 
         // Generar un ángulo aleatorio para que la ruleta se detenga
         Random random = new Random();
-        int randomDegree =  random.nextInt(360) + 1080;  // +1080 para que gire varias veces
+        int randomDegree =  random.nextInt(360) + 2160;  // +1080 para que gire varias veces
 
         // Crear una animación de rotación
         RotateAnimation rotateAnimation = new RotateAnimation(
@@ -161,14 +187,17 @@ public class RuletaActivity extends BaseActivity {
                 Animation.RELATIVE_TO_SELF, 0.5f
         );
 
-        rotateAnimation.setDuration(3000);  // Duración del giro en milisegundos
+        rotateAnimation.setDuration(6000);  // Duración del giro en milisegundos
         rotateAnimation.setFillAfter(true);  // Mantener la posición final después de la animación
 
         // Listener para cuando la animación se completa
         rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onAnimationStart(Animation animation) {
                 // Opcional: hacer algo al iniciar el giro
+                texto.setText("Apuestas realizadas");
+                isSpinning = true;
             }
 
             @Override
@@ -176,10 +205,11 @@ public class RuletaActivity extends BaseActivity {
                 // Obtener el resultado cuando la ruleta se detenga
                 String result = getRouletteResult(currentDegree);
                 Toast.makeText(RuletaActivity.this, "Resultado: " + result, Toast.LENGTH_LONG).show();
-
+                isSpinning = false;
                 // Realizar las apuestas basadas en el resultado
                 realizarApuestas(result);
                 eliminarFichasDeLaMesa();
+                startCountdown();
             }
 
             @Override
@@ -381,7 +411,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 25  || numeroGanador == 27 || numeroGanador == 30 || numeroGanador == 32 ||
                                     numeroGanador == 34 || numeroGanador == 36)
                             {
-                                saldo = saldo + (((2 * costo) + costo));
+                                saldo = saldo + ((2 * costo));
                                 actualizarSaldo();
                             }
                         }
@@ -392,7 +422,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 26  || numeroGanador == 28 || numeroGanador == 29 || numeroGanador == 31 ||
                                     numeroGanador == 33 || numeroGanador == 35)
                             {
-                                saldo = saldo + (((2 * costo) + costo));
+                                saldo = saldo + ((2 * costo));
                                 actualizarSaldo();
                             }
                         }else if(Integer.parseInt(button.getContentDescription().toString()) == numeroGanador){
@@ -518,18 +548,20 @@ public class RuletaActivity extends BaseActivity {
                     }
 
                 } else if (lista.size() == 3) {
-
-                    Log.d("Apuestas", "ESTA EN 33333333: " + costo);
-                    kuala.setVisibility(View.VISIBLE);
-                    if (mediaPlayer != null) {
-                        mediaPlayer.start();
+                    for (ImageButton button : lista) {
+                        if(button.getContentDescription().equals("0")){
+                        Log.d("Apuestas", "ESTA EN 33333333: " + costo);
+                        kuala.setVisibility(View.VISIBLE);
+                        if (mediaPlayer != null) {
+                            mediaPlayer.start();
+                        }
+                        saldo = saldo + costo;
+                        actualizarSaldo();
+                        // Espera un tiempo antes de desvanecer (fade out)
+                        kuala.postDelayed(this::fadeOutImage, 10);
+                        Toast.makeText(RuletaActivity.this, "ESA APUESTA ESTA PROHIBIDA", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    saldo = saldo + costo;
-                    actualizarSaldo();
-                    // Espera un tiempo antes de desvanecer (fade out)
-                    kuala.postDelayed(this::fadeOutImage, 10);
-                    Toast.makeText(RuletaActivity.this, "ESA APUESTA ESTA PROHIBIDA", Toast.LENGTH_SHORT).show();
-
                 } else if (lista.size() == 4) {
 
                     for (ImageButton button : lista) {
@@ -751,6 +783,46 @@ public class RuletaActivity extends BaseActivity {
                 rootView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
+
+        infobtn = findViewById(R.id.infobtn);
+        infobtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Crear el AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(RuletaActivity.this);
+                builder.setTitle("Como se juega"); // Opcional
+                String mensaje = "Arrastra la ficha con la cantidad que quieras apostar en el tablero. " +
+                        "Se pueden apostar varias fichas de uno en uno, si quieres cambiar una ficha de posición " +
+                        "simplemente arrástrala. Una vez que la ficha está en el tablero, " +
+                        "arrastrarla fuera solo hará que pierdas dinero.\n\nSuerte";
+
+                // Crear un SpannableString para centrar y poner en negrita la palabra "Suerte"
+                SpannableString spannableMessage = new SpannableString(mensaje);
+                int suerteStart = mensaje.indexOf("Suerte");
+                int suerteEnd = mensaje.length();
+
+                // Aplicar negrita a "Suerte"
+                spannableMessage.setSpan(new StyleSpan(Typeface.BOLD), suerteStart, suerteEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                // Aplicar centrado a "Suerte"
+                spannableMessage.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), suerteStart, suerteEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                builder.setMessage(spannableMessage);
+                // Configurar el botón "Aceptar"
+                builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Acción al hacer clic en "Aceptar"
+                        dialog.dismiss(); // Cerrar el cuadro
+                    }
+                });
+
+                // Mostrar el AlertDialog
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -761,6 +833,11 @@ public class RuletaActivity extends BaseActivity {
         ficha.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                // Si la ruleta está girando, no permitir el arrastre de fichas
+                if (isSpinning) {
+                    Toast.makeText(RuletaActivity.this, "No se pueden mover fichas mientras la ruleta está girando", Toast.LENGTH_SHORT).show();
+                    return true;  // Evitar que se mueva la ficha
+                }
                 switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         // Solo inicializamos el arrastre de la ficha aquí, sin modificar el saldo

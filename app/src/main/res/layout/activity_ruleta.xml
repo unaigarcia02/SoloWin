@@ -22,6 +22,16 @@
         app:srcCompat="@drawable/tapete2"
         tools:ignore="ContentDescription" />
 
+    <ImageButton
+        android:id="@+id/infobtn"
+        android:layout_width="29dp"
+        android:layout_height="29dp"
+        android:contentDescription=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/info"
+        tools:ignore="ContentDescription" />
+
     <ImageView
         android:id="@+id/ruleta"
         android:layout_width="310dp"
@@ -33,16 +43,33 @@
         app:srcCompat="@drawable/ruleta"
         tools:ignore="ContentDescription" />
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="5dp"
+        android:text="Hagan sus apuestas"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:layout_marginStart="578dp"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent">
 
         <!-- Contenedor para el círculo de cuenta regresiva -->
         <FrameLayout
             android:id="@+id/circleContainer"
-            android:layout_width="100dp"
-            android:layout_height="100dp" />
+            android:layout_width="72dp"
+            android:layout_height="71dp" />
 
     </FrameLayout>
 
@@ -50,9 +77,9 @@
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="139dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="141dp"
+        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="@+id/ruleta"
         app:layout_constraintStart_toStartOf="@+id/ruleta"
         app:layout_constraintTop_toTopOf="@+id/ruleta"
