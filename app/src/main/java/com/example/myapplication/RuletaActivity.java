@@ -200,6 +200,7 @@ public class RuletaActivity extends BaseActivity {
                 isSpinning = true;
             }
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onAnimationEnd(Animation animation) {
                 // Obtener el resultado cuando la ruleta se detenga
@@ -209,6 +210,7 @@ public class RuletaActivity extends BaseActivity {
                 // Realizar las apuestas basadas en el resultado
                 realizarApuestas(result);
                 eliminarFichasDeLaMesa();
+                texto.setText("Hagan sus apuestas");
                 startCountdown();
             }
 
@@ -549,17 +551,127 @@ public class RuletaActivity extends BaseActivity {
 
                 } else if (lista.size() == 3) {
                     for (ImageButton button : lista) {
-                        if(button.getContentDescription().equals("0")){
-                        Log.d("Apuestas", "ESTA EN 33333333: " + costo);
-                        kuala.setVisibility(View.VISIBLE);
-                        if (mediaPlayer != null) {
-                            mediaPlayer.start();
+
+                        if(button.getContentDescription().equals("2 to 1 (1)")){
+                            if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
+                                    numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
+                                    numeroGanador == 27  || numeroGanador == 30 || numeroGanador == 33 || numeroGanador == 36)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                actualizarSaldo();
+                            }
                         }
-                        saldo = saldo + costo;
-                        actualizarSaldo();
-                        // Espera un tiempo antes de desvanecer (fade out)
-                        kuala.postDelayed(this::fadeOutImage, 10);
-                        Toast.makeText(RuletaActivity.this, "ESA APUESTA ESTA PROHIBIDA", Toast.LENGTH_SHORT).show();
+                        else if(button.getContentDescription().equals("2 to 1 (2)")){
+                            if (numeroGanador == 2  || numeroGanador == 5 || numeroGanador == 8 || numeroGanador == 11 ||
+                                    numeroGanador == 14  || numeroGanador == 17 || numeroGanador == 20 || numeroGanador == 23 ||
+                                    numeroGanador == 26  || numeroGanador == 29 || numeroGanador == 32 || numeroGanador == 35)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 to 1 (3)")){
+                            if (numeroGanador == 1  || numeroGanador == 4 || numeroGanador == 7 || numeroGanador == 10 ||
+                                    numeroGanador == 13  || numeroGanador == 15 || numeroGanador == 19 || numeroGanador == 22 ||
+                                    numeroGanador == 20  || numeroGanador == 28 || numeroGanador == 31 || numeroGanador == 34)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("1 st 12")){
+                            if (numeroGanador == 1  || numeroGanador == 2 || numeroGanador == 3 || numeroGanador == 4 ||
+                                    numeroGanador == 5  || numeroGanador == 6 || numeroGanador == 7 || numeroGanador == 8 ||
+                                    numeroGanador == 9  || numeroGanador == 10 || numeroGanador == 11 || numeroGanador == 12)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("2 nd 12")){
+                            if (numeroGanador == 13  || numeroGanador == 14 || numeroGanador == 15 || numeroGanador == 16 ||
+                                    numeroGanador == 17  || numeroGanador == 18 || numeroGanador == 19 || numeroGanador == 20 ||
+                                    numeroGanador == 21  || numeroGanador == 22 || numeroGanador == 23 || numeroGanador == 24)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("3 rd 12")){
+                            if (numeroGanador == 25  || numeroGanador == 26 || numeroGanador == 27 || numeroGanador == 28 ||
+                                    numeroGanador == 29  || numeroGanador == 30 || numeroGanador == 31 || numeroGanador == 32 ||
+                                    numeroGanador == 33  || numeroGanador == 34 || numeroGanador == 35 || numeroGanador == 36)
+                            {
+                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("1 to 18")){
+                            if (numeroGanador >= 1 && numeroGanador <= 18)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("19 to 36")){
+                            if (numeroGanador >= 19 && numeroGanador <= 36)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("even")){
+                            if (numeroGanador % 2 == 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("odd")){
+                            if (numeroGanador % 2 != 0)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("red")){
+                            if (numeroGanador == 1  || numeroGanador == 3 || numeroGanador == 5 || numeroGanador == 7 ||
+                                    numeroGanador == 9  || numeroGanador == 12 || numeroGanador == 14 || numeroGanador == 16 ||
+                                    numeroGanador == 18  || numeroGanador == 19 || numeroGanador == 21 || numeroGanador == 23 ||
+                                    numeroGanador == 25  || numeroGanador == 27 || numeroGanador == 30 || numeroGanador == 32 ||
+                                    numeroGanador == 34 || numeroGanador == 36)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /3);
+                                actualizarSaldo();
+                            }
+                        }
+                        else if(button.getContentDescription().equals("black")){
+                            if (numeroGanador == 2  || numeroGanador == 4 || numeroGanador == 6 || numeroGanador == 8 ||
+                                    numeroGanador == 10  || numeroGanador == 11 || numeroGanador == 13 || numeroGanador == 15 ||
+                                    numeroGanador == 17  || numeroGanador == 20 || numeroGanador == 22 || numeroGanador == 24 ||
+                                    numeroGanador == 26  || numeroGanador == 28 || numeroGanador == 29 || numeroGanador == 31 ||
+                                    numeroGanador == 33 || numeroGanador == 35)
+                            {
+                                saldo = saldo + ((float) (2 * costo) /3);
+                                actualizarSaldo();
+                            }
+
+                        }
+                        else if(button.getContentDescription().equals("0")){
+                            Log.d("Apuestas", "ESTA EN 33333333: " + costo);
+                            kuala.setVisibility(View.VISIBLE);
+                            if (mediaPlayer != null) {
+                                mediaPlayer.start();
+                            }
+                            saldo = saldo + costo;
+                            actualizarSaldo();
+                            // Espera un tiempo antes de desvanecer (fade out)
+                            kuala.postDelayed(this::fadeOutImage, 10);
+                            Toast.makeText(RuletaActivity.this, "ESA APUESTA ESTA PROHIBIDA", Toast.LENGTH_SHORT).show();
+                        }
+                        else if(Integer.parseInt(button.getContentDescription().toString()) == numeroGanador){
+                            saldo = saldo + (((35 * costo) + costo)/3);
+                            actualizarSaldo();
                         }
                     }
                 } else if (lista.size() == 4) {
