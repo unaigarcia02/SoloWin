@@ -67,6 +67,9 @@ public class RuletaActivity extends BaseActivity {
     private CountDownTimer countdownTimer;
     private int secondsRemaining = 30;
 
+    private MediaPlayer musica;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +77,10 @@ public class RuletaActivity extends BaseActivity {
 
         kuala = findViewById(R.id.kuala);
         mediaPlayer = MediaPlayer.create(this, R.raw.boom);
+        musica = MediaPlayer.create(this, R.raw.luigi);
+
+        musica.setLooping(true);
+        musica.start();
 
         rouletteImage = findViewById(R.id.ruleta);
         texto = findViewById(R.id.textView3);
@@ -916,7 +923,7 @@ public class RuletaActivity extends BaseActivity {
                 // Aplicar negrita a "Suerte"
                 spannableMessage.setSpan(new StyleSpan(Typeface.BOLD), suerteStart, suerteEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                // Aplicar centrado a "Suerte"
+                    // Aplicar centrado a "Suerte"
                 spannableMessage.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER), suerteStart, suerteEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
@@ -1210,7 +1217,25 @@ public class RuletaActivity extends BaseActivity {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+        if (musica != null) {
+            musica.release(); // Libera el MediaPlayer cuando se destruye la Activity
+            musica = null;
+        }
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (musica != null && musica.isPlaying()) {
+            musica.pause(); // Pausa la música cuando la Activity está en pausa
+        }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (musica != null) {
+            musica.start(); // Reanuda la música cuando la Activity está en primer plano
+        }
+    }
 }
 
