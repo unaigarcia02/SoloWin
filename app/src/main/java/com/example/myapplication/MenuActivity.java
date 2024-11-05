@@ -28,6 +28,7 @@ public class MenuActivity extends BaseActivity  {
 
         ImageButton ruletaBtn = findViewById(R.id.RuletaBTN);
         ImageButton buscaminasBtn = findViewById(R.id.BuscaminasBTN);
+        ImageButton slotBtn = findViewById(R.id.SlotBTN);
 
         // Configurar el clic en el botón
         ruletaBtn.setOnClickListener(view -> {
@@ -37,6 +38,11 @@ public class MenuActivity extends BaseActivity  {
 
         buscaminasBtn.setOnClickListener(view -> {
             Intent intent = new Intent(MenuActivity.this, BuscaMinasActivity.class);
+            startActivity(intent);
+        });
+
+        slotBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(MenuActivity.this, SlotActivity.class);
             startActivity(intent);
         });
 

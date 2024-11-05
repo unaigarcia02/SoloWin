@@ -59,7 +59,7 @@
             tools:ignore="HardcodedText" />
 
         <ImageButton
-            android:id="@+id/button4"
+            android:id="@+id/SlotBTN"
             android:layout_width="250dp"
             android:layout_height="125dp"
             android:layout_marginTop="40dp"

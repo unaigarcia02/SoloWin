@@ -7,4 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".SlotActivity">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="1068dp"
+        android:layout_height="627dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/fondo_slot" />
 </androidx.constraintlayout.widget.ConstraintLayout>
