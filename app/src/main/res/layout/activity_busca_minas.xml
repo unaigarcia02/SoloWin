@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -13,41 +12,41 @@
         android:id="@+id/leftGridLayout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:rowCount="3"
+        android:background="@drawable/tapete2"
         android:columnCount="3"
         android:padding="8dp"
-        android:background="@drawable/tapete2"
-        app:layout_constraintTop_toTopOf="parent"
+        android:rowCount="5"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rightGridLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rightGridLayout">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Elementos dentro del GridLayout izquierdo -->
-        <!-- Botón de Información (ícono) -->
+        <!-- Botón de Información -->
         <ImageButton
             android:id="@+id/infobtn"
             android:layout_width="29dp"
             android:layout_height="29dp"
             android:layout_row="0"
             android:layout_column="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/info"
             tools:ignore="ContentDescription" />
 
         <!-- Cantidad de monedas -->
         <LinearLayout
-            android:layout_width="29dp"
-            android:layout_height="29dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_row="0"
+            android:layout_rowWeight="1"
             android:layout_column="2"
-            android:orientation="horizontal"
-            android:gravity="end">
+            android:gravity="top|center_horizontal"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/coinIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="2dp"
                 android:src="@drawable/coin"
                 tools:ignore="ContentDescription" />
 
@@ -55,28 +54,125 @@
                 android:id="@+id/saldoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
                 android:text="1000"
-                android:textColor="#FFF"
-                android:layout_marginStart="4dp" />
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- Texto apuesta -->
+        <TextView
+            android:id="@+id/apuestaLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_marginTop="8dp"
+            android:text="Apuesta"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
+        <!-- Campo de Entrada para la Apuesta -->
+        <EditText
+            android:id="@+id/apuestaInput"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_marginStart="4dp"
+            android:background="#FFFFFF"
+            android:hint="Ingrese apuesta"
+            android:inputType="number"
+            android:paddingTop="100dp"
+            android:paddingBottom="100dp"
+            android:textColor="#000"
+            android:textSize="16sp" />
 
+        <!-- Etiqueta de Dificultad -->
+        <TextView
+            android:id="@+id/dificultadLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="2"
+            android:layout_column="0"
+            android:layout_rowWeight="1"
+            android:text="Dificultad"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="bottom"/>
+
+        <!-- Botones de Dificultad -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/botFacil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#4CAF50"
+                android:text="Fácil"
+                android:textColor="#FFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/radioMedia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:backgroundTint="#FFA500"
+                android:text="Media"
+                android:textColor="#FFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/radioDificil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:backgroundTint="#FF0000"
+                android:text="Difícil"
+                android:textColor="#FFF"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!-- Boton Comenzar -->
+        <Button
+            android:id="@+id/botonComenzar"
+            android:layout_width="90dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+            android:backgroundTint="#0000FF"
+            android:padding="0dp"
+            android:text="Comenzar"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginEnd="100dp"  />
     </GridLayout>
 
     <!-- GridLayout de la derecha -->
     <GridLayout
         android:id="@+id/rightGridLayout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:rowCount="2"
+        android:layout_width="441dp"
+        android:layout_height="423dp"
+        android:background="@drawable/tapete2"
         android:columnCount="2"
         android:padding="8dp"
-        android:background="@drawable/tapete2"
-        app:layout_constraintTop_toTopOf="parent"
+        android:rowCount="2"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/leftGridLayout"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <!-- Elementos dentro del GridLayout derecho -->
         <TextView
