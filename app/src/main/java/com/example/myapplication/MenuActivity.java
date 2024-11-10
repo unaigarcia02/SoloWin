@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
@@ -29,6 +30,7 @@ public class MenuActivity extends BaseActivity  {
         ImageButton ruletaBtn = findViewById(R.id.RuletaBTN);
         ImageButton buscaminasBtn = findViewById(R.id.BuscaminasBTN);
         ImageButton slotBtn = findViewById(R.id.SlotBTN);
+        ImageButton mrblackjackBtn = findViewById(R.id.mrblackBTN);
 
         // Configurar el clic en el botón
         ruletaBtn.setOnClickListener(view -> {
@@ -45,6 +47,12 @@ public class MenuActivity extends BaseActivity  {
             Intent intent = new Intent(MenuActivity.this, SlotActivity.class);
             startActivity(intent);
         });
+        mrblackjackBtn.setOnClickListener(View -> {
+            Intent hallo = new Intent(MenuActivity.this, BlackJackActivity.class);
+            startActivity(hallo);
+        });
+
+
 
         // Usar ViewTreeObserver para asegurarse de que las vistas estén listas
         fondo1.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
