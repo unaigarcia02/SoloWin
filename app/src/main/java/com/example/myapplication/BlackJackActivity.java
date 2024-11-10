@@ -64,9 +64,6 @@ public class BlackJackActivity extends AppCompatActivity {
         binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
 
 
-
-
-
     }
     public int actualizarPuntuacion(int numero, int puntuacion) {
         int puntos = 0;
