@@ -5,184 +5,286 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BuscaMinasActivity">
+    android:background="@drawable/tapete2"
+    tools:context=".BlackJackActivity">
 
-    <!-- GridLayout de la izquierda -->
-    <GridLayout
-        android:id="@+id/leftGridLayout"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/tapete2"
-        android:columnCount="3"
-        android:padding="8dp"
-        android:rowCount="5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rightGridLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <!-- Panel del Dealer con diseño mejorado -->
+    <LinearLayout
+        android:id="@+id/dealerPanel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.4">
 
-        <!-- Elementos dentro del GridLayout izquierdo -->
-        <!-- Botón de Información -->
-        <ImageButton
-            android:id="@+id/infobtn"
-            android:layout_width="29dp"
-            android:layout_height="29dp"
-            android:layout_row="0"
-            android:layout_column="0"
-            app:srcCompat="@drawable/info"
-            tools:ignore="ContentDescription" />
-
-        <!-- Cantidad de monedas -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:gravity="top|center_horizontal"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/coinIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="2dp"
-                android:src="@drawable/coin"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/saldoText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:text="1000"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Texto apuesta -->
         <TextView
-            android:id="@+id/apuestaLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="0"
-            android:layout_marginTop="8dp"
-            android:text="Apuesta"
-            android:textColor="#000"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <!-- Campo de Entrada para la Apuesta -->
-        <EditText
-            android:id="@+id/apuestaInput"
-            android:layout_width="200dp"
-            android:layout_height="0dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_marginStart="4dp"
-            android:background="#FFFFFF"
-            android:hint="Ingrese apuesta"
-            android:inputType="number"
-            android:paddingTop="100dp"
-            android:paddingBottom="100dp"
-            android:textColor="#000"
-            android:textSize="16sp" />
-
-        <!-- Etiqueta de Dificultad -->
-        <TextView
-            android:id="@+id/dificultadLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:layout_rowWeight="1"
-            android:text="Dificultad"
-            android:textColor="#000"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:gravity="bottom"/>
-
-        <!-- Botones de Dificultad -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="3"
-            android:layout_column="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/botFacil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#4CAF50"
-                android:text="Fácil"
-                android:textColor="#FFF"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/radioMedia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:backgroundTint="#FFA500"
-                android:text="Media"
-                android:textColor="#FFF"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/radioDificil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:backgroundTint="#FF0000"
-                android:text="Difícil"
-                android:textColor="#FFF"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <!-- Boton Comenzar -->
-        <Button
-            android:id="@+id/botonComenzar"
-            android:layout_width="90dp"
-            android:layout_height="0dp"
-            android:layout_row="4"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:backgroundTint="#0000FF"
-            android:padding="0dp"
-            android:text="Comenzar"
+            android:text="Dealer"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:layout_marginEnd="100dp"  />
-    </GridLayout>
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"/>
 
-    <!-- GridLayout de la derecha -->
-    <GridLayout
-        android:id="@+id/rightGridLayout"
-        android:layout_width="441dp"
-        android:layout_height="423dp"
-        android:background="@drawable/tapete2"
-        android:columnCount="2"
-        android:padding="8dp"
-        android:rowCount="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/leftGridLayout"
-        app:layout_constraintTop_toTopOf="parent">
+        <!-- Área de cartas del dealer mejorada -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#33FFFFFF">
 
-        <!-- Elementos dentro del GridLayout derecho -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_area_background"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:id="@+id/dealerCards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="12dp"
+                        android:spacing="8dp"/>
+                </HorizontalScrollView>
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/dealerScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Puntuación: ?"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/score_background"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <!-- Panel del Jugador con diseño mejorado -->
+    <LinearLayout
+        android:id="@+id/playerPanel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintTop_toBottomOf="@id/dealerPanel"
+        app:layout_constraintBottom_toTopOf="@id/controlPanel"
+        app:layout_constraintHeight_percent="0.4">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:text="Item R1" />
-        <!-- Agrega más elementos aquí -->
-    </GridLayout>
+            android:text="Jugador"
+            android:textColor="#FFFFFF"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:shadowColor="#000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"/>
+
+        <!-- Área de cartas del jugador mejorada -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#33FFFFFF">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/card_area_background"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+
+                    <LinearLayout
+                        android:id="@+id/playerCards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="12dp"
+                        android:spacing="8dp"/>
+                </HorizontalScrollView>
+            </FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/playerScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Puntuación: 0"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/score_background"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <!-- Panel de Control mejorado -->
+    <LinearLayout
+        android:id="@+id/controlPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#33000000"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Panel de Saldo y Apuesta mejorado -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#4CAF50">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/coin"
+                        android:layout_marginEnd="8dp"/>
+
+                    <TextView
+                        android:id="@+id/saldoText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000"
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="#FF9800">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Apuesta: "
+                        android:textColor="#FFFFFF"
+                        android:textSize="24sp"/>
+
+                    <EditText
+                        android:id="@+id/betInput"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bet_background"
+                        android:inputType="number"
+                        android:padding="8dp"
+                        android:textSize="20sp"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Botones de Control mejorados -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:spacing="16dp">
+
+            <Button
+                android:id="@+id/dealButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp"
+                android:text="Repartir"
+                android:layout_marginEnd="8dp"
+                android:textSize="18sp"
+                android:backgroundTint="#4CAF50"/>
+
+            <Button
+                android:id="@+id/hitButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp"
+                android:text="Pedir"
+                android:layout_marginEnd="8dp"
+                android:textSize="18sp"
+                android:enabled="false"
+                android:backgroundTint="#FF9800"/>
+
+            <Button
+                android:id="@+id/standButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp"
+                android:text="Plantarse"
+                android:layout_marginEnd="8dp"
+                android:textSize="18sp"
+                android:enabled="false"
+                android:backgroundTint="#F44336"/>
+
+            <Button
+                android:id="@+id/doubleButton"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="56dp"
+                android:text="Doblar"
+                android:textSize="18sp"
+                android:enabled="false"
+                android:backgroundTint="#2196F3"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
