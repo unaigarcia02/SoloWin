@@ -9,6 +9,9 @@ import android.view.DisplayCutout;
 
 public class BaseActivity extends AppCompatActivity {
 
+
+    protected static float saldo = 125.50f;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

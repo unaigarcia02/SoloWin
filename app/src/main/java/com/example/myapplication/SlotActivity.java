@@ -10,6 +10,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class SlotActivity extends AppCompatActivity {
 
+    private float saldo = BaseActivity.saldo; //utiliza esta variable como saldo, porque se actualiza para todos los juegos
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

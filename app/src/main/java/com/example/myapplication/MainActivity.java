@@ -41,19 +41,7 @@ public class MainActivity extends BaseActivity  {
             startActivity(intent);
         });
 
-        ImageButton imageButton = findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Aplicar el efecto de desenfoque al presionar el botón
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
-                    View rootView = findViewById(R.id.main);  // Usar el layout raíz
-                    RenderEffect blurEffect = RenderEffect.createBlurEffect(15f, 15f, Shader.TileMode.CLAMP);
-                    rootView.setRenderEffect(blurEffect);
-                }
 
-            }
-        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

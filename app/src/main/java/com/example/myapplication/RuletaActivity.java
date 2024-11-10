@@ -9,7 +9,6 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AlignmentSpan;
 import android.text.style.StyleSpan;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +47,7 @@ public class RuletaActivity extends BaseActivity {
     private MediaPlayer mediaPlayer;
     private boolean original1, original2, original3, original4, original5;
     private float saldo;
+    private float saldoAnterior;
     private Map<String, Integer> apuestasPorBoton = new HashMap<>();  // Mapa para almacenar las apuestas por botón
     private float[][] buttonCoordinates = new float[49][2];
     ImageButton[] botones = new ImageButton[49]; // Crear un array para almacenar los botones
@@ -68,6 +68,7 @@ public class RuletaActivity extends BaseActivity {
     private int secondsRemaining = 30;
 
     private MediaPlayer musica;
+    private MediaPlayer ruletsound;
 
 
     @Override
@@ -78,6 +79,8 @@ public class RuletaActivity extends BaseActivity {
         kuala = findViewById(R.id.kuala);
         mediaPlayer = MediaPlayer.create(this, R.raw.boom);
         musica = MediaPlayer.create(this, R.raw.luigi);
+        ruletsound = MediaPlayer.create(this, R.raw.rulet);
+
 
         musica.setLooping(true);
         musica.start();
@@ -107,8 +110,9 @@ public class RuletaActivity extends BaseActivity {
         inicializarBotones();
 
         TextView saldoTextView = findViewById(R.id.Saldo);
-        saldo = Integer.parseInt(saldoTextView.getText().toString());
-
+        saldo = BaseActivity.saldo;
+        saldoTextView.setText(Float.toString(saldo));
+        saldoAnterior = saldo;
         inicializarreloj();
         startCountdown();
 
@@ -185,7 +189,7 @@ public class RuletaActivity extends BaseActivity {
 
         // Generar un ángulo aleatorio para que la ruleta se detenga
         Random random = new Random();
-        int randomDegree =  random.nextInt(360) + 2160;  // +1080 para que gire varias veces
+        int randomDegree =  random.nextInt(360) + 3600;  // +1080 para que gire varias veces
 
         // Crear una animación de rotación
         RotateAnimation rotateAnimation = new RotateAnimation(
@@ -194,7 +198,7 @@ public class RuletaActivity extends BaseActivity {
                 Animation.RELATIVE_TO_SELF, 0.5f
         );
 
-        rotateAnimation.setDuration(6000);  // Duración del giro en milisegundos
+        rotateAnimation.setDuration(8000);  // Duración del giro en milisegundos
         rotateAnimation.setFillAfter(true);  // Mantener la posición final después de la animación
 
         // Listener para cuando la animación se completa
@@ -205,6 +209,9 @@ public class RuletaActivity extends BaseActivity {
                 // Opcional: hacer algo al iniciar el giro
                 texto.setText("Apuestas realizadas");
                 isSpinning = true;
+                if (ruletsound != null) {
+                    ruletsound.start();
+                }
             }
 
             @SuppressLint("SetTextI18n")
@@ -219,6 +226,7 @@ public class RuletaActivity extends BaseActivity {
                 eliminarFichasDeLaMesa();
                 texto.setText("Hagan sus apuestas");
                 startCountdown();
+
             }
 
             @Override
@@ -290,7 +298,6 @@ public class RuletaActivity extends BaseActivity {
             layout.removeView(ficha);  // Eliminar la ficha del layout
         }
         fichasEnLaMesa.clear();  // Limpiar la lista después de eliminar las fichas
-        Toast.makeText(RuletaActivity.this, "Todas las fichas eliminadas de la mesa", Toast.LENGTH_SHORT).show();
     }
 
     private void realizarApuestas(String resultado) {
@@ -323,14 +330,11 @@ public class RuletaActivity extends BaseActivity {
 
             // Procesar y imprimir cada lista de botones
             for (List<ImageButton> lista : listasBotones) {
-                // Imprimir costo en Logcat
 
                 // Verifica la cantidad de botones en la lista
                 if (lista.size() == 1) {
 
                     for (ImageButton button : lista) {
-                        Log.d("Apuestas", "ESTA EN 11111111: " + costo);
-                        Log.d("Apuestas", "ESTA EN 11111111: " + button.getContentDescription());// Imprimir el contenido de descripción del botón
                         if(button.getContentDescription().equals("2 to 1 (1)")){
                             if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
                                     numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
@@ -444,8 +448,6 @@ public class RuletaActivity extends BaseActivity {
                 }if (lista.size() == 2) {
 
                     for (ImageButton button : lista) {
-                        Log.d("Apuestas", "ESTA EN 22222222: " + costo);
-                        Log.d("Apuestas", "ESTA EN 222222222: " + button.getContentDescription());// Imprimir el contenido de descripción del botón
                         if(button.getContentDescription().equals("2 to 1 (1)")){
                             if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
                                     numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
@@ -665,7 +667,6 @@ public class RuletaActivity extends BaseActivity {
 
                         }
                         else if(button.getContentDescription().equals("0")){
-                            Log.d("Apuestas", "ESTA EN 33333333: " + costo);
                             kuala.setVisibility(View.VISIBLE);
                             if (mediaPlayer != null) {
                                 mediaPlayer.start();
@@ -684,8 +685,7 @@ public class RuletaActivity extends BaseActivity {
                 } else if (lista.size() == 4) {
 
                     for (ImageButton button : lista) {
-                        Log.d("Apuestas", "ESTA EN 22222222: " + costo);
-                        Log.d("Apuestas", "ESTA EN 222222222: " + button.getContentDescription());// Imprimir el contenido de descripción del botón
+
                         if(button.getContentDescription().equals("2 to 1 (1)")){
                             if (numeroGanador == 3  || numeroGanador == 6 || numeroGanador == 9 || numeroGanador == 12 ||
                                     numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
@@ -867,8 +867,7 @@ public class RuletaActivity extends BaseActivity {
         }
 
         // Debug: Imprimir el ángulo y la sección
-        Log.d("Ruleta", "Grados Normalizados: " + degreeNormalized + ", Sección: " + section);
-        Log.d("resultado", resultMapping[resultMapping.length - section]);
+
 
         return resultMapping[resultMapping.length - section]; // Retorna el resultado basado en el índice ajustado
     }
@@ -954,7 +953,6 @@ public class RuletaActivity extends BaseActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 // Si la ruleta está girando, no permitir el arrastre de fichas
                 if (isSpinning) {
-                    Toast.makeText(RuletaActivity.this, "No se pueden mover fichas mientras la ruleta está girando", Toast.LENGTH_SHORT).show();
                     return true;  // Evitar que se mueva la ficha
                 }
                 switch (motionEvent.getAction()) {
@@ -1009,11 +1007,6 @@ public class RuletaActivity extends BaseActivity {
                                         apuestasPorBoton.put(buttonText, apuestaActual + costo);  // Sumar el costo de la ficha a las apuestas actuales
                                     }
 
-                                    StringBuilder message = new StringBuilder("Ficha colocada sobre los botones: ");
-                                    for (String buttonText : buttonTextsOnRelease) {
-                                        message.append(buttonText).append(" ");
-                                    }
-                                    Toast.makeText(RuletaActivity.this, message.toString(), Toast.LENGTH_SHORT).show();
 
                                 } else {
                                     // Solo actualizar el mapa si la ficha ya ha sido soltada antes
@@ -1022,11 +1015,7 @@ public class RuletaActivity extends BaseActivity {
                                         apuestasPorBoton.put(buttonText, apuestaActual + costo);
                                     }
 
-                                    StringBuilder message2 = new StringBuilder("Ficha colocada sobre los botones: ");
-                                    for (String buttonText : buttonTextsOnRelease) {
-                                        message2.append(buttonText).append(" ");
-                                    }
-                                    Toast.makeText(RuletaActivity.this, message2.toString(), Toast.LENGTH_SHORT).show();
+
                                 }
                             } else {
                                 // Mostrar mensaje si no hay saldo suficiente
@@ -1036,7 +1025,6 @@ public class RuletaActivity extends BaseActivity {
                         } else {
                             // Si la ficha no se suelta sobre un botón válido, la eliminamos
                             view.setVisibility(View.GONE);
-                            Toast.makeText(RuletaActivity.this, "Ficha no colocada sobre ningún botón. Ficha desaparece.", Toast.LENGTH_SHORT).show();
                         }
                         break;
 
@@ -1073,7 +1061,6 @@ public class RuletaActivity extends BaseActivity {
 
 
         // Para depuración: Imprimir los índices de los botones detectados
-        Log.d("RuletaActivity", "Botones detectados: " + buttonIndices.toString());
 
         return buttonIndices; // Retorna la lista de botones detectados
     }
@@ -1127,6 +1114,13 @@ public class RuletaActivity extends BaseActivity {
     private void actualizarSaldo() {
         TextView saldoTextView = findViewById(R.id.Saldo);
         saldoTextView.setText(String.valueOf(saldo));
+        if (saldo > saldoAnterior) {
+            float saldoGanado = saldo - saldoAnterior;
+            Toast.makeText(this, "¡Felicidades, has ganado " + saldoGanado + " euros!", Toast.LENGTH_SHORT).show();
+        }
+
+        // Actualiza el saldo anterior para la próxima comprobación
+        saldoAnterior = saldo;
     }
 
     private List<String> getButtonsTextsAtPosition(float x, float y, int fichaWidth, int fichaHeight) {
@@ -1156,7 +1150,6 @@ public class RuletaActivity extends BaseActivity {
         }
 
         // Para depuración: Imprimir los textos de los botones detectados
-        Log.d("RuletaActivity", "Botones detectados: " + buttonTexts.toString());
 
         return buttonTexts; // Retorna la lista de textos de los botones detectados
     }
@@ -1170,9 +1163,7 @@ public class RuletaActivity extends BaseActivity {
             resumen.append("").append(boton).append(": ").append(totalApostado).append(" de");
         }
 
-        // Mostrar el resumen en la consola o en un Toast
-        Log.d("RuletaActivity", resumen.toString());
-        Toast.makeText(RuletaActivity.this, resumen.toString(), Toast.LENGTH_LONG).show();
+
     }
 
     private List<ImageButton> getButtonsUnderFicha(ImageView ficha) {
@@ -1220,6 +1211,10 @@ public class RuletaActivity extends BaseActivity {
         if (musica != null) {
             musica.release(); // Libera el MediaPlayer cuando se destruye la Activity
             musica = null;
+        }
+        if (ruletsound != null) {
+            ruletsound.release(); // Libera el MediaPlayer cuando se destruye la Activity
+            ruletsound = null;
         }
     }
     @Override

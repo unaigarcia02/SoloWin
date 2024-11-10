@@ -10,6 +10,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class BuscaMinasActivity extends BaseActivity {
+
+    private float saldo = BaseActivity.saldo; //utiliza esta variable como saldo, porque se actualiza para todos los juegos
+
     Button[][] botones = new Button[5][5];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
