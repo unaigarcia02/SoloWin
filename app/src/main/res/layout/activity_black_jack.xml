@@ -195,7 +195,7 @@
                         android:id="@+id/saldoText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1000"
+                        android:text=":("
                         android:textColor="#FFFFFF"
                         android:textSize="24sp"
                         android:textStyle="bold"/>
@@ -244,7 +244,7 @@
             android:spacing="16dp">
 
             <Button
-                android:id="@+id/dealButton"
+                android:id="@+id/repartirButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
@@ -254,7 +254,7 @@
                 android:backgroundTint="#4CAF50"/>
 
             <Button
-                android:id="@+id/hitButton"
+                android:id="@+id/pedirButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
@@ -265,7 +265,7 @@
                 android:backgroundTint="#FF9800"/>
 
             <Button
-                android:id="@+id/standButton"
+                android:id="@+id/plantarseButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
@@ -276,11 +276,11 @@
                 android:backgroundTint="#F44336"/>
 
             <Button
-                android:id="@+id/doubleButton"
+                android:id="@+id/doblarButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
-                android:text="Doblar"
+                android:text="X2"
                 android:textSize="18sp"
                 android:enabled="false"
                 android:backgroundTint="#2196F3"/>
