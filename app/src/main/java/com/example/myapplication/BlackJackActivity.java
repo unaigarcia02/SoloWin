@@ -84,8 +84,7 @@ public class BlackJackActivity extends AppCompatActivity {
 
         puntuacion += puntos;
 
-        Toast.makeText(this, "Puntuación actual: " + puntuacion, Toast.LENGTH_SHORT).show();
-        return puntos;
+        return puntuacion;
     }
     public String sacarCarta(){
         Random random = new Random();
