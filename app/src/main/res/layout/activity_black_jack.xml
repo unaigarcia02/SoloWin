@@ -168,7 +168,44 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:padding="12dp"
-                        android:spacing="8dp"/>
+                        android:spacing="8dp">
+
+                        <ImageView
+                            android:id="@+id/imageView17"
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+
+                            app:srcCompat="@drawable/back02" />
+
+                        <ImageView
+                            android:id="@+id/imageView16"
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+
+                            app:srcCompat="@drawable/back02" />
+
+                        <ImageView
+                            android:id="@+id/imageView15"
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+
+                            app:srcCompat="@drawable/back02" />
+
+                        <ImageView
+                            android:id="@+id/imageView12"
+                            android:layout_width="75dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+
+                            app:srcCompat="@drawable/back02" />
+                    </LinearLayout>
                 </HorizontalScrollView>
             </FrameLayout>
         </androidx.cardview.widget.CardView>
