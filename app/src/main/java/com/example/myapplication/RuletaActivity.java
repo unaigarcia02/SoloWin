@@ -566,7 +566,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 15  || numeroGanador == 18 || numeroGanador == 21 || numeroGanador == 24 ||
                                     numeroGanador == 27  || numeroGanador == 30 || numeroGanador == 33 || numeroGanador == 36)
                             {
-                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
                                 actualizarSaldo();
                             }
                         }
@@ -575,7 +575,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 14  || numeroGanador == 17 || numeroGanador == 20 || numeroGanador == 23 ||
                                     numeroGanador == 26  || numeroGanador == 29 || numeroGanador == 32 || numeroGanador == 35)
                             {
-                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
                                 actualizarSaldo();
                             }
                         }
@@ -584,7 +584,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 13  || numeroGanador == 15 || numeroGanador == 19 || numeroGanador == 22 ||
                                     numeroGanador == 20  || numeroGanador == 28 || numeroGanador == 31 || numeroGanador == 34)
                             {
-                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
                                 actualizarSaldo();
                             }
                         }
@@ -593,7 +593,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 5  || numeroGanador == 6 || numeroGanador == 7 || numeroGanador == 8 ||
                                     numeroGanador == 9  || numeroGanador == 10 || numeroGanador == 11 || numeroGanador == 12)
                             {
-                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
                                 actualizarSaldo();
                             }
                         }
@@ -602,7 +602,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 17  || numeroGanador == 18 || numeroGanador == 19 || numeroGanador == 20 ||
                                     numeroGanador == 21  || numeroGanador == 22 || numeroGanador == 23 || numeroGanador == 24)
                             {
-                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
                                 actualizarSaldo();
                             }
                         }
@@ -611,35 +611,35 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 29  || numeroGanador == 30 || numeroGanador == 31 || numeroGanador == 32 ||
                                     numeroGanador == 33  || numeroGanador == 34 || numeroGanador == 35 || numeroGanador == 36)
                             {
-                                saldo = saldo + ((float) ((2 * costo) + costo) /3);
+                                saldo = saldo + ((float) ((2 * costo) + costo) /4);
                                 actualizarSaldo();
                             }
                         }
                         else if(button.getContentDescription().equals("1 to 18")){
                             if (numeroGanador >= 1 && numeroGanador <= 18)
                             {
-                                saldo = saldo + ((float) (2 * costo) /3);
+                                saldo = saldo + ((float) (2 * costo) /4);
                                 actualizarSaldo();
                             }
                         }
                         else if(button.getContentDescription().equals("19 to 36")){
                             if (numeroGanador >= 19 && numeroGanador <= 36)
                             {
-                                saldo = saldo + ((float) (2 * costo) /3);
+                                saldo = saldo + ((float) (2 * costo) /4);
                                 actualizarSaldo();
                             }
                         }
                         else if(button.getContentDescription().equals("even")){
                             if (numeroGanador % 2 == 0)
                             {
-                                saldo = saldo + ((float) (2 * costo) /3);
+                                saldo = saldo + ((float) (2 * costo) /4);
                                 actualizarSaldo();
                             }
                         }
                         else if(button.getContentDescription().equals("odd")){
                             if (numeroGanador % 2 != 0)
                             {
-                                saldo = saldo + ((float) (2 * costo) /3);
+                                saldo = saldo + ((float) (2 * costo) /4);
                                 actualizarSaldo();
                             }
                         }
@@ -650,7 +650,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 25  || numeroGanador == 27 || numeroGanador == 30 || numeroGanador == 32 ||
                                     numeroGanador == 34 || numeroGanador == 36)
                             {
-                                saldo = saldo + ((float) (2 * costo) /3);
+                                saldo = saldo + ((float) (2 * costo) /4);
                                 actualizarSaldo();
                             }
                         }
@@ -661,7 +661,7 @@ public class RuletaActivity extends BaseActivity {
                                     numeroGanador == 26  || numeroGanador == 28 || numeroGanador == 29 || numeroGanador == 31 ||
                                     numeroGanador == 33 || numeroGanador == 35)
                             {
-                                saldo = saldo + ((float) (2 * costo) /3);
+                                saldo = saldo + ((float) (2 * costo) /4);
                                 actualizarSaldo();
                             }
 
@@ -678,7 +678,7 @@ public class RuletaActivity extends BaseActivity {
                             Toast.makeText(RuletaActivity.this, "ESA APUESTA ESTA PROHIBIDA", Toast.LENGTH_SHORT).show();
                         }
                         else if(Integer.parseInt(button.getContentDescription().toString()) == numeroGanador){
-                            saldo = saldo + (((35 * costo) + costo)/3);
+                            saldo = saldo + (((35 * costo) + costo)/4);
                             actualizarSaldo();
                         }
                     }
