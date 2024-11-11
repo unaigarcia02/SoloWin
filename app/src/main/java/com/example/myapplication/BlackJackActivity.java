@@ -118,6 +118,7 @@ public class BlackJackActivity extends AppCompatActivity {
             if (apuesta <= saldo) {
                 saldo = (float) (saldo - apuesta);
                 binding.saldoText.setText(String.valueOf(saldo));
+                binding.apostado.setText("Apostado: "+apuesta);
             } else {
                 Toast.makeText(this, "No tienes suficiente saldo", Toast.LENGTH_SHORT).show();
             }
