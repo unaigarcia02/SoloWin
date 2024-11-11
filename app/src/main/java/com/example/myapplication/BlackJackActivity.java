@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,6 +20,7 @@ public class BlackJackActivity extends AppCompatActivity {
 
     private int dealerpunt= 0;
     private int jugadorpunt=0;
+    private double apuesta = 0;
     //al cambiar de foco vuelve a tener pantalla completa
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -59,7 +62,7 @@ public class BlackJackActivity extends AppCompatActivity {
 
     private void setupButtons() {
         binding.pedirButton.setOnClickListener(v -> {
-            Toast.makeText(this, "QUE", Toast.LENGTH_SHORT).show();
+            pedir();
         });
 
         binding.plantarseButton.setOnClickListener(v -> {
@@ -73,8 +76,25 @@ public class BlackJackActivity extends AppCompatActivity {
         binding.repartirButton.setOnClickListener(v -> {
             repartir();
         });
+        binding.imageButton.setOnClickListener(v -> {
+            mostrarInstrucciones();
+        });
+
     }
-    public void repartir(){
+    private void mostrarInstrucciones() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Instrucciones de Blackjack");
+        builder.setMessage("El objetivo del Blackjack es acercarse lo más posible a 21 puntos sin pasarse. Cada carta tiene un valor numérico y puedes pedir más cartas o plantarte en cualquier momento. Ganas si tu puntuación es mayor que la del dealer sin pasarte de 21. Buena suerte :)");
+        builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
+    }
+
+    private void repartir(){
         binding.pedirButton.setEnabled(true);
         binding.plantarseButton.setEnabled(true);
         binding.doblarButton.setEnabled(true);
@@ -93,8 +113,20 @@ public class BlackJackActivity extends AppCompatActivity {
         binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
 
 
+        try {
+            apuesta = Double.parseDouble(binding.betInput.getText().toString());
+            if (apuesta <= saldo) {
+                saldo = (float) (saldo - apuesta);
+                binding.saldoText.setText(String.valueOf(saldo));
+            } else {
+                Toast.makeText(this, "No tienes suficiente saldo", Toast.LENGTH_SHORT).show();
+            }
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Por favor, introduce una cantidad válida", Toast.LENGTH_SHORT).show();
+        }
+
     }
-    public int actualizarPuntuacion(int numero, int puntuacion) {
+    private int actualizarPuntuacion(int numero, int puntuacion) {
         int puntos = 0;
 
         switch (numero) {
@@ -112,10 +144,30 @@ public class BlackJackActivity extends AppCompatActivity {
         }
 
         puntuacion += puntos;
+        if(jugadorpunt > 21 || dealerpunt > 21)
+        {
+            Toast.makeText(this, "Has perdido", Toast.LENGTH_SHORT).show();
+            jugadorpunt = 0;
+            dealerpunt =0;
+            binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
+            binding.dealerScore.setText("Puntuación: "+String.valueOf(dealerpunt));
+
+            binding.imageView10.setVisibility(View.INVISIBLE);
+            binding.imageView11.setVisibility(View.INVISIBLE);
+            binding.imageView16.setVisibility(View.INVISIBLE);
+            binding.imageView15.setVisibility(View.INVISIBLE);
+            binding.imageView12.setVisibility(View.INVISIBLE);
+            binding.imageView17.setVisibility(View.INVISIBLE);
+
+
+            Toast.makeText(this, String.valueOf(jugadorpunt), Toast.LENGTH_SHORT).show();
+            return 0;
+
+        }
 
         return puntuacion;
     }
-    public String sacarCarta(){
+    private String sacarCarta(){
         Random random = new Random();
         int palo = random.nextInt(3)+1;
         String palon = "";
@@ -156,7 +208,30 @@ public class BlackJackActivity extends AppCompatActivity {
         return palon+"_"+carta;
     }
 
+    private void pedir(){
+        if(binding.imageView16.getVisibility() != View.VISIBLE) {
+            String carta = sacarCarta();
+            binding.imageView16.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
+            binding.imageView16.setVisibility(View.VISIBLE);
+            jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
+            binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
+        }
+        else if(binding.imageView15.getVisibility() != View.VISIBLE) {
+            String carta = sacarCarta();
+            binding.imageView15.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
+            binding.imageView15.setVisibility(View.VISIBLE);
+            jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
+            binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
+        }
+        else if(binding.imageView12.getVisibility() != View.VISIBLE) {
+            String carta = sacarCarta();
+            binding.imageView12.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
+            binding.imageView12.setVisibility(View.VISIBLE);
+            jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
+            binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt)); }
     }
+    }
+
 
 
 
