@@ -300,7 +300,8 @@
                         android:inputType="number"
                         android:padding="8dp"
                         android:textSize="20sp"
-                        android:textColor="#000000"/>
+                        android:textColor="#FFFFFF"
+                        android:maxLength="7"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
@@ -318,42 +319,46 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
-                android:text="Repartir"
+                android:text="󰘸"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
-                android:backgroundTint="#4CAF50"/>
+                android:textSize="35sp"
+                android:backgroundTint="#4CAF50"
+                android:fontFamily="@font/nerd"/>
 
             <Button
                 android:id="@+id/pedirButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
-                android:text="Pedir"
+                android:text="󱢶"
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="35sp"
                 android:enabled="false"
-                android:backgroundTint="#FF9800"/>
+                android:backgroundTint="#FF9800"
+                android:fontFamily="@font/nerd"/>
 
             <Button
                 android:id="@+id/plantarseButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
-                android:text="Plantarse"
+                android:text=""
                 android:layout_marginEnd="8dp"
-                android:textSize="18sp"
+                android:textSize="35sp"
                 android:enabled="false"
-                android:backgroundTint="#F44336"/>
+                android:backgroundTint="#F44336"
+                android:fontFamily="@font/nerd"/>
 
             <Button
                 android:id="@+id/doblarButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="56dp"
-                android:text="X2"
-                android:textSize="18sp"
+                android:text="󰄿"
+                android:textSize="35sp"
                 android:enabled="false"
-                android:backgroundTint="#2196F3"/>
+                android:backgroundTint="#2196F3"
+                android:fontFamily="@font/nerd"/>
         </LinearLayout>
     </LinearLayout>
 
