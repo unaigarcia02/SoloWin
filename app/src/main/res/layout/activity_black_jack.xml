@@ -5,10 +5,10 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mrblack3"
+    android:background="@drawable/hard"
     tools:context=".BlackJackActivity">
 
-    <!-- Panel del Dealer con diseño mejorado -->
+    <!-- Panel del Dealer -->
     <LinearLayout
         android:id="@+id/dealerPanel"
         android:layout_width="match_parent"
@@ -30,7 +30,6 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 app:srcCompat="@drawable/info" />
-
 
             <TextView
                 android:layout_width="94dp"
@@ -59,11 +58,7 @@
                 android:text="Apostado: 0.0"
                 android:textColor="@android:color/white"
                 android:textSize="18sp" />
-
-
         </LinearLayout>
-
-        <!-- Área de cartas del dealer mejorada -->
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -99,7 +94,7 @@
 
                         <ImageView
                             android:id="@+id/imageView11"
-                            android:layout_width="75dp"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
@@ -107,7 +102,7 @@
 
                         <ImageView
                             android:id="@+id/imageView10"
-                            android:layout_width="75dp"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
@@ -115,7 +110,7 @@
 
                         <ImageView
                             android:id="@+id/imageView5"
-                            android:layout_width="75dp"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
@@ -123,11 +118,20 @@
 
                         <ImageView
                             android:id="@+id/imageView9"
-                            android:layout_width="75dp"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
                             app:srcCompat="@drawable/back04" />
+
+                        <ImageView
+                            android:id="@+id/imageView13"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back04" />
+
                     </LinearLayout>
                 </HorizontalScrollView>
             </FrameLayout>
@@ -146,7 +150,7 @@
             android:padding="8dp"/>
     </LinearLayout>
 
-    <!-- Panel del Jugador con diseño mejorado -->
+    <!-- Panel del Jugador -->
     <LinearLayout
         android:id="@+id/playerPanel"
         android:layout_width="match_parent"
@@ -170,7 +174,6 @@
             android:shadowDy="2"
             android:shadowRadius="3"/>
 
-        <!-- Área de cartas del jugador mejorada -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -205,39 +208,44 @@
 
                         <ImageView
                             android:id="@+id/imageView17"
-                            android:layout_width="75dp"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
-
                             app:srcCompat="@drawable/back02" />
 
                         <ImageView
                             android:id="@+id/imageView16"
-                            android:layout_width="75dp"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
-
                             app:srcCompat="@drawable/back02" />
 
                         <ImageView
                             android:id="@+id/imageView15"
-                            android:layout_width="75dp"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
-
                             app:srcCompat="@drawable/back02" />
 
                         <ImageView
                             android:id="@+id/imageView12"
-                            android:layout_width="75dp"
+                            android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
-
                             app:srcCompat="@drawable/back02" />
+
+                        <ImageView
+                            android:id="@+id/imageView18"
+                            android:layout_width="65dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back02" />
+
                     </LinearLayout>
                 </HorizontalScrollView>
             </FrameLayout>
@@ -256,7 +264,7 @@
             android:padding="8dp"/>
     </LinearLayout>
 
-    <!-- Panel de Control mejorado -->
+    <!-- Panel de Control -->
     <LinearLayout
         android:id="@+id/controlPanel"
         android:layout_width="match_parent"
@@ -266,7 +274,6 @@
         android:background="#33000000"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <!-- Panel de Saldo y Apuesta mejorado -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -339,7 +346,6 @@
             </androidx.cardview.widget.CardView>
         </LinearLayout>
 
-        <!-- Botones de Control mejorados -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
