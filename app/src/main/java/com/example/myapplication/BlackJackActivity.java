@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,9 @@ public class BlackJackActivity extends AppCompatActivity {
     private int dealerpunt= 0;
     private int jugadorpunt=0;
     private double apuesta = 0;
+
+    private ImageView[] pcs;
+    private ImageView[] dcs;
 
     private List<String> usadas = new ArrayList<>();
     //al cambiar de foco vuelve a tener pantalla completa
@@ -62,6 +66,22 @@ public class BlackJackActivity extends AppCompatActivity {
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                         View.SYSTEM_UI_FLAG_FULLSCREEN
         );
+          pcs = new ImageView[] {
+                binding.pc1,
+                binding.pc2,
+                binding.pc3,
+                binding.pc4,
+                binding.pc5,
+                binding.pc6
+        };
+        dcs = new ImageView[]  {
+                binding.dc1,
+                binding.dc2,
+                binding.dc3,
+                binding.dc4,
+                binding.dc5,
+                //binding.dc6
+        };
     }
 
     private void setupButtons() {
@@ -116,19 +136,19 @@ public class BlackJackActivity extends AppCompatActivity {
         String carta = sacarCarta();
         Toast.makeText(this, carta, Toast.LENGTH_SHORT).show();
         //Esto de aqui abajo usa el nombre y lo convierte en ID para cambiar la imagen, inteligente si me preguntas
-        binding.imageView11.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
-        binding.imageView11.setVisibility(View.VISIBLE);
+        binding.dc1.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
+        binding.dc1.setVisibility(View.VISIBLE);
         dealerpunt = actualizarPuntuacion(numeroactual,dealerpunt);
         binding.dealerScore.setText(String.valueOf("Puntuación conocida: "+dealerpunt));
-        binding.imageView10.setVisibility(View.VISIBLE);
+        binding.dc2.setVisibility(View.VISIBLE);
 
         String carta2 = sacarCarta();
-        binding.imageView17.setImageResource(getResources().getIdentifier(carta2, "drawable", getPackageName()));
-        binding.imageView17.setVisibility(View.VISIBLE);
+        binding.pc1.setImageResource(getResources().getIdentifier(carta2, "drawable", getPackageName()));
+        binding.pc1.setVisibility(View.VISIBLE);
         jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
         String carta3 = sacarCarta();
-        binding.imageView16.setImageResource(getResources().getIdentifier(carta3, "drawable", getPackageName()));
-        binding.imageView16.setVisibility(View.VISIBLE);
+        binding.pc2.setImageResource(getResources().getIdentifier(carta3, "drawable", getPackageName()));
+        binding.pc2.setVisibility(View.VISIBLE);
         jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
         binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
 
@@ -139,7 +159,7 @@ public class BlackJackActivity extends AppCompatActivity {
 
         switch (numero) {
             case 1:
-                puntos = 11;
+                puntos = 1;
                 break;
             case 11:
             case 12:
@@ -160,15 +180,16 @@ public class BlackJackActivity extends AppCompatActivity {
             binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
             binding.dealerScore.setText("Puntuación: "+String.valueOf(dealerpunt));
 
-            binding.imageView10.setVisibility(View.INVISIBLE);
-            binding.imageView11.setVisibility(View.INVISIBLE);
-            binding.imageView16.setVisibility(View.INVISIBLE);
-            binding.imageView15.setVisibility(View.INVISIBLE);
-            binding.imageView12.setVisibility(View.INVISIBLE);
-            binding.imageView17.setVisibility(View.INVISIBLE);
-            binding.imageView18.setVisibility(View.INVISIBLE);
-            binding.imageView13.setVisibility(View.INVISIBLE);
 
+            for (ImageView pc : pcs) {
+                pc.setVisibility(View.INVISIBLE);
+            }
+            for (ImageView dc : dcs) {
+                dc.setVisibility(View.INVISIBLE);
+            }
+            binding.pedirButton.setEnabled(false);
+            binding.plantarseButton.setEnabled(false);
+            binding.doblarButton.setEnabled(false);
 
             //Toast.makeText(this, String.valueOf(jugadorpunt), Toast.LENGTH_SHORT).show();
             return 0;
@@ -177,6 +198,7 @@ public class BlackJackActivity extends AppCompatActivity {
 
         return puntuacion;
     }
+
     private String sacarCarta(){
         Random random = new Random();
         int palo = random.nextInt(4);
@@ -224,26 +246,16 @@ public class BlackJackActivity extends AppCompatActivity {
     }
 
     private void pedir(){
-        if(binding.imageView16.getVisibility() != View.VISIBLE) {
-            String carta = sacarCarta();
-            binding.imageView16.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
-            binding.imageView16.setVisibility(View.VISIBLE);
-            jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
-            binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
+        for (ImageView pc : pcs) {
+            if(pc.getVisibility() != View.VISIBLE) {
+                String carta = sacarCarta();
+                pc.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
+                pc.setVisibility(View.VISIBLE);
+                jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
+                binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
+                break;
+            }
         }
-        else if(binding.imageView15.getVisibility() != View.VISIBLE) {
-            String carta = sacarCarta();
-            binding.imageView15.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
-            binding.imageView15.setVisibility(View.VISIBLE);
-            jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
-            binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
-        }
-        else if(binding.imageView12.getVisibility() != View.VISIBLE) {
-            String carta = sacarCarta();
-            binding.imageView12.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
-            binding.imageView12.setVisibility(View.VISIBLE);
-            jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
-            binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt)); }
     }
     }
 

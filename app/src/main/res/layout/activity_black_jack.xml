@@ -93,7 +93,7 @@
                         android:spacing="8dp">
 
                         <ImageView
-                            android:id="@+id/imageView11"
+                            android:id="@+id/dc1"
                             android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -101,7 +101,7 @@
                             app:srcCompat="@drawable/back04" />
 
                         <ImageView
-                            android:id="@+id/imageView10"
+                            android:id="@+id/dc2"
                             android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -109,7 +109,7 @@
                             app:srcCompat="@drawable/back04" />
 
                         <ImageView
-                            android:id="@+id/imageView5"
+                            android:id="@+id/dc3"
                             android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -117,7 +117,7 @@
                             app:srcCompat="@drawable/back04" />
 
                         <ImageView
-                            android:id="@+id/imageView9"
+                            android:id="@+id/dc4"
                             android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -125,7 +125,7 @@
                             app:srcCompat="@drawable/back04" />
 
                         <ImageView
-                            android:id="@+id/imageView13"
+                            android:id="@+id/dc5"
                             android:layout_width="65dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -207,40 +207,48 @@
                         android:spacing="8dp">
 
                         <ImageView
-                            android:id="@+id/imageView17"
-                            android:layout_width="65dp"
+                            android:id="@+id/pc1"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
                             app:srcCompat="@drawable/back02" />
 
                         <ImageView
-                            android:id="@+id/imageView16"
-                            android:layout_width="65dp"
+                            android:id="@+id/pc2"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
                             app:srcCompat="@drawable/back02" />
 
                         <ImageView
-                            android:id="@+id/imageView15"
-                            android:layout_width="65dp"
+                            android:id="@+id/pc3"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
                             app:srcCompat="@drawable/back02" />
 
                         <ImageView
-                            android:id="@+id/imageView12"
-                            android:layout_width="65dp"
+                            android:id="@+id/pc4"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
                             app:srcCompat="@drawable/back02" />
 
                         <ImageView
-                            android:id="@+id/imageView18"
-                            android:layout_width="65dp"
+                            android:id="@+id/pc5"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back02" />
+
+                        <ImageView
+                            android:id="@+id/pc6"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
