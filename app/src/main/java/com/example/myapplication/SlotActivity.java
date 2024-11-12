@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import static java.lang.Thread.sleep;
+
 import android.os.Bundle;
 import android.os.Message;
 import android.widget.Button;
@@ -30,6 +32,8 @@ public class SlotActivity extends BaseActivity {
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button3);
         button3 = findViewById(R.id.button5);
+        msg.setText(String.valueOf(saldo));
+
 
         // Inicializar MapaSym correctamente en onCreate
         MapaSym = new HashMap<>();
@@ -42,16 +46,34 @@ public class SlotActivity extends BaseActivity {
     }
 
     private void setupButtons() {
-        button1.setOnClickListener(v -> handleButtonPress(button1, 1));
-        button2.setOnClickListener(v -> handleButtonPress(button2, 3));
-        button3.setOnClickListener(v -> handleButtonPress(button3, 5));
+        button1.setOnClickListener(v -> {
+            try {
+                handleButtonPress(button1, 1);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        button2.setOnClickListener(v -> {
+            try {
+                handleButtonPress(button2, 3);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        button3.setOnClickListener(v -> {
+            try {
+                handleButtonPress(button3, 5);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
-    private void handleButtonPress(Button button, int mult) {
+    private void handleButtonPress(Button button, int mult) throws InterruptedException {
         if (isStarted) {
             // Si las vueltas están activas, se detienen
             stopVueltas();
-
+            sleep(500);
             // Obtener los símbolos resultantes
             int symbol1 = vuelta1.getCurrentImage();
             int symbol2 = vuelta2.getCurrentImage();
@@ -65,6 +87,7 @@ public class SlotActivity extends BaseActivity {
             isStarted = false; // Reiniciar el estado de vueltas
         } else {
             // Iniciar las vueltas y deshabilitar otros botones
+            if ((button==button1 && saldo>1) || (button==button2 && saldo>3) || (button==button3 && saldo>5)) {
             disableOtherButtons(button);
             startVueltas();
             button.setText("Stop");
@@ -73,7 +96,10 @@ public class SlotActivity extends BaseActivity {
             else if (button==button2) {saldo=saldo-3;}
             else if (button==button3) {saldo=saldo-5;}
             msg.setText(String.valueOf(saldo));
-            isStarted = true; // Indicar que las vueltas están activas
+            isStarted = true;}
+            else{
+                Toast.makeText(this, "Saldo insuficiente", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -86,18 +112,22 @@ public class SlotActivity extends BaseActivity {
             if (nombreSimbolo=="cereza"){
                 Toast.makeText(this, "Has ganado:" + mult*2 + "€", Toast.LENGTH_SHORT).show();
                 saldo=saldo+mult*2;
+                msg.setText(String.valueOf(saldo));
             }
             if (nombreSimbolo=="campana"){
                 Toast.makeText(this, "Has ganado:" + mult*4 + "€", Toast.LENGTH_SHORT).show();
                 saldo=saldo+mult*4;
+                msg.setText(String.valueOf(saldo));
             }
             if (nombreSimbolo=="bar"){
                 Toast.makeText(this, "Has ganado:" + mult*8 + "€", Toast.LENGTH_SHORT).show();
                 saldo=saldo+mult*8;
+                msg.setText(String.valueOf(saldo));
             }
             if (nombreSimbolo=="7") {
                 Toast.makeText(this, "Has ganado:" + mult*16 + "€", Toast.LENGTH_SHORT).show();
                 saldo = saldo+mult*16;
+                msg.setText(String.valueOf(saldo));
             }
         }
         else{

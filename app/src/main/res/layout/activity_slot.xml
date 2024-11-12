@@ -100,5 +100,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText" />
 
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="280dp"
+        android:layout_height="231dp"
+        android:layout_marginTop="120dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/image" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
