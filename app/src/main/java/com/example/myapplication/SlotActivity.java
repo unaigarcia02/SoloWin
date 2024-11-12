@@ -18,7 +18,6 @@ public class SlotActivity extends BaseActivity {
     private ImageView img1, img2, img3;
     private Vueltas vuelta1, vuelta2, vuelta3;
     private boolean isStartedButton1 = false, isStartedButton2 = false, isStartedButton3 = false;
-    private float saldo = BaseActivity.saldo; //utiliza esta variable como saldo, porque se actualiza para todos los juegos
     private Button button1, button2, button3;
 
     public static final Random RANDOM = new Random();
@@ -42,82 +41,77 @@ public class SlotActivity extends BaseActivity {
 
         setupButtons();
 
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
     }
 
     private void setupButtons() {
-        button1.setOnClickListener(v -> {
-            if (isStartedButton1) {
-                // Detener vueltas del botón 1
-                stopVueltas();
-                button1.setText("1€");
-                isStartedButton1 = false;
-                checkResult();
-            } else {
-                // Resetear otros botones
-                resetButtons(button2, button3);
-
-                // Iniciar vueltas del botón 1
-                startVueltas();
-                button1.setText("Stop");
-                isStartedButton1 = true;
-            }
-        });
-
-        button2.setOnClickListener(v -> {
-            if (isStartedButton2) {
-                // Detener vueltas del botón 2
-                stopVueltas();
-                button2.setText("3€");
-                isStartedButton2 = false;
-                checkResult();
-            } else {
-                // Resetear otros botones
-                resetButtons(button1, button3);
-
-                // Iniciar vueltas del botón 2
-                startVueltas();
-                button2.setText("Stop");
-                isStartedButton2 = true;
-            }
-        });
-
-        button3.setOnClickListener(v -> {
-            if (isStartedButton3) {
-                // Detener vueltas del botón 3
-                stopVueltas();
-                button3.setText("5€");
-                isStartedButton3 = false;
-                checkResult();
-            } else {
-                // Resetear otros botones
-                resetButtons(button1, button2);
-
-                // Iniciar vueltas del botón 3
-                startVueltas();
-                button3.setText("Stop");
-                isStartedButton3 = true;
-            }
-        });
+        button1.setOnClickListener(v -> handleButtonPress(button1, 1));
+        button2.setOnClickListener(v -> handleButtonPress(button2, 3));
+        button3.setOnClickListener(v -> handleButtonPress(button3, 5));
     }
 
-    private void resetButtons(Button... buttons) {
-        // Detiene cualquier otra vuelta en progreso y resetea el texto
-        for (Button button : buttons) {
-            button.setText(button.getId() == R.id.button1 ? "1€" : button.getId() == R.id.button3 ? "3€" : "5€");
+    private void handleButtonPress(Button button, int cost) {
+        boolean isButtonAlreadyActive =
+                (button == button1 && isStartedButton1) ||
+                        (button == button2 && isStartedButton2) ||
+                        (button == button3 && isStartedButton3);
+
+        if (isButtonAlreadyActive) {
+            // Si el botón ya estaba activo, se detienen las vueltas
+            stopVueltas();
+            resetButtonLabels();
+            enableAllButtons();
+            resetButtonStates(); // Reinicia los estados de los botones para permitir reinicio
+        } else {
+            // Iniciar la animación y deshabilitar otros botones
+            disableOtherButtons(button);
+            startVueltas();
+            button.setText("Stop");
+            updateButtonStates(button);
         }
-        // Resetea los estados de cada botón
-        isStartedButton1 = isStartedButton2 = isStartedButton3 = false;
+    }
+
+    private void updateButtonStates(Button activeButton) {
+        // Activar el estado solo para el botón presionado
+        isStartedButton1 = (activeButton == button1);
+        isStartedButton2 = (activeButton == button2);
+        isStartedButton3 = (activeButton == button3);
+    }
+
+    private void resetButtonStates() {
+        // Reinicia el estado de todos los botones a false
+        isStartedButton1 = false;
+        isStartedButton2 = false;
+        isStartedButton3 = false;
+    }
+
+    private void resetButtonLabels() {
+        // Reinicia el texto de los botones
+        button1.setText("1€");
+        button2.setText("3€");
+        button3.setText("5€");
+    }
+
+    private void disableOtherButtons(Button activeButton) {
+        // Deshabilita los botones que no están activos
+        if (activeButton != button1) button1.setEnabled(false);
+        if (activeButton != button2) button2.setEnabled(false);
+        if (activeButton != button3) button3.setEnabled(false);
+    }
+
+    private void enableAllButtons() {
+        // Vuelve a habilitar todos los botones
+        button1.setEnabled(true);
+        button2.setEnabled(true);
+        button3.setEnabled(true);
     }
 
     private void startVueltas() {
-        // Inicia las vueltas de los 3 elementos
+        // Inicia las vueltas para todas las imágenes
         vuelta1 = new Vueltas(img -> runOnUiThread(() -> img1.setImageResource(img)), 200, randomLong(0, 200));
         vuelta2 = new Vueltas(img -> runOnUiThread(() -> img2.setImageResource(img)), 200, randomLong(0, 200));
         vuelta3 = new Vueltas(img -> runOnUiThread(() -> img3.setImageResource(img)), 200, randomLong(0, 200));
@@ -127,20 +121,9 @@ public class SlotActivity extends BaseActivity {
     }
 
     private void stopVueltas() {
-        // Detiene las vueltas
+        // Detiene todas las vueltas
         if (vuelta1 != null) vuelta1.stopVueltas();
         if (vuelta2 != null) vuelta2.stopVueltas();
         if (vuelta3 != null) vuelta3.stopVueltas();
-    }
-
-    private void checkResult() {
-        // Verifica el resultado y muestra el mensaje
-        if (vuelta1.currentIndex == vuelta2.currentIndex && vuelta2.currentIndex == vuelta3.currentIndex) {
-            Toast.makeText(this, "3 iguales", Toast.LENGTH_SHORT).show();
-        } else if (vuelta1.currentIndex == vuelta2.currentIndex || vuelta2.currentIndex == vuelta3.currentIndex || vuelta1.currentIndex == vuelta3.currentIndex) {
-            Toast.makeText(this, "2 iguales", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Ninguna igual", Toast.LENGTH_SHORT).show();
-        }
     }
 }
