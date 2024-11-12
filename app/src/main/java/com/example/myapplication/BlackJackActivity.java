@@ -75,7 +75,10 @@ public class BlackJackActivity extends AppCompatActivity {
                 binding.pc3,
                 binding.pc4,
                 binding.pc5,
-                binding.pc6
+                binding.pc6,
+                binding.pc7,
+                binding.pc8,
+                binding.pc9
         };
         dcs = new ImageView[]{
                 binding.dc1,
@@ -83,7 +86,10 @@ public class BlackJackActivity extends AppCompatActivity {
                 binding.dc3,
                 binding.dc4,
                 binding.dc5,
-                //binding.dc6
+                binding.dc6,
+                binding.dc7,
+                binding.dc8,
+                binding.dc9
         };
     }
 
