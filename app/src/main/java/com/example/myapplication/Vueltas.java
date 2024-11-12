@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import java.util.Random;
+
 public class Vueltas extends Thread{
 
     interface VueltasListener {
@@ -12,7 +14,7 @@ public class Vueltas extends Thread{
     private long frameDuration;
     private long startIn;
     private boolean isStarted;
-
+    public static final Random RANDOM = new Random();
     public Vueltas(VueltasListener vueltasListener, long frameDuration, long startIn){
         this.vueltasListener = vueltasListener;
         this.frameDuration = frameDuration;

@@ -15,30 +15,27 @@ import java.util.Random;
 
 
 public class SlotActivity extends BaseActivity {
-    private TextView msg;
-    private ImageView img1,img2,img3;
+    private ImageView img1, img2, img3;
     private Vueltas vuelta1, vuelta2, vuelta3;
-    private Button btn;
-    private boolean isStarted;
+    private boolean isStartedButton1 = false, isStartedButton2 = false, isStartedButton3 = false;
     private float saldo = BaseActivity.saldo; //utiliza esta variable como saldo, porque se actualiza para todos los juegos
     private Button button1, button2, button3;
 
     public static final Random RANDOM = new Random();
 
-    public static long randomLong(long lower, long upper){
+    public static long randomLong(long lower, long upper) {
         return lower + (long) (RANDOM.nextDouble() * (upper - lower));
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_slot);
 
-        img1 = (ImageView) findViewById(R.id.img1);
-        img2 = (ImageView) findViewById(R.id.img1);
-        img3 = (ImageView) findViewById(R.id.img1);
-        msg = (TextView) findViewById(R.id.Saldo);
-
+        img1 = findViewById(R.id.img1);
+        img2 = findViewById(R.id.img2);
+        img3 = findViewById(R.id.img3);
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button3);
         button3 = findViewById(R.id.button5);
@@ -56,182 +53,94 @@ public class SlotActivity extends BaseActivity {
 
     private void setupButtons() {
         button1.setOnClickListener(v -> {
-            if(isStarted){
-                vuelta1.stopVueltas();
-                vuelta2.stopVueltas();
-                vuelta3.stopVueltas();
-
-                if(vuelta1.currentIndex == vuelta2.currentIndex && vuelta2.currentIndex == vuelta3.currentIndex){
-                    msg.setText("You win the big prize");
-                } else if (vuelta1.currentIndex == vuelta2.currentIndex || vuelta2.currentIndex == vuelta3.currentIndex || vuelta1.currentIndex == vuelta3.currentIndex) {
-                    msg.setText("Little Prize");
-                } else{
-                    msg.setText("You lose");
-                }
-
-                btn.setText("Start");
-                isStarted=false;
+            if (isStartedButton1) {
+                // Detener vueltas del botón 1
+                stopVueltas();
+                button1.setText("1€");
+                isStartedButton1 = false;
+                checkResult();
             } else {
-                vuelta1=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img1.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta1.start();
-                vuelta2=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img2.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta2.start();
-                vuelta3=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img3.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta3.start();
+                // Resetear otros botones
+                resetButtons(button2, button3);
+
+                // Iniciar vueltas del botón 1
+                startVueltas();
+                button1.setText("Stop");
+                isStartedButton1 = true;
             }
-            btn.setText("Stop");
-            msg.setText("");
-            isStarted=true;
+        });
+
+        button2.setOnClickListener(v -> {
+            if (isStartedButton2) {
+                // Detener vueltas del botón 2
+                stopVueltas();
+                button2.setText("3€");
+                isStartedButton2 = false;
+                checkResult();
+            } else {
+                // Resetear otros botones
+                resetButtons(button1, button3);
+
+                // Iniciar vueltas del botón 2
+                startVueltas();
+                button2.setText("Stop");
+                isStartedButton2 = true;
+            }
         });
 
         button3.setOnClickListener(v -> {
-            if(isStarted){
-                vuelta1.stopVueltas();
-                vuelta2.stopVueltas();
-                vuelta3.stopVueltas();
-
-                if(vuelta1.currentIndex == vuelta2.currentIndex && vuelta2.currentIndex == vuelta3.currentIndex){
-                    msg.setText("You win the big prize");
-                } else if (vuelta1.currentIndex == vuelta2.currentIndex || vuelta2.currentIndex == vuelta3.currentIndex || vuelta1.currentIndex == vuelta3.currentIndex) {
-                    msg.setText("Little Prize");
-                } else{
-                    msg.setText("You lose");
-                }
-
-                btn.setText("Start");
-                isStarted=false;
+            if (isStartedButton3) {
+                // Detener vueltas del botón 3
+                stopVueltas();
+                button3.setText("5€");
+                isStartedButton3 = false;
+                checkResult();
             } else {
-                vuelta1=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img1.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta1.start();
-                vuelta2=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img2.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta2.start();
-                vuelta3=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img3.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta3.start();
+                // Resetear otros botones
+                resetButtons(button1, button2);
+
+                // Iniciar vueltas del botón 3
+                startVueltas();
+                button3.setText("Stop");
+                isStartedButton3 = true;
             }
-            btn.setText("Stop");
-            msg.setText("");
-            isStarted=true;
         });
-
-        button3.setOnClickListener(v -> {
-            if(isStarted){
-                vuelta1.stopVueltas();
-                vuelta2.stopVueltas();
-                vuelta3.stopVueltas();
-
-                if(vuelta1.currentIndex == vuelta2.currentIndex && vuelta2.currentIndex == vuelta3.currentIndex){
-                    msg.setText("You win the big prize");
-                } else if (vuelta1.currentIndex == vuelta2.currentIndex || vuelta2.currentIndex == vuelta3.currentIndex || vuelta1.currentIndex == vuelta3.currentIndex) {
-                    msg.setText("Little Prize");
-                } else{
-                    msg.setText("You lose");
-                }
-
-                btn.setText("Start");
-                isStarted=false;
-            } else {
-                vuelta1=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img1.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta1.start();
-                vuelta2=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img2.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta2.start();
-                vuelta3=new Vueltas(new Vueltas.VueltasListener() {
-                    @Override
-                    public void newImage(final int img) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                img3.setImageResource(img);
-                            }
-                        });
-                    }
-                }, 200, randomLong(0,200));
-                vuelta3.start();
-            }
-            btn.setText("Stop");
-            msg.setText("");
-            isStarted=true;
-        });
-
     }
 
+    private void resetButtons(Button... buttons) {
+        // Detiene cualquier otra vuelta en progreso y resetea el texto
+        for (Button button : buttons) {
+            button.setText(button.getId() == R.id.button1 ? "1€" : button.getId() == R.id.button3 ? "3€" : "5€");
+        }
+        // Resetea los estados de cada botón
+        isStartedButton1 = isStartedButton2 = isStartedButton3 = false;
+    }
+
+    private void startVueltas() {
+        // Inicia las vueltas de los 3 elementos
+        vuelta1 = new Vueltas(img -> runOnUiThread(() -> img1.setImageResource(img)), 200, randomLong(0, 200));
+        vuelta2 = new Vueltas(img -> runOnUiThread(() -> img2.setImageResource(img)), 200, randomLong(0, 200));
+        vuelta3 = new Vueltas(img -> runOnUiThread(() -> img3.setImageResource(img)), 200, randomLong(0, 200));
+        vuelta1.start();
+        vuelta2.start();
+        vuelta3.start();
+    }
+
+    private void stopVueltas() {
+        // Detiene las vueltas
+        if (vuelta1 != null) vuelta1.stopVueltas();
+        if (vuelta2 != null) vuelta2.stopVueltas();
+        if (vuelta3 != null) vuelta3.stopVueltas();
+    }
+
+    private void checkResult() {
+        // Verifica el resultado y muestra el mensaje
+        if (vuelta1.currentIndex == vuelta2.currentIndex && vuelta2.currentIndex == vuelta3.currentIndex) {
+            Toast.makeText(this, "3 iguales", Toast.LENGTH_SHORT).show();
+        } else if (vuelta1.currentIndex == vuelta2.currentIndex || vuelta2.currentIndex == vuelta3.currentIndex || vuelta1.currentIndex == vuelta3.currentIndex) {
+            Toast.makeText(this, "2 iguales", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Ninguna igual", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
