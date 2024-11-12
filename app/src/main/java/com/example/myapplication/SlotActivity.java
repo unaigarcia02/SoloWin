@@ -10,7 +10,6 @@ import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import com.example.myapplication.databinding.ActivitySlotBinding;
 
 import java.util.Random;
 
@@ -22,7 +21,7 @@ public class SlotActivity extends BaseActivity {
     private Button btn;
     private boolean isStarted;
     private float saldo = BaseActivity.saldo; //utiliza esta variable como saldo, porque se actualiza para todos los juegos
-    private ActivitySlotBinding binding;
+    private Button button1, button2, button3;
 
     public static final Random RANDOM = new Random();
 
@@ -34,20 +33,29 @@ public class SlotActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_slot);
+
+        img1 = (ImageView) findViewById(R.id.img1);
+        img2 = (ImageView) findViewById(R.id.img1);
+        img3 = (ImageView) findViewById(R.id.img1);
+        msg = (TextView) findViewById(R.id.Saldo);
+
+        button1 = findViewById(R.id.button1);
+        button2 = findViewById(R.id.button3);
+        button3 = findViewById(R.id.button5);
+
+        setupButtons();
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        img1 = (ImageView) findViewById(R.id.img1);
-        img2 = (ImageView) findViewById(R.id.img1);
-        img3 = (ImageView) findViewById(R.id.img1);
-        msg = (TextView) findViewById(R.id.Saldo);
-        setupButtons();
+
     }
 
     private void setupButtons() {
-        binding.button1.setOnClickListener(v -> {
+        button1.setOnClickListener(v -> {
             if(isStarted){
                 vuelta1.stopVueltas();
                 vuelta2.stopVueltas();
@@ -106,7 +114,7 @@ public class SlotActivity extends BaseActivity {
             isStarted=true;
         });
 
-        binding.button3.setOnClickListener(v -> {
+        button3.setOnClickListener(v -> {
             if(isStarted){
                 vuelta1.stopVueltas();
                 vuelta2.stopVueltas();
@@ -165,7 +173,7 @@ public class SlotActivity extends BaseActivity {
             isStarted=true;
         });
 
-        binding.button5.setOnClickListener(v -> {
+        button3.setOnClickListener(v -> {
             if(isStarted){
                 vuelta1.stopVueltas();
                 vuelta2.stopVueltas();
