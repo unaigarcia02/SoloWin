@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.databinding.ActivityBlackJackBinding;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class BlackJackActivity extends AppCompatActivity {
@@ -21,6 +23,8 @@ public class BlackJackActivity extends AppCompatActivity {
     private int dealerpunt= 0;
     private int jugadorpunt=0;
     private double apuesta = 0;
+
+    private List<String> usadas = new ArrayList<>();
     //al cambiar de foco vuelve a tener pantalla completa
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -66,7 +70,7 @@ public class BlackJackActivity extends AppCompatActivity {
         });
 
         binding.plantarseButton.setOnClickListener(v -> {
-            Toast.makeText(this, "QUE", Toast.LENGTH_SHORT).show();
+            //plantarse();
         });
 
         binding.doblarButton.setOnClickListener(v -> {
@@ -74,7 +78,19 @@ public class BlackJackActivity extends AppCompatActivity {
         });
 
         binding.repartirButton.setOnClickListener(v -> {
-            repartir();
+            try {
+                apuesta = Double.parseDouble(binding.betInput.getText().toString());
+                if (apuesta <= saldo) {
+                    saldo = (float) (saldo - apuesta);
+                    binding.saldoText.setText(String.valueOf(saldo));
+                    binding.apostado.setText("Apostado: "+apuesta);
+                    repartir();
+                } else {
+                    Toast.makeText(this, "No tienes suficiente saldo", Toast.LENGTH_SHORT).show();
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Por favor, introduce una cantidad válida", Toast.LENGTH_SHORT).show();
+            }
         });
         binding.imageButton.setOnClickListener(v -> {
             mostrarInstrucciones();
@@ -93,7 +109,6 @@ public class BlackJackActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
     private void repartir(){
         binding.pedirButton.setEnabled(true);
         binding.plantarseButton.setEnabled(true);
@@ -104,27 +119,19 @@ public class BlackJackActivity extends AppCompatActivity {
         binding.imageView11.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
         binding.imageView11.setVisibility(View.VISIBLE);
         dealerpunt = actualizarPuntuacion(numeroactual,dealerpunt);
-        binding.dealerScore.setText(String.valueOf("Puntuación: "+dealerpunt));
+        binding.dealerScore.setText(String.valueOf("Puntuación conocida: "+dealerpunt));
+        binding.imageView10.setVisibility(View.VISIBLE);
 
         String carta2 = sacarCarta();
         binding.imageView17.setImageResource(getResources().getIdentifier(carta2, "drawable", getPackageName()));
         binding.imageView17.setVisibility(View.VISIBLE);
         jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
+        String carta3 = sacarCarta();
+        binding.imageView16.setImageResource(getResources().getIdentifier(carta3, "drawable", getPackageName()));
+        binding.imageView16.setVisibility(View.VISIBLE);
+        jugadorpunt = actualizarPuntuacion(numeroactual,jugadorpunt);
         binding.playerScore.setText("Puntuación: "+String.valueOf(jugadorpunt));
 
-
-        try {
-            apuesta = Double.parseDouble(binding.betInput.getText().toString());
-            if (apuesta <= saldo) {
-                saldo = (float) (saldo - apuesta);
-                binding.saldoText.setText(String.valueOf(saldo));
-                binding.apostado.setText("Apostado: "+apuesta);
-            } else {
-                Toast.makeText(this, "No tienes suficiente saldo", Toast.LENGTH_SHORT).show();
-            }
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Por favor, introduce una cantidad válida", Toast.LENGTH_SHORT).show();
-        }
 
     }
     private int actualizarPuntuacion(int numero, int puntuacion) {
@@ -159,9 +166,11 @@ public class BlackJackActivity extends AppCompatActivity {
             binding.imageView15.setVisibility(View.INVISIBLE);
             binding.imageView12.setVisibility(View.INVISIBLE);
             binding.imageView17.setVisibility(View.INVISIBLE);
+            binding.imageView18.setVisibility(View.INVISIBLE);
+            binding.imageView13.setVisibility(View.INVISIBLE);
 
 
-            Toast.makeText(this, String.valueOf(jugadorpunt), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, String.valueOf(jugadorpunt), Toast.LENGTH_SHORT).show();
             return 0;
 
         }
@@ -170,7 +179,7 @@ public class BlackJackActivity extends AppCompatActivity {
     }
     private String sacarCarta(){
         Random random = new Random();
-        int palo = random.nextInt(3)+1;
+        int palo = random.nextInt(4);
         String palon = "";
         switch (palo){
             case 0:
@@ -206,6 +215,11 @@ public class BlackJackActivity extends AppCompatActivity {
                 break;
         }
 
+        if(usadas.contains(palon+"_"+carta)){
+            Toast.makeText(this,"Se ha eliminado"+palon+"_"+carta, Toast.LENGTH_SHORT).show();
+            return sacarCarta();
+        }
+        usadas.add(palon+"_"+carta);
         return palon+"_"+carta;
     }
 
