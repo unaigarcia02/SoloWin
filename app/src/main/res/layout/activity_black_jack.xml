@@ -94,7 +94,7 @@
 
                         <ImageView
                             android:id="@+id/dc1"
-                            android:layout_width="65dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
@@ -102,7 +102,7 @@
 
                         <ImageView
                             android:id="@+id/dc2"
-                            android:layout_width="65dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
@@ -110,7 +110,7 @@
 
                         <ImageView
                             android:id="@+id/dc3"
-                            android:layout_width="65dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
@@ -118,7 +118,7 @@
 
                         <ImageView
                             android:id="@+id/dc4"
-                            android:layout_width="65dp"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
@@ -126,7 +126,39 @@
 
                         <ImageView
                             android:id="@+id/dc5"
-                            android:layout_width="65dp"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back04" />
+
+                        <ImageView
+                            android:id="@+id/dc6"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back04" />
+
+                        <ImageView
+                            android:id="@+id/dc7"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back04" />
+
+                        <ImageView
+                            android:id="@+id/dc8"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back04" />
+
+                        <ImageView
+                            android:id="@+id/dc9"
+                            android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:visibility="invisible"
@@ -248,6 +280,30 @@
 
                         <ImageView
                             android:id="@+id/pc6"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back02" />
+
+                        <ImageView
+                            android:id="@+id/pc7"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back02" />
+
+                        <ImageView
+                            android:id="@+id/pc8"
+                            android:layout_width="80dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            app:srcCompat="@drawable/back02" />
+
+                        <ImageView
+                            android:id="@+id/pc9"
                             android:layout_width="80dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
