@@ -55,7 +55,7 @@
                     android:src="@drawable/coin" />
 
                 <TextView
-                    android:id="@+id/saldoText"
+                    android:id="@+id/saldo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1000"
@@ -108,7 +108,7 @@
             android:textColor="#FFF"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:gravity="bottom"/>
+            android:gravity="bottom|center"/>
 
         <!-- Botones de Dificultad -->
         <LinearLayout
@@ -116,7 +116,8 @@
             android:layout_height="wrap_content"
             android:layout_row="3"
             android:layout_column="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="top">
 
             <Button
                 android:id="@+id/botFacil"
@@ -128,7 +129,7 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/radioMedia"
+                android:id="@+id/botMedia"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -138,7 +139,7 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/radioDificil"
+                android:id="@+id/botDificil"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
