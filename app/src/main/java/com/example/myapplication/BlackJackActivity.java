@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -25,9 +26,9 @@ public class BlackJackActivity extends AppCompatActivity {
     private int dealerpunt = 0;
     private int jugadorpunt = 0;
     private double apuesta = 0;
-
     private ImageView[] pcs;
     private ImageView[] dcs;
+    private MediaPlayer mediaPlayer;
 
     private List<String> usadas = new ArrayList<>();
 
@@ -91,6 +92,24 @@ public class BlackJackActivity extends AppCompatActivity {
                 binding.dc8,
                 binding.dc9
         };
+
+
+        //Musica
+        mediaPlayer = MediaPlayer.create(this, R.raw.temones);
+        int duracion = mediaPlayer.getDuration();
+        Random random = new Random();
+        int inicioAleatorio = random.nextInt(duracion);
+        mediaPlayer.seekTo(inicioAleatorio);
+        mediaPlayer.start();
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Liberar memoria
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 
     private void setupButtons() {
