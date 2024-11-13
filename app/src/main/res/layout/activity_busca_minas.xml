@@ -12,7 +12,7 @@
         android:id="@+id/leftGridLayout"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:background="@drawable/tapete2"
+        android:background="@drawable/fondo_busca"
         android:columnCount="3"
         android:padding="8dp"
         android:rowCount="5"
@@ -33,31 +33,15 @@
             tools:ignore="ContentDescription" />
 
         <!-- Cantidad de monedas -->
-        <LinearLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_rowWeight="1"
-            android:layout_column="2"
-            android:gravity="end"
-            android:orientation="horizontal">
+            android:layout_marginEnd="32dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#4CAF50">
 
-            <ImageView
-                android:id="@+id/coinIcon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/coin"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/saldoText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1000"
-                android:textColor="#000"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <!-- Texto apuesta -->
         <TextView
@@ -75,20 +59,15 @@
 
         <!-- Campo de Entrada para la Apuesta -->
         <EditText
-            android:id="@+id/apuestaInput"
-            android:layout_width="150dp"
-            android:layout_height="3dp"
-            android:layout_row="1"
-            android:layout_rowWeight="1"
-            android:layout_column="1"
-            android:layout_marginStart="4dp"
-            android:background="#FFFFFF"
-            android:hint="Ingrese apuesta"
+            android:id="@+id/betInput"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bet_background"
             android:inputType="number"
-            android:paddingTop="100dp"
-            android:paddingBottom="100dp"
-            android:textColor="#000"
-            android:textSize="16sp" />
+            android:padding="8dp"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:maxLength="7"/>
 
         <!-- Etiqueta de Dificultad -->
         <TextView
@@ -143,6 +122,7 @@
         </LinearLayout>
 
         <!-- Boton Comenzar -->
+
         <Button
             android:id="@+id/botonComenzar"
             android:layout_width="wrap_content"
@@ -151,10 +131,34 @@
             android:layout_rowWeight="1"
             android:layout_column="2"
             android:backgroundTint="#0000FF"
-            android:padding="0dp"
+            android:padding="10dp"
             android:text="Comenzar"
             android:textColor="#FFFFFF"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/coin" />
+
+            <TextView
+                android:id="@+id/saldoText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":("
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
     </GridLayout>
 
     <!-- GridLayout de la derecha -->
@@ -162,7 +166,7 @@
         android:id="@+id/rightGridLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/tapete2"
+        android:background="@drawable/fondo_busca"
         android:columnCount="5"
         android:padding="8dp"
         android:rowCount="5"
@@ -181,7 +185,7 @@
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -193,7 +197,7 @@
             android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -205,7 +209,7 @@
             android:layout_column="2"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -217,7 +221,7 @@
             android:layout_column="3"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -229,7 +233,7 @@
             android:layout_column="4"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -242,7 +246,7 @@
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -254,7 +258,7 @@
             android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -266,7 +270,7 @@
             android:layout_column="2"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -278,7 +282,7 @@
             android:layout_column="3"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -290,7 +294,7 @@
             android:layout_column="4"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -303,7 +307,7 @@
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -315,7 +319,7 @@
             android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -327,7 +331,7 @@
             android:layout_column="2"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -339,7 +343,7 @@
             android:layout_column="3"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -351,7 +355,7 @@
             android:layout_column="4"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -364,7 +368,7 @@
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -376,7 +380,7 @@
             android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -388,7 +392,7 @@
             android:layout_column="2"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -400,7 +404,7 @@
             android:layout_column="3"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -412,7 +416,7 @@
             android:layout_column="4"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -425,7 +429,7 @@
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -437,7 +441,7 @@
             android:layout_column="1"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -449,7 +453,7 @@
             android:layout_column="2"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
@@ -461,8 +465,8 @@
             android:layout_column="3"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
-            app:srcCompat="@drawable/casilla_gris"
+            android:layout_margin="5dp"
+            app:srcCompat="@drawable/azulejo"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -473,7 +477,7 @@
             android:layout_column="4"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
-            android:layout_margin="20dp"
+            android:layout_margin="5dp"
             app:srcCompat="@drawable/casilla_gris"
             tools:ignore="ContentDescription" />
 
