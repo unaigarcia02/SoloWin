@@ -2,6 +2,8 @@ package com.example.myapplication;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.media.FaceDetector;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -120,15 +122,15 @@ public class BlackJackActivity extends AppCompatActivity {
 
     private void setupButtons() {
         binding.pedirButton.setOnClickListener(v -> {
-            pedir();
+            pedir(false);
         });
 
         binding.plantarseButton.setOnClickListener(v -> {
-            plantarse();
+            plantarse(false);
         });
 
         binding.doblarButton.setOnClickListener(v -> {
-            Toast.makeText(this, "QUE", Toast.LENGTH_SHORT).show();
+            doblar();
         });
 
         binding.repartirButton.setOnClickListener(v -> {
@@ -167,6 +169,8 @@ public class BlackJackActivity extends AppCompatActivity {
     }
 
     private void repartir() {
+        binding.apostado.setTextColor(Color.WHITE);
+
         jugadorpunt = 0;
         dealerpunt = 0;
         binding.playerScore.setText("Puntuación: " + String.valueOf(jugadorpunt));
@@ -175,6 +179,7 @@ public class BlackJackActivity extends AppCompatActivity {
 
         for (ImageView pc : pcs) {
             pc.setVisibility(View.INVISIBLE);
+            pc.setRotation(0);
         }
         for (ImageView dc : dcs) {
             dc.setVisibility(View.INVISIBLE);
@@ -189,7 +194,7 @@ public class BlackJackActivity extends AppCompatActivity {
         binding.plantarseButton.setEnabled(true);
         binding.doblarButton.setEnabled(true);
         String carta = sacarCarta();
-        Toast.makeText(this, carta, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, carta, Toast.LENGTH_SHORT).show();
         //Esto de aqui abajo usa el nombre y lo convierte en ID para cambiar la imagen, inteligente si me preguntas
         binding.dc1.setImageResource(getResources().getIdentifier(carta, "drawable", getPackageName()));
         binding.dc1.setVisibility(View.VISIBLE);
@@ -219,7 +224,9 @@ public class BlackJackActivity extends AppCompatActivity {
 
         switch (numero) {
             case 1:
-                puntos = 1;
+                puntos =11;
+                if(puntuacion+puntos > 21){
+                puntos = 1;}
                 break;
             case 11:
             case 12:
@@ -298,7 +305,7 @@ public class BlackJackActivity extends AppCompatActivity {
         }
 
         if (usadas.contains(palon + "_" + carta)) {
-            Toast.makeText(this, "Se ha eliminado" + palon + "_" + carta, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Se ha eliminado" + palon + "_" + carta, Toast.LENGTH_SHORT).show();
             return sacarCarta();
         }
         usadas.add(palon + "_" + carta);
@@ -309,7 +316,7 @@ public class BlackJackActivity extends AppCompatActivity {
         return palon + "_" + carta;
     }
 
-    private void pedir() {
+    private void pedir(boolean esDoble) {
         for (ImageView pc : pcs) {
             if (pc.getVisibility() != View.VISIBLE) {
                 String carta = sacarCarta();
@@ -317,12 +324,15 @@ public class BlackJackActivity extends AppCompatActivity {
                 pc.setVisibility(View.VISIBLE);
                 jugadorpunt = actualizarPuntuacion(numeroactual, jugadorpunt);
                 binding.playerScore.setText("Puntuación: " + String.valueOf(jugadorpunt));
+                if(esDoble){
+                    pc.setRotation(90);
+                }
                 break;
             }
         }
     }
 
-    private void plantarse() {
+    private void plantarse(boolean esDoble) {
         binding.pedirButton.setEnabled(false);
         binding.plantarseButton.setEnabled(false);
         binding.doblarButton.setEnabled(false);
@@ -353,6 +363,9 @@ public class BlackJackActivity extends AppCompatActivity {
                 } else if (dealerpunt > 21) {
                     Toast.makeText(binding.getRoot().getContext(), "El dealer se pasó, ¡ganas!", Toast.LENGTH_SHORT).show();
                     saldo = (float) (saldo + 2*apuesta);
+                    if(esDoble){
+                        saldo = (float) (saldo + 2*(apuesta+apuesta));
+                    }
                     BaseActivity.saldo = saldo;
                     binding.saldoText.setText(String.valueOf(saldo));
 
@@ -364,6 +377,9 @@ public class BlackJackActivity extends AppCompatActivity {
                     else if (dealerpunt < jugadorpunt) {
                         Toast.makeText(binding.getRoot().getContext(), "Has ganado, tu tienes más puntuación", Toast.LENGTH_SHORT).show();
                         saldo = (float) (saldo + 2*apuesta);
+                        if(esDoble){
+                            saldo = (float) (saldo + 2*(apuesta+apuesta));
+                        }
                         BaseActivity.saldo = saldo;
                         binding.saldoText.setText(String.valueOf(saldo));
 
@@ -371,6 +387,9 @@ public class BlackJackActivity extends AppCompatActivity {
                     else if(dealerpunt == jugadorpunt){
                         Toast.makeText(binding.getRoot().getContext(), "¿Empate? El casino ha devuelto su apuesta", Toast.LENGTH_SHORT).show();
                         saldo = (float) (saldo + apuesta);
+                        if(esDoble){
+                            saldo = (float) (saldo + (apuesta+apuesta));
+                        }
                         BaseActivity.saldo = saldo;
                         binding.saldoText.setText(String.valueOf(saldo));
 
@@ -380,6 +399,22 @@ public class BlackJackActivity extends AppCompatActivity {
                     }
             }
         }, 500); // 500 ms de retraso entre cada carta
+    }
+    private void doblar() {
+        if (apuesta <= saldo) {
+            saldo = (float) (saldo - apuesta);
+            BaseActivity.saldo = saldo;
+            binding.saldoText.setText(String.valueOf(saldo));
+            binding.apostado.setText("Apostado: " + 2*apuesta);
+            binding.apostado.setTextColor(Color.RED);
+            pedir(true);
+            if(jugadorpunt <= 21){
+            plantarse(true);}
+        } else {
+            Toast.makeText(this, "No tienes suficiente saldo para doblar la apuesta", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }
 
