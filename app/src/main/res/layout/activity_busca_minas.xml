@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/fondo_busca"
         android:columnCount="3"
-        android:padding="8dp"
+        android:padding="10dp"
         android:rowCount="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rightGridLayout"
@@ -34,14 +34,38 @@
 
         <!-- Cantidad de monedas -->
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+            android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:layout_row="0"
+            android:layout_column="2"
             app:cardCornerRadius="24dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#4CAF50">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="0dp"
+                    android:src="@drawable/coin" />
+
+                <TextView
+                    android:id="@+id/saldoText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
         </androidx.cardview.widget.CardView>
+
 
         <!-- Texto apuesta -->
         <TextView
@@ -51,10 +75,11 @@
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:layout_column="0"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="0dp"
             android:text="Apuesta"
-            android:textColor="#000"
-            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
         <!-- Campo de Entrada para la Apuesta -->
@@ -64,8 +89,10 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bet_background"
             android:inputType="number"
-            android:padding="8dp"
-            android:textSize="20sp"
+            android:layout_marginTop="50dp"
+            android:layout_marginStart="10dp"
+            android:padding="5dp"
+            android:textSize="18sp"
             android:textColor="#FFFFFF"
             android:maxLength="7"/>
 
@@ -78,8 +105,8 @@
             android:layout_column="0"
             android:layout_rowWeight="1"
             android:text="Dificultad"
-            android:textColor="#000"
-            android:textSize="20sp"
+            android:textColor="#FFF"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:gravity="bottom"/>
 
@@ -93,72 +120,48 @@
 
             <Button
                 android:id="@+id/botFacil"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
                 android:text="Fácil"
                 android:textColor="#FFF"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/radioMedia"
-                android:layout_width="wrap_content"
+                android:layout_width="85dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="2dp"
                 android:backgroundTint="#FFA500"
                 android:text="Media"
                 android:textColor="#FFF"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
 
             <Button
                 android:id="@+id/radioDificil"
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="2dp"
                 android:backgroundTint="#FF0000"
                 android:text="Difícil"
                 android:textColor="#FFF"
-                android:textSize="16sp" />
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- Boton Comenzar -->
-
         <Button
             android:id="@+id/botonComenzar"
-            android:layout_width="wrap_content"
+            android:layout_width="90dp"
             android:layout_height="0dp"
             android:layout_row="4"
             android:layout_rowWeight="1"
             android:layout_column="2"
             android:backgroundTint="#0000FF"
-            android:padding="10dp"
+            android:padding="0dp"
             android:text="Comenzar"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="0"
-            android:layout_column="2"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/coin" />
-
-            <TextView
-                android:id="@+id/saldoText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=":("
-                android:textColor="#FFFFFF"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-        </LinearLayout>
     </GridLayout>
 
     <!-- GridLayout de la derecha -->
@@ -186,7 +189,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -198,7 +201,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -210,7 +213,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -222,7 +225,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -234,7 +237,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <!-- Segunda fila -->
@@ -247,7 +250,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -259,7 +262,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -271,7 +274,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -283,7 +286,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -295,7 +298,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <!-- Tercera fila -->
@@ -308,7 +311,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -320,7 +323,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -332,7 +335,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -344,7 +347,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -356,7 +359,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <!-- Cuarta fila -->
@@ -369,7 +372,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -381,7 +384,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -393,7 +396,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -405,7 +408,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -417,7 +420,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <!-- Quinta fila -->
@@ -430,7 +433,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -442,7 +445,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -454,7 +457,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -466,7 +469,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/azulejo"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
 
         <ImageButton
@@ -478,10 +481,7 @@
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_margin="5dp"
-            app:srcCompat="@drawable/casilla_gris"
+            app:srcCompat="@drawable/azulejo2"
             tools:ignore="ContentDescription" />
-
     </GridLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-
