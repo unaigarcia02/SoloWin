@@ -9,6 +9,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.core.graphics.Insets;
@@ -17,13 +18,13 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MenuActivity extends BaseActivity  {
     private ImageView fondo1, fondo2;
-
+    private TextView msg;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_menu);
-
+        msg = findViewById(R.id.Saldo);
         fondo1 = findViewById(R.id.imageView);
         fondo2 = findViewById(R.id.imageView7);
 
@@ -84,10 +85,12 @@ public class MenuActivity extends BaseActivity  {
         animacion.setDuration(4000);     // Duración de la animación en milisegundos
         animacion.setRepeatCount(Animation.INFINITE);  // Repetir infinitamente
         animacion.setRepeatMode(Animation.RESTART);    // Reinicia la animación
-
         // Ejecuta la animación
         animacion.setInterpolator(new LinearInterpolator());
-
         fondo.startAnimation(animacion);
+    }
+    protected void onResume() {
+        super.onResume();
+        msg.setText(String.valueOf(BaseActivity.saldo));
     }
 }

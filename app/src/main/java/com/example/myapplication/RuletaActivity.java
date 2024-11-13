@@ -1121,6 +1121,7 @@ public class RuletaActivity extends BaseActivity {
 
         // Actualiza el saldo anterior para la próxima comprobación
         saldoAnterior = saldo;
+        BaseActivity.saldo=saldo;
     }
 
     private List<String> getButtonsTextsAtPosition(float x, float y, int fichaWidth, int fichaHeight) {

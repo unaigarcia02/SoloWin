@@ -2,8 +2,10 @@ package com.example.myapplication;
 
 import static java.lang.Thread.sleep;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.Message;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,10 +18,11 @@ public class SlotActivity extends BaseActivity {
     private ImageView img1, img2, img3;
     private Vueltas vuelta1, vuelta2, vuelta3;
     private boolean isStarted = false; // Controla si alguna vuelta está activa
-    private Button button1, button2, button3;
+    private Button button1, button2, button3, button4;
     private Map<Integer, String> MapaSym;
     private TextView msg;
     private float saldo = BaseActivity.saldo; // Ejemplo de saldo inicial
+    private MediaPlayer musica, musica2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,13 @@ public class SlotActivity extends BaseActivity {
         button1 = findViewById(R.id.button1);
         button2 = findViewById(R.id.button3);
         button3 = findViewById(R.id.button5);
+        button4 = findViewById(R.id.imageButton);
         msg.setText(String.valueOf(saldo));
-
+        musica = MediaPlayer.create(this, R.raw.luigislot);
+        musica2 = MediaPlayer.create(this, R.raw.vueltas);
+        musica.setLooping(true);
+        musica2.setLooping(true);
+        musica.start();
 
         // Inicializar MapaSym correctamente en onCreate
         MapaSym = new HashMap<>();
@@ -67,6 +75,9 @@ public class SlotActivity extends BaseActivity {
                 throw new RuntimeException(e);
             }
         });
+        button1.setOnClickListener(v -> {
+            mostrarInstrucciones();
+        });
     }
 
     private void handleButtonPress(Button button, int mult) throws InterruptedException {
@@ -74,6 +85,7 @@ public class SlotActivity extends BaseActivity {
             // Si las vueltas están activas, se detienen
             stopVueltas();
             sleep(500);
+            musica2.pause();
             // Obtener los símbolos resultantes
             int symbol1 = vuelta1.getCurrentImage();
             int symbol2 = vuelta2.getCurrentImage();
@@ -91,10 +103,11 @@ public class SlotActivity extends BaseActivity {
             disableOtherButtons(button);
             startVueltas();
             button.setText("Stop");
+            musica2.start();
             // Descontar el saldo según el botón pulsado
-            if (button==button1){saldo --;}
-            else if (button==button2) {saldo=saldo-3;}
-            else if (button==button3) {saldo=saldo-5;}
+            if (button==button1){saldo --;  BaseActivity.saldo=saldo;}
+            else if (button==button2) {saldo=saldo-3;   BaseActivity.saldo=saldo;}
+            else if (button==button3) {saldo=saldo-5;   BaseActivity.saldo=saldo;}
             msg.setText(String.valueOf(saldo));
             isStarted = true;}
             else{
@@ -112,21 +125,25 @@ public class SlotActivity extends BaseActivity {
             if (nombreSimbolo=="cereza"){
                 Toast.makeText(this, "Has ganado:" + mult*2 + "€", Toast.LENGTH_SHORT).show();
                 saldo=saldo+mult*2;
+                BaseActivity.saldo=saldo;
                 msg.setText(String.valueOf(saldo));
             }
             if (nombreSimbolo=="campana"){
                 Toast.makeText(this, "Has ganado:" + mult*4 + "€", Toast.LENGTH_SHORT).show();
                 saldo=saldo+mult*4;
+                BaseActivity.saldo=saldo;
                 msg.setText(String.valueOf(saldo));
             }
             if (nombreSimbolo=="bar"){
                 Toast.makeText(this, "Has ganado:" + mult*8 + "€", Toast.LENGTH_SHORT).show();
                 saldo=saldo+mult*8;
+                BaseActivity.saldo=saldo;
                 msg.setText(String.valueOf(saldo));
             }
             if (nombreSimbolo=="7") {
                 Toast.makeText(this, "Has ganado:" + mult*16 + "€", Toast.LENGTH_SHORT).show();
                 saldo = saldo+mult*16;
+                BaseActivity.saldo=saldo;
                 msg.setText(String.valueOf(saldo));
             }
         }
@@ -166,5 +183,29 @@ public class SlotActivity extends BaseActivity {
         button1.setEnabled(true);
         button2.setEnabled(true);
         button3.setEnabled(true);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        if (musica != null) {
+            musica.release(); // Libera el MediaPlayer cuando se destruye la Activity
+            musica = null;
+        }
+        if (musica2 != null) {
+            musica2.release(); // Libera el MediaPlayer cuando se destruye la Activity
+            musica2 = null;
+        }
+    }
+    private void mostrarInstrucciones() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Instrucciones de la Slot Machine");
+        builder.setMessage("El objetivo del Blackjack es acercarse lo más posible a 21 puntos sin pasarse. Cada carta tiene un valor numérico y puedes pedir más cartas o plantarte en cualquier momento. Ganas si tu puntuación es mayor que la del dealer sin pasarte de 21. Buena suerte :)");
+        builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }

@@ -31,6 +31,7 @@
         android:layout_height="49dp"
         android:layout_marginStart="266dp"
         android:layout_marginBottom="46dp"
+        android:backgroundTint="#4CAF50"
         android:text="1€"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -41,6 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="366dp"
         android:layout_marginBottom="46dp"
+        android:backgroundTint="#FFA500"
         android:text="3€"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -51,9 +53,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="466dp"
         android:layout_marginBottom="46dp"
+        android:backgroundTint="#FF0000"
         android:text="5€"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/info" />
 
     <ImageView
         android:id="@+id/img3"
@@ -85,21 +99,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/sym1" />
 
-    <TextView
-        android:id="@+id/Saldo"
-        android:layout_width="116dp"
-        android:layout_height="58dp"
-        android:background="#4CAF50"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="125"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
-
     <ImageView
         android:id="@+id/imageView14"
         android:layout_width="280dp"
@@ -109,5 +108,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/image" />
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        app:cardBackgroundColor="#4CAF50"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="4dp"
+        tools:ignore="MissingConstraints">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/coin" />
+
+            <TextView
+                android:id="@+id/Saldo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":("
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
