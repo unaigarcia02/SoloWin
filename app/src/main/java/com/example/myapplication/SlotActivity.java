@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +19,8 @@ public class SlotActivity extends BaseActivity {
     private ImageView img1, img2, img3;
     private Vueltas vuelta1, vuelta2, vuelta3;
     private boolean isStarted = false; // Controla si alguna vuelta está activa
-    private Button button1, button2, button3, button4;
+    private Button button1, button2, button3;
+    private ImageButton button4;
     private Map<Integer, String> MapaSym;
     private TextView msg;
     private float saldo = BaseActivity.saldo; // Ejemplo de saldo inicial
@@ -75,7 +77,7 @@ public class SlotActivity extends BaseActivity {
                 throw new RuntimeException(e);
             }
         });
-        button1.setOnClickListener(v -> {
+        button4.setOnClickListener(v -> {
             mostrarInstrucciones();
         });
     }
@@ -199,7 +201,7 @@ public class SlotActivity extends BaseActivity {
     private void mostrarInstrucciones() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Instrucciones de la Slot Machine");
-        builder.setMessage("El objetivo del Blackjack es acercarse lo más posible a 21 puntos sin pasarse. Cada carta tiene un valor numérico y puedes pedir más cartas o plantarte en cualquier momento. Ganas si tu puntuación es mayor que la del dealer sin pasarte de 21. Buena suerte :)");
+        builder.setMessage("Para jugar debes tener un saldo mayor del que quieres apostar. Para apostar haces click en cualquiera de los 3 botones. La slot comenzará a funcionar y habrá que darle de nuevo al botón de la apuesta para que pare de girar. Buena suerte :)");
         builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
