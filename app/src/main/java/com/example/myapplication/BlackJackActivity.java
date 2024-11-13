@@ -29,6 +29,8 @@ public class BlackJackActivity extends AppCompatActivity {
     private ImageView[] pcs;
     private ImageView[] dcs;
     private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer2;
+
 
     private List<String> usadas = new ArrayList<>();
 
@@ -110,6 +112,10 @@ public class BlackJackActivity extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+        if (mediaPlayer2 != null) {
+            mediaPlayer2.release();
+            mediaPlayer2 = null;
+        }
     }
 
     private void setupButtons() {
@@ -130,6 +136,7 @@ public class BlackJackActivity extends AppCompatActivity {
                 apuesta = Double.parseDouble(binding.betInput.getText().toString());
                 if (apuesta <= saldo) {
                     saldo = (float) (saldo - apuesta);
+                    BaseActivity.saldo = saldo;
                     binding.saldoText.setText(String.valueOf(saldo));
                     binding.apostado.setText("Apostado: " + apuesta);
                     repartir();
@@ -295,6 +302,10 @@ public class BlackJackActivity extends AppCompatActivity {
             return sacarCarta();
         }
         usadas.add(palon + "_" + carta);
+        mediaPlayer2 = MediaPlayer.create(this, R.raw.card);
+        int duracion = mediaPlayer2.getDuration();
+        Random random2 = new Random();
+        mediaPlayer2.start();
         return palon + "_" + carta;
     }
 
@@ -342,6 +353,7 @@ public class BlackJackActivity extends AppCompatActivity {
                 } else if (dealerpunt > 21) {
                     Toast.makeText(binding.getRoot().getContext(), "El dealer se pasó, ¡ganas!", Toast.LENGTH_SHORT).show();
                     saldo = (float) (saldo + 2*apuesta);
+                    BaseActivity.saldo = saldo;
                     binding.saldoText.setText(String.valueOf(saldo));
 
                 } else {
@@ -352,12 +364,14 @@ public class BlackJackActivity extends AppCompatActivity {
                     else if (dealerpunt < jugadorpunt) {
                         Toast.makeText(binding.getRoot().getContext(), "Has ganado, tu tienes más puntuación", Toast.LENGTH_SHORT).show();
                         saldo = (float) (saldo + 2*apuesta);
+                        BaseActivity.saldo = saldo;
                         binding.saldoText.setText(String.valueOf(saldo));
 
                     }
                     else if(dealerpunt == jugadorpunt){
                         Toast.makeText(binding.getRoot().getContext(), "¿Empate? El casino ha devuelto su apuesta", Toast.LENGTH_SHORT).show();
                         saldo = (float) (saldo + apuesta);
+                        BaseActivity.saldo = saldo;
                         binding.saldoText.setText(String.valueOf(saldo));
 
 
