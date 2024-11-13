@@ -75,6 +75,28 @@ public class BuscaMinasActivity extends BaseActivity {
         botFacil=findViewById(R.id.botFacil);
         botMedia=findViewById(R.id.botMedia);
         botDificil=findViewById(R.id.botDificil);
+        //configurar para solo seleccionar una
+        View.OnClickListener dificultadListener=v -> {
+            resetearDificultades();
+
+            if (v.getId()==R.id.botFacil) {
+                dificultadSelec = "Facil";
+                botFacil.setSelected(true);
+            }else if(v.getId()==R.id.botMedia){
+                dificultadSelec="Media";
+                botMedia.setSelected(true);
+            }else if(v.getId()==R.id.botDificil) {
+                dificultadSelec = "Dificil";
+                botDificil.setSelected(true);
+            }
+        };
+        botFacil.setOnClickListener(dificultadListener);
+        botMedia.setOnClickListener(dificultadListener);
+        botDificil.setOnClickListener(dificultadListener);
+
+        //boton comenzar
+        botonComenzar=findViewById(R.id.botonComenzar);
+        botonComenzar.setOnClickListener(v->iniciarJuego());
 
     }
 
@@ -92,6 +114,48 @@ public class BuscaMinasActivity extends BaseActivity {
         builder.show();
     }
 
+    private void resetearDificultades(){
+        botFacil.setSelected(false);
+        botMedia.setSelected(false);
+        botDificil.setSelected(false);
+    }
+
+    private void iniciarJuego(){
+        String apuestaStr=apuestaInput.getText().toString();
+
+        //no se introduce nada en el EditText
+        if (apuestaStr.isEmpty()){
+            mostrarAlerta("Error","Introduce una cantidad para apostar.");
+            return;
+        }
+
+        float apuesta=Float.parseFloat(apuestaStr);
+
+        //verificar que la apuesta no es mayor al saldo
+        if (apuesta>saldo){
+            mostrarAlerta("Saldo insuficiente","No tiene saldo suficiente para realizar esta apuesta");
+            return;
+        }
+
+        //verificar que se ha seleccionado una dificultad
+        if(dificultadSelec.isEmpty()){
+            mostrarAlerta("Error","Por favor, selecciona una dificultad");
+            return;
+        }
+
+        //iniciar el juego
+        //saldo=saldo-apuesta;
+        //sal.setText(String.valueOf(saldo));
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(titulo);
+        builder.setMessage(mensaje);
+        builder.setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -101,6 +165,4 @@ public class BuscaMinasActivity extends BaseActivity {
             mediaPlayer = null;
         }
     }
-
-
 }
