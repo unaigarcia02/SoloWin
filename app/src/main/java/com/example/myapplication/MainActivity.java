@@ -25,9 +25,13 @@ public class MainActivity extends BaseActivity {
         video = findViewById(R.id.videoView);
         String path = "android.resource://" + getPackageName() + "/" + R.raw.casin;
         video.setVideoURI(Uri.parse(path));
-        video.setOnCompletionListener(mediaPlayer -> video.start());
+        video.setOnPreparedListener(mediaPlayer -> {
+            mediaPlayer.setVolume(0f, 0f); // Silencia el audio
+            video.start(); // Comienza a reproducir el video
+        });
 
-        video.start();
+
+        video.setOnCompletionListener(mediaPlayer -> video.start()); // Loop del video
 
         Button buttonJugar = findViewById(R.id.buttonJgr);
         buttonJugar.setOnClickListener(v -> {
