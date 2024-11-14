@@ -53,10 +53,17 @@ public class BuscaMinasActivity extends BaseActivity {
             return insets;
         });
 
+        // Inicialización de casillas una vez en onCreate()
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                String buttonID = "casilla" + i + j;
+                int resID = getResources().getIdentifier(buttonID, "id", getPackageName());
+                casillas[i][j] = findViewById(resID);
+            }
+        }
+
         setupButtons();
         setupMediaPlayer();
-        //resetearTablero();
-
     }
 
     private void setupMediaPlayer() {
@@ -192,6 +199,14 @@ public class BuscaMinasActivity extends BaseActivity {
             } while (tieneBomba[fila][columna] || tieneDiamante[fila][columna]); // Evitar superposiciones
             tieneDiamante[fila][columna] = true;
         }
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                casillas[i][j].setEnabled(true);
+                casillas[i][j].setAlpha(1.0f); // Restablecer transparencia
+                casillas[i][j].setImageResource(R.drawable.azulejo2);
+            }
+        }
+
         // Asignar comportamiento a cada casilla
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -241,9 +256,9 @@ public class BuscaMinasActivity extends BaseActivity {
         // Restablecer el tablero y permitir nueva apuesta y selección de dificultad
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                //casillas[i][j].setImageResource(0); // Eliminar la imagen previa
+                casillas[i][j].setEnabled(false);
+                casillas[i][j].setAlpha(1.0f);
                 casillas[i][j].setImageResource(R.drawable.azulejo2); // Hacer la casilla visible de nuevo
-                //casillas[i][j].setEnabled(true); // Habilitar la casilla para el próximo juego
             }
         }
 
