@@ -10,7 +10,7 @@ import android.view.DisplayCutout;
 public class BaseActivity extends AppCompatActivity {
 
 
-    protected static float saldo = 125.50f;
+    protected static float saldo = 200f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
