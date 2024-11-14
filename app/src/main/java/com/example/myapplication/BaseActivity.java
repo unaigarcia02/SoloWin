@@ -1,10 +1,13 @@
 package com.example.myapplication;
 
+import android.os.Build;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+import android.graphics.Color;
+import android.view.Window;
 import android.os.Build;
 import android.view.WindowManager;
 import android.view.DisplayCutout;
