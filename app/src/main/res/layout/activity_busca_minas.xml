@@ -40,7 +40,7 @@
             android:layout_column="2"
             app:cardCornerRadius="24dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="#4CAF50">
+            app:cardBackgroundColor="#8E44AD">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -55,7 +55,7 @@
                     android:src="@drawable/coin" />
 
                 <TextView
-                    android:id="@+id/saldoText"
+                    android:id="@+id/saldo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1000"
@@ -108,7 +108,7 @@
             android:textColor="#FFF"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:gravity="bottom"/>
+            android:gravity="bottom|center"/>
 
         <!-- Botones de Dificultad -->
         <LinearLayout
@@ -116,7 +116,8 @@
             android:layout_height="wrap_content"
             android:layout_row="3"
             android:layout_column="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="top">
 
             <Button
                 android:id="@+id/botFacil"
@@ -128,7 +129,7 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/radioMedia"
+                android:id="@+id/botMedia"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -138,7 +139,7 @@
                 android:textSize="12sp" />
 
             <Button
-                android:id="@+id/radioDificil"
+                android:id="@+id/botDificil"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -146,6 +147,7 @@
                 android:text="Difícil"
                 android:textColor="#FFF"
                 android:textSize="12sp" />
+            
         </LinearLayout>
 
         <!-- Boton Comenzar -->
@@ -156,7 +158,7 @@
             android:layout_row="4"
             android:layout_rowWeight="1"
             android:layout_column="2"
-            android:backgroundTint="#0000FF"
+            android:backgroundTint="#8E44AD"
             android:padding="0dp"
             android:text="Comenzar"
             android:textColor="#FFFFFF"
@@ -181,7 +183,7 @@
         <!-- Casillas-->
         <!-- Primera fila-->
         <ImageButton
-            android:id="@+id/casilla11"
+            android:id="@+id/casilla00"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -193,7 +195,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla12"
+            android:id="@+id/casilla01"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -205,7 +207,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla13"
+            android:id="@+id/casilla02"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -217,7 +219,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla14"
+            android:id="@+id/casilla03"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -229,7 +231,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla15"
+            android:id="@+id/casilla04"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="0"
@@ -242,7 +244,7 @@
 
         <!-- Segunda fila -->
         <ImageButton
-            android:id="@+id/casilla21"
+            android:id="@+id/casilla10"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -254,7 +256,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla22"
+            android:id="@+id/casilla11"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -266,7 +268,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla23"
+            android:id="@+id/casilla12"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -278,7 +280,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla24"
+            android:id="@+id/casilla13"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -290,7 +292,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla25"
+            android:id="@+id/casilla14"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="1"
@@ -303,7 +305,7 @@
 
         <!-- Tercera fila -->
         <ImageButton
-            android:id="@+id/casilla31"
+            android:id="@+id/casilla20"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -315,7 +317,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla32"
+            android:id="@+id/casilla21"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -327,7 +329,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla33"
+            android:id="@+id/casilla22"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -339,7 +341,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla34"
+            android:id="@+id/casilla23"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -351,7 +353,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla35"
+            android:id="@+id/casilla24"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="2"
@@ -364,7 +366,7 @@
 
         <!-- Cuarta fila -->
         <ImageButton
-            android:id="@+id/casilla41"
+            android:id="@+id/casilla30"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -376,7 +378,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla42"
+            android:id="@+id/casilla31"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -388,7 +390,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla43"
+            android:id="@+id/casilla32"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -400,7 +402,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla44"
+            android:id="@+id/casilla33"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -412,7 +414,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla45"
+            android:id="@+id/casilla34"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="3"
@@ -425,7 +427,7 @@
 
         <!-- Quinta fila -->
         <ImageButton
-            android:id="@+id/casilla51"
+            android:id="@+id/casilla40"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="4"
@@ -437,7 +439,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla52"
+            android:id="@+id/casilla41"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="4"
@@ -449,7 +451,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla53"
+            android:id="@+id/casilla42"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="4"
@@ -461,7 +463,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla54"
+            android:id="@+id/casilla43"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="4"
@@ -473,7 +475,7 @@
             tools:ignore="ContentDescription" />
 
         <ImageButton
-            android:id="@+id/casilla55"
+            android:id="@+id/casilla44"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_row="4"
