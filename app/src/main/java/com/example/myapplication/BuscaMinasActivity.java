@@ -246,9 +246,23 @@ public class BuscaMinasActivity extends BaseActivity {
         }
         // Recompensar al jugador si gana
         if (victoria) {
-            saldo += apuesta * 2; // Duplicar la apuesta como recompensa
+            float multiplicador = 1.0f;
+            // Configurar multiplicador según la dificultad seleccionada
+            switch (dificultadSelec) {
+                case "Facil":
+                    multiplicador = 2.0f;
+                    break;
+                case "Media":
+                    multiplicador = 3.0f;
+                    break;
+                case "Dificil":
+                    multiplicador = 5.0f;
+                    break;
+            }
+            saldo += apuesta * multiplicador;
             sal.setText(String.valueOf(saldo));
         }
+
         new android.os.Handler().postDelayed(this::resetearTablero, 2000);
     }
 
@@ -261,7 +275,6 @@ public class BuscaMinasActivity extends BaseActivity {
                 casillas[i][j].setImageResource(R.drawable.azulejo2); // Hacer la casilla visible de nuevo
             }
         }
-
         // Restablecer valores del juego
         dificultadSelec = "";
         apuesta = 0;
