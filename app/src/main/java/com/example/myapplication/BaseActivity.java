@@ -14,6 +14,7 @@ import android.view.DisplayCutout;
 
 public class BaseActivity extends AppCompatActivity {
     protected static float saldo = 200f;
+    protected static MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
