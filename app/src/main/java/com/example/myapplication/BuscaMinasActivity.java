@@ -228,6 +228,7 @@ public class BuscaMinasActivity extends BaseActivity {
             casillas[fila][columna].setBackground(null);
             casillas[fila][columna].setImageResource(R.drawable.diamante); // Asignar imagen de diamante
             diamantesEncontrados++;
+
             if (diamantesEncontrados == totalDiamantes) {
                 mostrarAlerta("¡Felicidades!", "¡Has encontrado todos los diamantes y has ganado el juego!");
                 finalizarJuego(true);
@@ -280,6 +281,7 @@ public class BuscaMinasActivity extends BaseActivity {
         apuesta = 0;
         apuestaInput.setText(""); // Limpiar el campo de apuesta
         resetearDificultades(); // Quitar la selección de dificultad
+        diamantesEncontrados = 0;
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
