@@ -111,6 +111,9 @@ public class BlackJackActivity extends AppCompatActivity {
         int inicioAleatorio = random.nextInt(duracion);
         mediaPlayer.seekTo(inicioAleatorio);
         mediaPlayer.start();
+
+        BaseActivity.pararmusica();
+        //vaya codigo de espaguetti, esto es terrible
     }
     @Override
     protected void onDestroy() {
