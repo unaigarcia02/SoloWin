@@ -25,7 +25,7 @@ public class BaseActivity extends AppCompatActivity {
             window.getAttributes().layoutInDisplayCutoutMode =
                     WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         }
-
+        musica();
         hideSystemUI();
     }
 
@@ -53,5 +53,32 @@ public class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         hideSystemUI();
+    }
+
+    public void musica(){
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.musicaperrona);
+            mediaPlayer.setLooping(true);
+            mediaPlayer.start();
+        }
+    }
+
+    public static void ponermusica(Context context) {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(context, R.raw.musicaperrona);
+            mediaPlayer.setLooping(true);
+        }
+        if (!mediaPlayer.isPlaying()) {
+            mediaPlayer.start();
+        }
+    }
+
+
+    public static void pararmusica() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release(); // Libera recursos y pone a null
+            mediaPlayer = null; // Para poder crear uno nuevo al volver a llamar a ponermusica
+        }
     }
 }
