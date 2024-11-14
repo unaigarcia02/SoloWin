@@ -22,7 +22,8 @@
             android:screenOrientation="landscape" />
         <activity
             android:name=".BuscaMinasActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="landscape"/>
         <activity
             android:name=".RuletaActivity"
             android:exported="true"
