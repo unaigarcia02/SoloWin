@@ -5,16 +5,22 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.media.FaceDetector;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 
 import com.example.myapplication.databinding.ActivityBlackJackBinding;
+import com.example.myapplication.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,25 +61,26 @@ public class BlackJackActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityBlackJackBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         binding.saldoText.setText(String.valueOf(saldo));
         setupButtons();
-        getWindow().setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
-        );
-        View decorView = getWindow().getDecorView();
-        decorView.setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY |
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
-                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN |
-                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
-                        View.SYSTEM_UI_FLAG_FULLSCREEN
-        );
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            getWindow().getAttributes().layoutInDisplayCutoutMode =
+                    WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        }
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        WindowInsetsControllerCompat controller = new WindowInsetsControllerCompat(getWindow(), binding.getRoot());
+        controller.hide(WindowInsetsCompat.Type.systemBars());
+        controller.setSystemBarsBehavior(WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+
+        // Inicialización cartas
         pcs = new ImageView[]{
                 binding.pc1,
                 binding.pc2,
@@ -97,8 +104,7 @@ public class BlackJackActivity extends AppCompatActivity {
                 binding.dc9
         };
 
-
-        //Musica
+        // Musica
         mediaPlayer = MediaPlayer.create(this, R.raw.temones);
         int duracion = mediaPlayer.getDuration();
         Random random = new Random();
