@@ -64,6 +64,7 @@ public class BuscaMinasActivity extends BaseActivity {
 
         setupButtons();
         setupMediaPlayer();
+        BaseActivity.pararmusica();//deja esto aqui, es para que se pare la musica del menu al entrar aqui
     }
 
     private void setupMediaPlayer() {
