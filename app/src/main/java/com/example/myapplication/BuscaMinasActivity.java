@@ -23,6 +23,7 @@ import java.util.Random;
 public class BuscaMinasActivity extends BaseActivity {
 
     private float saldo = BaseActivity.saldo; //utiliza esta variable como saldo, porque se actualiza para todos los juegos
+    private float apuesta;
     private MediaPlayer mediaPlayer;
     ImageButton[][] casillas = new ImageButton[5][5];
     private TextView sal;
@@ -31,6 +32,10 @@ public class BuscaMinasActivity extends BaseActivity {
     private EditText apuestaInput;
     private Button botFacil,botMedia,botDificil;
     private String dificultadSelec="";
+    private int totalDiamantes;
+    private int diamantesEncontrados;
+    private boolean[][] tieneBomba;
+    private boolean[][] tieneDiamante;
 
 
     @Override
@@ -50,7 +55,7 @@ public class BuscaMinasActivity extends BaseActivity {
 
         setupButtons();
         setupMediaPlayer();
-
+        //resetearTablero();
 
     }
 
@@ -97,7 +102,6 @@ public class BuscaMinasActivity extends BaseActivity {
         //boton comenzar
         botonComenzar=findViewById(R.id.botonComenzar);
         botonComenzar.setOnClickListener(v->iniciarJuego());
-
     }
 
     //informacion boton informacion
@@ -122,6 +126,7 @@ public class BuscaMinasActivity extends BaseActivity {
 
     private void iniciarJuego(){
         String apuestaStr=apuestaInput.getText().toString();
+        apuesta=Float.parseFloat(apuestaStr);
 
         //no se introduce nada en el EditText
         if (apuestaStr.isEmpty()){
@@ -129,23 +134,124 @@ public class BuscaMinasActivity extends BaseActivity {
             return;
         }
 
-        float apuesta=Float.parseFloat(apuestaStr);
-
         //verificar que la apuesta no es mayor al saldo
-        if (apuesta>saldo){
+        else if (apuesta>saldo){
             mostrarAlerta("Saldo insuficiente","No tiene saldo suficiente para realizar esta apuesta");
             return;
         }
 
         //verificar que se ha seleccionado una dificultad
-        if(dificultadSelec.isEmpty()){
+        else if(dificultadSelec.isEmpty()){
             mostrarAlerta("Error","Por favor, selecciona una dificultad");
             return;
         }
 
         //iniciar el juego
-        //saldo=saldo-apuesta;
-        //sal.setText(String.valueOf(saldo));
+        else{
+            saldo=saldo-apuesta;
+            sal.setText(String.valueOf(saldo));
+            jugar();
+        }
+    }
+
+    private void jugar() {
+        // Inicializar variables
+        diamantesEncontrados = 0;
+        tieneBomba = new boolean[5][5];
+        tieneDiamante = new boolean[5][5];
+
+        // Configurar la cantidad de bombas y diamantes según la dificultad
+        int numBombas = 0;
+        if (dificultadSelec.equals("Facil")) {
+            numBombas = 2;
+            totalDiamantes = 5;
+        } else if (dificultadSelec.equals("Media")) {
+            numBombas = 4;
+            totalDiamantes = 10;
+        } else if (dificultadSelec.equals("Dificil")) {
+            numBombas = 8;
+            totalDiamantes = 15;
+        }
+
+        // Colocar bombas aleatoriamente
+        Random random = new Random();
+        for (int i = 0; i < numBombas; i++) {
+            int fila, columna;
+            do {
+                fila = random.nextInt(5);
+                columna = random.nextInt(5);
+            } while (tieneBomba[fila][columna]); // Evitar colocar dos bombas en la misma celda
+            tieneBomba[fila][columna] = true;
+        }
+        // Colocar diamantes aleatoriamente
+        for (int i = 0; i < totalDiamantes; i++) {
+            int fila, columna;
+            do {
+                fila = random.nextInt(5);
+                columna = random.nextInt(5);
+            } while (tieneBomba[fila][columna] || tieneDiamante[fila][columna]); // Evitar superposiciones
+            tieneDiamante[fila][columna] = true;
+        }
+        // Asignar comportamiento a cada casilla
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                int finalI = i;
+                int finalJ = j;
+                casillas[i][j] = findViewById(getResources().getIdentifier("casilla" + i + j, "id", getPackageName()));
+                casillas[i][j].setOnClickListener(v -> revelarCasilla(finalI, finalJ));
+            }
+        }
+    }
+
+    private void revelarCasilla(int fila, int columna) {
+        if (tieneBomba[fila][columna]) {
+            casillas[fila][columna].setBackground(null);
+            casillas[fila][columna].setImageResource(R.drawable.bomba); // Asignar imagen de bomba
+            mostrarAlerta("Has perdido", "Has encontrado una bomba. Mejor suerte la próxima vez.");
+            finalizarJuego(false);
+        } else if (tieneDiamante[fila][columna]) {
+            casillas[fila][columna].setBackground(null);
+            casillas[fila][columna].setImageResource(R.drawable.diamante); // Asignar imagen de diamante
+            diamantesEncontrados++;
+            if (diamantesEncontrados == totalDiamantes) {
+                mostrarAlerta("¡Felicidades!", "¡Has encontrado todos los diamantes y has ganado el juego!");
+                finalizarJuego(true);
+            }
+        } else {
+            casillas[fila][columna].setAlpha(0f);//hacer la casilla transparente
+        }
+    }
+
+    private void finalizarJuego(boolean victoria) {
+        // Deshabilitar todas las casillas después de ganar o perder
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                casillas[i][j].setEnabled(false);
+            }
+        }
+        // Recompensar al jugador si gana
+        if (victoria) {
+            saldo += apuesta * 2; // Duplicar la apuesta como recompensa
+            sal.setText(String.valueOf(saldo));
+        }
+        new android.os.Handler().postDelayed(this::resetearTablero, 2000);
+    }
+
+    private void resetearTablero(){
+        // Restablecer el tablero y permitir nueva apuesta y selección de dificultad
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                //casillas[i][j].setImageResource(0); // Eliminar la imagen previa
+                casillas[i][j].setImageResource(R.drawable.azulejo2); // Hacer la casilla visible de nuevo
+                //casillas[i][j].setEnabled(true); // Habilitar la casilla para el próximo juego
+            }
+        }
+
+        // Restablecer valores del juego
+        dificultadSelec = "";
+        apuesta = 0;
+        apuestaInput.setText(""); // Limpiar el campo de apuesta
+        resetearDificultades(); // Quitar la selección de dificultad
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
