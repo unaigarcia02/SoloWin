@@ -55,7 +55,6 @@ public class SlotActivity extends BaseActivity {
         setupButtons();
 
         BaseActivity.pararmusica();//deja esto, es para que se pare la musica del menu cuando se entra aqui
-        //por cierto, presentame a ane :(
     }
 
     private void setupButtons() {
