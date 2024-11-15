@@ -63,7 +63,6 @@
                     android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
-
         </androidx.cardview.widget.CardView>
 
 
@@ -111,7 +110,8 @@
             android:gravity="bottom|center"/>
 
         <!-- Botones de Dificultad -->
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/grupodificultad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_row="3"
@@ -119,16 +119,16 @@
             android:orientation="horizontal"
             android:gravity="top">
 
-            <Button
+            <RadioButton
                 android:id="@+id/botFacil"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#4CAF50"
                 android:text="Fácil"
                 android:textColor="#FFF"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
-            <Button
+            <RadioButton
                 android:id="@+id/botMedia"
                 android:layout_width="85dp"
                 android:layout_height="wrap_content"
@@ -136,9 +136,9 @@
                 android:backgroundTint="#FFA500"
                 android:text="Media"
                 android:textColor="#FFF"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
 
-            <Button
+            <RadioButton
                 android:id="@+id/botDificil"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -146,9 +146,9 @@
                 android:backgroundTint="#FF0000"
                 android:text="Difícil"
                 android:textColor="#FFF"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
             
-        </LinearLayout>
+        </RadioGroup>
 
         <!-- Boton Comenzar -->
         <Button
@@ -162,7 +162,7 @@
             android:padding="0dp"
             android:text="Comenzar"
             android:textColor="#FFFFFF"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
     </GridLayout>
 

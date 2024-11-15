@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.view.View;
 
@@ -26,11 +28,13 @@ public class BuscaMinasActivity extends BaseActivity {
     private float apuesta;
     private MediaPlayer mediaPlayer;
     ImageButton[][] casillas = new ImageButton[5][5];
+
     private TextView sal;
     private ImageButton infobtn;
     private Button botonComenzar;
     private EditText apuestaInput;
-    private Button botFacil,botMedia,botDificil;
+    private RadioGroup dificultades;
+    private RadioButton botFacil,botMedia,botDificil;
     private String dificultadSelec="";
     private int totalDiamantes;
     private int diamantesEncontrados;
@@ -64,7 +68,7 @@ public class BuscaMinasActivity extends BaseActivity {
 
         setupButtons();
         setupMediaPlayer();
-        BaseActivity.pararmusica();//deja esto aqui, es para que se pare la musica del menu al entrar aqui
+        BaseActivity.pararmusica(); //detener musica del menu
     }
 
     private void setupMediaPlayer() {
@@ -85,27 +89,21 @@ public class BuscaMinasActivity extends BaseActivity {
         apuestaInput=findViewById(R.id.betInput);
 
         //botones de dificultad
+        dificultades=findViewById(R.id.grupodificultad);
         botFacil=findViewById(R.id.botFacil);
         botMedia=findViewById(R.id.botMedia);
         botDificil=findViewById(R.id.botDificil);
-        //configurar para solo seleccionar una
-        View.OnClickListener dificultadListener=v -> {
-            resetearDificultades();
 
-            if (v.getId()==R.id.botFacil) {
+        //Detectar cambios en el RadioGroup
+        dificultades.setOnCheckedChangeListener((group,checkedId)->{
+            if (checkedId==R.id.botFacil) {
                 dificultadSelec = "Facil";
-                botFacil.setSelected(true);
-            }else if(v.getId()==R.id.botMedia){
-                dificultadSelec="Media";
-                botMedia.setSelected(true);
-            }else if(v.getId()==R.id.botDificil) {
-                dificultadSelec = "Dificil";
-                botDificil.setSelected(true);
+            } else if(checkedId==R.id.botMedia) {
+                dificultadSelec = "Media";
+            }else if (checkedId==R.id.botDificil){
+                    dificultadSelec="Dificil";
             }
-        };
-        botFacil.setOnClickListener(dificultadListener);
-        botMedia.setOnClickListener(dificultadListener);
-        botDificil.setOnClickListener(dificultadListener);
+        });
 
         //boton comenzar
         botonComenzar=findViewById(R.id.botonComenzar);
@@ -183,27 +181,28 @@ public class BuscaMinasActivity extends BaseActivity {
 
         // Colocar bombas aleatoriamente
         Random random = new Random();
-        for (int i = 0; i < numBombas; i++) {
-            int fila, columna;
-            do {
-                fila = random.nextInt(5);
-                columna = random.nextInt(5);
-            } while (tieneBomba[fila][columna]); // Evitar colocar dos bombas en la misma celda
-            tieneBomba[fila][columna] = true;
+        int bombasColocadas=0;
+        while(bombasColocadas<numBombas){
+            int fila=random.nextInt(5);
+            int columna= random.nextInt(5);
+            if(!tieneBomba[fila][columna]){
+                tieneBomba[fila][columna]=true;
+                bombasColocadas++;
+            }
         }
+
         // Colocar diamantes aleatoriamente
-        for (int i = 0; i < totalDiamantes; i++) {
-            int fila, columna;
-            do {
-                fila = random.nextInt(5);
-                columna = random.nextInt(5);
-            } while (tieneBomba[fila][columna] || tieneDiamante[fila][columna]); // Evitar superposiciones
-            tieneDiamante[fila][columna] = true;
+        for (int i = 0; i < 5; i++) {
+            for(int j=0;j<5;j++){
+                if (!tieneBomba[i][j]) {
+                    tieneDiamante[i][j] = true;
+                }
+            }
         }
+
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 casillas[i][j].setEnabled(true);
-                casillas[i][j].setAlpha(1.0f); // Restablecer transparencia
                 casillas[i][j].setImageResource(R.drawable.azulejo2);
             }
         }
@@ -234,8 +233,6 @@ public class BuscaMinasActivity extends BaseActivity {
                 mostrarAlerta("¡Felicidades!", "¡Has encontrado todos los diamantes y has ganado el juego!");
                 finalizarJuego(true);
             }
-        } else {
-            casillas[fila][columna].setAlpha(0f);//hacer la casilla transparente
         }
     }
 
@@ -265,7 +262,6 @@ public class BuscaMinasActivity extends BaseActivity {
             sal.setText(String.valueOf(saldo));
         }
         BaseActivity.saldo=saldo;
-
         new android.os.Handler().postDelayed(this::resetearTablero, 2000);
     }
 
@@ -274,10 +270,10 @@ public class BuscaMinasActivity extends BaseActivity {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 casillas[i][j].setEnabled(false);
-                casillas[i][j].setAlpha(1.0f);
                 casillas[i][j].setImageResource(R.drawable.azulejo2); // Hacer la casilla visible de nuevo
             }
         }
+
         // Restablecer valores del juego
         dificultadSelec = "";
         apuesta = 0;
