@@ -107,6 +107,8 @@ public class BuscaMinasActivity extends BaseActivity {
                 dificultadSelec = "Media";
             }else if (checkedId==R.id.botDificil){
                     dificultadSelec="Dificil";
+            }else{
+                dificultadSelec="";
             }
         });
 
@@ -130,21 +132,18 @@ public class BuscaMinasActivity extends BaseActivity {
     }
 
     private void resetearDificultades(){
-        botFacil.setSelected(false);
-        botMedia.setSelected(false);
-        botDificil.setSelected(false);
+        dificultades.clearCheck();
     }
 
     private void iniciarJuego(){
         String apuestaStr=apuestaInput.getText().toString();
-        apuesta=Float.parseFloat(apuestaStr);
-
         //no se introduce nada en el EditText
         if (apuestaStr.isEmpty()){
             mostrarAlerta("Error","Introduce una cantidad para apostar.");
             return;
         }
 
+        apuesta=Float.parseFloat(apuestaStr);
         //verificar que la apuesta no es mayor al saldo
         if (apuesta>saldo){
             mostrarAlerta("Saldo insuficiente","No tiene saldo suficiente para realizar esta apuesta");
@@ -158,13 +157,12 @@ public class BuscaMinasActivity extends BaseActivity {
         }
 
         //iniciar el juego
-        else{
-            saldo=saldo-apuesta;
-            sal.setText(String.valueOf(saldo));
-            botonComenzar.setVisibility(View.GONE);
-            botonStop.setVisibility(View.VISIBLE);
-            jugar();
-        }
+        saldo=saldo-apuesta;
+        sal.setText(String.valueOf(saldo));
+        botonComenzar.setVisibility(View.GONE);
+        botonStop.setVisibility(View.VISIBLE);
+        jugar();
+
     }
 
     private void jugar() {
@@ -284,7 +282,7 @@ public class BuscaMinasActivity extends BaseActivity {
         botonComenzar.setVisibility(View.VISIBLE);
         botonStop.setVisibility(View.GONE);
         BaseActivity.saldo=saldo;
-        new android.os.Handler().postDelayed(this::resetearTablero, 2000);
+        new android.os.Handler().postDelayed(this::resetearTablero, 1000);
     }
 
     private void resetearTablero(){
