@@ -242,7 +242,16 @@ public class BuscaMinasActivity extends BaseActivity {
     }
 
     private void plantarse(){
-        int recompensa = (int)((apuesta / totalDiamantes) * diamantesEncontrados);
+        int multiplicador = 1; // Valor por defecto
+        switch (dificultadSelec) {
+            case "Media":
+                multiplicador = 2; // Más riesgo, más recompensa
+                break;
+            case "Dificil":
+                multiplicador = 3; // Máximo riesgo, máxima recompensa
+                break;
+        }
+        int recompensa = (int)((apuesta / totalDiamantes) * diamantesEncontrados*multiplicador);
         saldo += recompensa;
 
         mostrarAlerta("Te has plantado", "Has encontrado " + diamantesEncontrados +
