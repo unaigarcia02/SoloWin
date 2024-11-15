@@ -38,8 +38,7 @@ public class Vueltas extends Thread {
         while (isStarted) {
             try {
                 // Añadimos aleatoriedad al frameDuration
-                long randomFrameDuration = frameDuration + RANDOM.nextInt(100) - 50; // valor entre frameDuration - 50 y frameDuration + 50
-                Thread.sleep(500);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
