@@ -53,6 +53,9 @@ public class SlotActivity extends BaseActivity {
         MapaSym.put(R.drawable.sym4, "campana");
 
         setupButtons();
+
+        BaseActivity.pararmusica();//deja esto, es para que se pare la musica del menu cuando se entra aqui
+        //por cierto, presentame a ane :(
     }
 
     private void setupButtons() {

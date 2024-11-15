@@ -116,6 +116,8 @@ public class RuletaActivity extends BaseActivity {
         inicializarreloj();
         startCountdown();
 
+        BaseActivity.pararmusica();
+
     }
 
     private void inicializarreloj() {

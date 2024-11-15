@@ -92,5 +92,6 @@ public class MenuActivity extends BaseActivity  {
     protected void onResume() {
         super.onResume();
         msg.setText(String.valueOf(BaseActivity.saldo));
+        BaseActivity.ponermusica(this);
     }
 }
