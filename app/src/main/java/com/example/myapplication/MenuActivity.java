@@ -7,6 +7,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class MenuActivity extends BaseActivity  {
     private ImageView fondo1, fondo2;
     private TextView msg;
+    private Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class MenuActivity extends BaseActivity  {
         msg = findViewById(R.id.Saldo);
         fondo1 = findViewById(R.id.imageView);
         fondo2 = findViewById(R.id.imageView7);
-
+        button = findViewById(R.id.buttonsum);
         ImageButton ruletaBtn = findViewById(R.id.RuletaBTN);
         ImageButton buscaminasBtn = findViewById(R.id.BuscaminasBTN);
         ImageButton slotBtn = findViewById(R.id.SlotBTN);
@@ -52,7 +54,10 @@ public class MenuActivity extends BaseActivity  {
             Intent hallo = new Intent(MenuActivity.this, BlackJackActivity.class);
             startActivity(hallo);
         });
-
+        button.setOnClickListener(view -> {
+            BaseActivity.saldo=BaseActivity.saldo+10;
+            msg.setText(String.valueOf(BaseActivity.saldo));
+        });
 
 
         // Usar ViewTreeObserver para asegurarse de que las vistas estén listas
