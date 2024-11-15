@@ -32,6 +32,7 @@ public class BuscaMinasActivity extends BaseActivity {
     private TextView sal;
     private ImageButton infobtn;
     private Button botonComenzar;
+    private Button botonStop;
     private EditText apuestaInput;
     private RadioGroup dificultades;
     private RadioButton botFacil,botMedia,botDificil;
@@ -69,6 +70,10 @@ public class BuscaMinasActivity extends BaseActivity {
         setupButtons();
         setupMediaPlayer();
         BaseActivity.pararmusica(); //detener musica del menu
+
+        botonStop = findViewById(R.id.botonPlantarse);
+        botonStop.setVisibility(View.GONE); // Ocultar inicialmente
+        botonStop.setOnClickListener(v -> plantarse());
     }
 
     private void setupMediaPlayer() {
@@ -156,6 +161,8 @@ public class BuscaMinasActivity extends BaseActivity {
         else{
             saldo=saldo-apuesta;
             sal.setText(String.valueOf(saldo));
+            botonComenzar.setVisibility(View.GONE);
+            botonStop.setVisibility(View.VISIBLE);
             jugar();
         }
     }
@@ -236,6 +243,19 @@ public class BuscaMinasActivity extends BaseActivity {
         }
     }
 
+    private void plantarse(){
+        int recompensa = (int)((apuesta / totalDiamantes) * diamantesEncontrados);
+        saldo += recompensa;
+
+        mostrarAlerta("Te has plantado", "Has encontrado " + diamantesEncontrados +
+                " diamantes y te llevas una recompensa de " + recompensa + " monedas.");
+
+        sal.setText(String.valueOf(saldo));
+
+        // Terminar el juego y reiniciar
+        finalizarJuego(false);
+    }
+
     private void finalizarJuego(boolean victoria) {
         // Deshabilitar todas las casillas después de ganar o perder
         for (int i = 0; i < 5; i++) {
@@ -261,6 +281,8 @@ public class BuscaMinasActivity extends BaseActivity {
             saldo += apuesta * multiplicador;
             sal.setText(String.valueOf(saldo));
         }
+        botonComenzar.setVisibility(View.VISIBLE);
+        botonStop.setVisibility(View.GONE);
         BaseActivity.saldo=saldo;
         new android.os.Handler().postDelayed(this::resetearTablero, 2000);
     }

@@ -161,9 +161,24 @@
             android:backgroundTint="#8E44AD"
             android:padding="0dp"
             android:text="Comenzar"
+
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
+        <!-- Boton Plantarse -->
+        <Button
+            android:id="@+id/botonPlantarse"
+            android:layout_width="90dp"
+            android:layout_height="0dp"
+            android:layout_row="4"
+            android:layout_rowWeight="1"
+            android:layout_column="2"
+            android:backgroundTint="#4A235A"
+            android:padding="0dp"
+            android:text="Stop"
+            android:visibility="gone"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
     </GridLayout>
 
     <!-- GridLayout de la derecha -->
