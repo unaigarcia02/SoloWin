@@ -143,13 +143,13 @@ public class BuscaMinasActivity extends BaseActivity {
         }
 
         //verificar que la apuesta no es mayor al saldo
-        else if (apuesta>saldo){
+        if (apuesta>saldo){
             mostrarAlerta("Saldo insuficiente","No tiene saldo suficiente para realizar esta apuesta");
             return;
         }
 
         //verificar que se ha seleccionado una dificultad
-        else if(dificultadSelec.isEmpty()){
+        if(dificultadSelec.isEmpty()){
             mostrarAlerta("Error","Por favor, selecciona una dificultad");
             return;
         }
@@ -171,14 +171,14 @@ public class BuscaMinasActivity extends BaseActivity {
         // Configurar la cantidad de bombas y diamantes según la dificultad
         int numBombas = 0;
         if (dificultadSelec.equals("Facil")) {
-            numBombas = 2;
-            totalDiamantes = 5;
+            numBombas = 1;
+            totalDiamantes = 24;
         } else if (dificultadSelec.equals("Media")) {
-            numBombas = 4;
-            totalDiamantes = 10;
+            numBombas = 3;
+            totalDiamantes = 22;
         } else if (dificultadSelec.equals("Dificil")) {
-            numBombas = 8;
-            totalDiamantes = 15;
+            numBombas = 6;
+            totalDiamantes = 19;
         }
 
         // Colocar bombas aleatoriamente
@@ -264,6 +264,7 @@ public class BuscaMinasActivity extends BaseActivity {
             saldo += apuesta * multiplicador;
             sal.setText(String.valueOf(saldo));
         }
+        BaseActivity.saldo=saldo;
 
         new android.os.Handler().postDelayed(this::resetearTablero, 2000);
     }
