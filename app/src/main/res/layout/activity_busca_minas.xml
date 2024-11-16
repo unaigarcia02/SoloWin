@@ -161,7 +161,6 @@
             android:backgroundTint="#8E44AD"
             android:padding="0dp"
             android:text="Comenzar"
-
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
 
