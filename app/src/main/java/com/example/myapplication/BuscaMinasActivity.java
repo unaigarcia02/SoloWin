@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -37,6 +38,9 @@ public class BuscaMinasActivity extends BaseActivity {
     private RadioGroup dificultades;
     private RadioButton botFacil,botMedia,botDificil;
     private String dificultadSelec="";
+    private LinearLayout gananciasLayout;
+    private TextView ganancias;
+    private int recompensaParcial = 0;
     private int totalDiamantes;
     private int diamantesEncontrados;
     private boolean[][] tieneBomba;
@@ -51,6 +55,12 @@ public class BuscaMinasActivity extends BaseActivity {
 
         sal=findViewById(R.id.saldo);
         sal.setText(String.valueOf(saldo));
+
+        gananciasLayout = findViewById(R.id.gananciasLayout); // Inicializar el layout
+        gananciasLayout.setVisibility(View.GONE); // Ocultar inicialmente
+        ganancias = findViewById(R.id.ganancias); // Inicializar el TextView de ganancias acumuladas
+        ganancias.setText(": 0");
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -161,6 +171,7 @@ public class BuscaMinasActivity extends BaseActivity {
         sal.setText(String.valueOf(saldo));
         botonComenzar.setVisibility(View.GONE);
         botonStop.setVisibility(View.VISIBLE);
+        gananciasLayout.setVisibility(View.VISIBLE);
         jugar();
 
     }
@@ -234,6 +245,17 @@ public class BuscaMinasActivity extends BaseActivity {
             casillas[fila][columna].setImageResource(R.drawable.diamante); // Asignar imagen de diamante
             diamantesEncontrados++;
 
+            // Calcular la recompensa parcial
+            int multiplicador = 1;
+            if ("Media".equals(dificultadSelec)) {
+                multiplicador = 2;
+            } else if ("Dificil".equals(dificultadSelec)) {
+                multiplicador = 3;
+            }
+            recompensaParcial = (int)((apuesta / totalDiamantes)*diamantesEncontrados* multiplicador);
+            // Actualizar el TextView de ganancias acumuladas
+            ganancias.setText(": " + recompensaParcial);
+
             if (diamantesEncontrados == totalDiamantes) {
                 mostrarAlerta("¡Felicidades!", "¡Has encontrado todos los diamantes y has ganado el juego!");
                 finalizarJuego(true);
@@ -288,6 +310,8 @@ public class BuscaMinasActivity extends BaseActivity {
             saldo += apuesta * multiplicador;
             sal.setText(String.valueOf(saldo));
         }
+
+        gananciasLayout.setVisibility(View.GONE);
         botonComenzar.setVisibility(View.VISIBLE);
         botonStop.setVisibility(View.GONE);
         BaseActivity.saldo=saldo;
@@ -334,7 +358,6 @@ public class BuscaMinasActivity extends BaseActivity {
             mediaPlayer.start();
         }
     }
-
 
     @Override
     protected void onDestroy() {
