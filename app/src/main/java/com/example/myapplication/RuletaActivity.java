@@ -911,7 +911,8 @@ public class RuletaActivity extends BaseActivity {
                 // Crear el AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(RuletaActivity.this);
                 builder.setTitle("Como se juega"); // Opcional
-                String mensaje = "Arrastra la ficha con la cantidad que quieras apostar en el tablero. " +
+                String mensaje = "Arrastra la ficha con la cantidad que quieras apostar en el tablero." +
+                        " La ficha puede estar a la vez sobre 1. 2 o 4 casillas, pero la recompensa se dividide dependiendo de la cantidad. " +
                         "Se pueden apostar varias fichas de uno en uno, si quieres cambiar una ficha de posición " +
                         "simplemente arrástrala. Una vez que la ficha está en el tablero, " +
                         "arrastrarla fuera solo hará que pierdas dinero.\n\nSuerte";
