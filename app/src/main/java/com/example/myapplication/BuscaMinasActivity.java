@@ -131,7 +131,7 @@ public class BuscaMinasActivity extends BaseActivity {
     private void mostrarInstrucciones() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Instrucciones del Buscaminas");
-        builder.setMessage("El objetivo del juego es encontrar todos los diamantes evitando destapar cualquier bomba. Para comenzar, introduce la cantidad que deseas apostar, elige el nivel de dificultad y presiona Comenzar. Buena suerte :)");
+        builder.setMessage("El objetivo del juego es encontrar los diamantes evitando las bombas. Para comenzar, introduce la cantidad que deseas apostar, elige el nivel de dificultad y presiona 'Comenzar'. Recuerda que puedes plantarte en cualquier momento. Buena suerte :)");
         builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -171,6 +171,7 @@ public class BuscaMinasActivity extends BaseActivity {
         sal.setText(String.valueOf(saldo));
         botonComenzar.setVisibility(View.GONE);
         botonStop.setVisibility(View.VISIBLE);
+        ganancias.setText(": 0");
         gananciasLayout.setVisibility(View.VISIBLE);
         jugar();
 
@@ -315,6 +316,7 @@ public class BuscaMinasActivity extends BaseActivity {
         botonComenzar.setVisibility(View.VISIBLE);
         botonStop.setVisibility(View.GONE);
         BaseActivity.saldo=saldo;
+        recompensaParcial = 0;
         new android.os.Handler().postDelayed(this::resetearTablero, 1000);
     }
 
