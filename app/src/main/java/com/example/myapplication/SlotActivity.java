@@ -39,7 +39,7 @@ public class SlotActivity extends BaseActivity {
         button3 = findViewById(R.id.button5);
         button4 = findViewById(R.id.imageButton);
         msg.setText(String.valueOf(saldo));
-        musica = MediaPlayer.create(this, R.raw.luigislot);
+        musica = MediaPlayer.create(this, R.raw.temones);
         musica2 = MediaPlayer.create(this, R.raw.vueltas);
         musica.setLooping(true);
         musica2.setLooping(true);
