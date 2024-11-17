@@ -63,7 +63,7 @@
             android:id="@+id/Version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ver 0.2.2.5 Pre-Alpha"
+            android:text="Ver 1.0"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
