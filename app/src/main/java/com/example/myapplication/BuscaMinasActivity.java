@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.view.View;
 
@@ -26,12 +29,18 @@ public class BuscaMinasActivity extends BaseActivity {
     private float apuesta;
     private MediaPlayer mediaPlayer;
     ImageButton[][] casillas = new ImageButton[5][5];
+
     private TextView sal;
     private ImageButton infobtn;
     private Button botonComenzar;
+    private Button botonStop;
     private EditText apuestaInput;
-    private Button botFacil,botMedia,botDificil;
+    private RadioGroup dificultades;
+    private RadioButton botFacil,botMedia,botDificil;
     private String dificultadSelec="";
+    private LinearLayout gananciasLayout;
+    private TextView ganancias;
+    private int recompensaParcial = 0;
     private int totalDiamantes;
     private int diamantesEncontrados;
     private boolean[][] tieneBomba;
@@ -46,6 +55,12 @@ public class BuscaMinasActivity extends BaseActivity {
 
         sal=findViewById(R.id.saldo);
         sal.setText(String.valueOf(saldo));
+
+        gananciasLayout = findViewById(R.id.gananciasLayout); // Inicializar el layout
+        gananciasLayout.setVisibility(View.GONE); // Ocultar inicialmente
+        ganancias = findViewById(R.id.ganancias); // Inicializar el TextView de ganancias acumuladas
+        ganancias.setText(": 0");
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -64,7 +79,11 @@ public class BuscaMinasActivity extends BaseActivity {
 
         setupButtons();
         setupMediaPlayer();
-        BaseActivity.pararmusica();//deja esto aqui, es para que se pare la musica del menu al entrar aqui
+        BaseActivity.pararmusica(); //detener musica del menu
+
+        botonStop = findViewById(R.id.botonPlantarse);
+        botonStop.setVisibility(View.GONE); // Ocultar inicialmente
+        botonStop.setOnClickListener(v -> plantarse());
     }
 
     private void setupMediaPlayer() {
@@ -85,27 +104,23 @@ public class BuscaMinasActivity extends BaseActivity {
         apuestaInput=findViewById(R.id.betInput);
 
         //botones de dificultad
+        dificultades=findViewById(R.id.grupodificultad);
         botFacil=findViewById(R.id.botFacil);
         botMedia=findViewById(R.id.botMedia);
         botDificil=findViewById(R.id.botDificil);
-        //configurar para solo seleccionar una
-        View.OnClickListener dificultadListener=v -> {
-            resetearDificultades();
 
-            if (v.getId()==R.id.botFacil) {
+        //Detectar cambios en el RadioGroup
+        dificultades.setOnCheckedChangeListener((group,checkedId)->{
+            if (checkedId==R.id.botFacil) {
                 dificultadSelec = "Facil";
-                botFacil.setSelected(true);
-            }else if(v.getId()==R.id.botMedia){
-                dificultadSelec="Media";
-                botMedia.setSelected(true);
-            }else if(v.getId()==R.id.botDificil) {
-                dificultadSelec = "Dificil";
-                botDificil.setSelected(true);
+            } else if(checkedId==R.id.botMedia) {
+                dificultadSelec = "Media";
+            }else if (checkedId==R.id.botDificil){
+                    dificultadSelec="Dificil";
+            }else{
+                dificultadSelec="";
             }
-        };
-        botFacil.setOnClickListener(dificultadListener);
-        botMedia.setOnClickListener(dificultadListener);
-        botDificil.setOnClickListener(dificultadListener);
+        });
 
         //boton comenzar
         botonComenzar=findViewById(R.id.botonComenzar);
@@ -116,7 +131,7 @@ public class BuscaMinasActivity extends BaseActivity {
     private void mostrarInstrucciones() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Instrucciones del Buscaminas");
-        builder.setMessage("El objetivo del juego es encontrar todos los diamantes evitando destapar cualquier bomba. Para comenzar, introduce la cantidad que deseas apostar, elige el nivel de dificultad y presiona Comenzar. Buena suerte :)");
+        builder.setMessage("El objetivo del juego es encontrar los diamantes evitando las bombas. Para comenzar, introduce la cantidad que deseas apostar, elige el nivel de dificultad y presiona 'Comenzar'. Recuerda que puedes plantarte en cualquier momento. Buena suerte :)");
         builder.setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -127,21 +142,18 @@ public class BuscaMinasActivity extends BaseActivity {
     }
 
     private void resetearDificultades(){
-        botFacil.setSelected(false);
-        botMedia.setSelected(false);
-        botDificil.setSelected(false);
+        dificultades.clearCheck();
     }
 
     private void iniciarJuego(){
         String apuestaStr=apuestaInput.getText().toString();
-        apuesta=Float.parseFloat(apuestaStr);
-
         //no se introduce nada en el EditText
         if (apuestaStr.isEmpty()){
             mostrarAlerta("Error","Introduce una cantidad para apostar.");
             return;
         }
 
+        apuesta=Float.parseFloat(apuestaStr);
         //verificar que la apuesta no es mayor al saldo
         if (apuesta>saldo){
             mostrarAlerta("Saldo insuficiente","No tiene saldo suficiente para realizar esta apuesta");
@@ -155,11 +167,14 @@ public class BuscaMinasActivity extends BaseActivity {
         }
 
         //iniciar el juego
-        else{
-            saldo=saldo-apuesta;
-            sal.setText(String.valueOf(saldo));
-            jugar();
-        }
+        saldo=saldo-apuesta;
+        sal.setText(String.valueOf(saldo));
+        botonComenzar.setVisibility(View.GONE);
+        botonStop.setVisibility(View.VISIBLE);
+        ganancias.setText(": 0");
+        gananciasLayout.setVisibility(View.VISIBLE);
+        jugar();
+
     }
 
     private void jugar() {
@@ -183,27 +198,28 @@ public class BuscaMinasActivity extends BaseActivity {
 
         // Colocar bombas aleatoriamente
         Random random = new Random();
-        for (int i = 0; i < numBombas; i++) {
-            int fila, columna;
-            do {
-                fila = random.nextInt(5);
-                columna = random.nextInt(5);
-            } while (tieneBomba[fila][columna]); // Evitar colocar dos bombas en la misma celda
-            tieneBomba[fila][columna] = true;
+        int bombasColocadas=0;
+        while(bombasColocadas<numBombas){
+            int fila=random.nextInt(5);
+            int columna= random.nextInt(5);
+            if(!tieneBomba[fila][columna]){
+                tieneBomba[fila][columna]=true;
+                bombasColocadas++;
+            }
         }
+
         // Colocar diamantes aleatoriamente
-        for (int i = 0; i < totalDiamantes; i++) {
-            int fila, columna;
-            do {
-                fila = random.nextInt(5);
-                columna = random.nextInt(5);
-            } while (tieneBomba[fila][columna] || tieneDiamante[fila][columna]); // Evitar superposiciones
-            tieneDiamante[fila][columna] = true;
+        for (int i = 0; i < 5; i++) {
+            for(int j=0;j<5;j++){
+                if (!tieneBomba[i][j]) {
+                    tieneDiamante[i][j] = true;
+                }
+            }
         }
+
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 casillas[i][j].setEnabled(true);
-                casillas[i][j].setAlpha(1.0f); // Restablecer transparencia
                 casillas[i][j].setImageResource(R.drawable.azulejo2);
             }
         }
@@ -230,13 +246,44 @@ public class BuscaMinasActivity extends BaseActivity {
             casillas[fila][columna].setImageResource(R.drawable.diamante); // Asignar imagen de diamante
             diamantesEncontrados++;
 
+            // Calcular la recompensa parcial
+            int multiplicador = 1;
+            if ("Media".equals(dificultadSelec)) {
+                multiplicador = 2;
+            } else if ("Dificil".equals(dificultadSelec)) {
+                multiplicador = 3;
+            }
+            recompensaParcial = (int)((apuesta / totalDiamantes)*diamantesEncontrados* multiplicador);
+            // Actualizar el TextView de ganancias acumuladas
+            ganancias.setText(": " + recompensaParcial);
+
             if (diamantesEncontrados == totalDiamantes) {
                 mostrarAlerta("¡Felicidades!", "¡Has encontrado todos los diamantes y has ganado el juego!");
                 finalizarJuego(true);
             }
-        } else {
-            casillas[fila][columna].setAlpha(0f);//hacer la casilla transparente
         }
+    }
+
+    private void plantarse(){
+        int multiplicador = 1; // Valor por defecto
+        switch (dificultadSelec) {
+            case "Media":
+                multiplicador = 2; // Más riesgo, más recompensa
+                break;
+            case "Dificil":
+                multiplicador = 3; // Máximo riesgo, máxima recompensa
+                break;
+        }
+        int recompensa = (int)((apuesta / totalDiamantes) * diamantesEncontrados*multiplicador);
+        saldo += recompensa;
+
+        mostrarAlerta("Te has plantado", "Has encontrado " + diamantesEncontrados +
+                " diamantes y te llevas una recompensa de " + recompensa + " monedas.");
+
+        sal.setText(String.valueOf(saldo));
+
+        // Terminar el juego y reiniciar
+        finalizarJuego(false);
     }
 
     private void finalizarJuego(boolean victoria) {
@@ -264,9 +311,13 @@ public class BuscaMinasActivity extends BaseActivity {
             saldo += apuesta * multiplicador;
             sal.setText(String.valueOf(saldo));
         }
-        BaseActivity.saldo=saldo;
 
-        new android.os.Handler().postDelayed(this::resetearTablero, 2000);
+        gananciasLayout.setVisibility(View.GONE);
+        botonComenzar.setVisibility(View.VISIBLE);
+        botonStop.setVisibility(View.GONE);
+        BaseActivity.saldo=saldo;
+        recompensaParcial = 0;
+        new android.os.Handler().postDelayed(this::resetearTablero, 1000);
     }
 
     private void resetearTablero(){
@@ -274,10 +325,10 @@ public class BuscaMinasActivity extends BaseActivity {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 casillas[i][j].setEnabled(false);
-                casillas[i][j].setAlpha(1.0f);
                 casillas[i][j].setImageResource(R.drawable.azulejo2); // Hacer la casilla visible de nuevo
             }
         }
+
         // Restablecer valores del juego
         dificultadSelec = "";
         apuesta = 0;
@@ -292,6 +343,22 @@ public class BuscaMinasActivity extends BaseActivity {
         builder.setMessage(mensaje);
         builder.setPositiveButton("Aceptar", (dialog, which) -> dialog.dismiss());
         builder.show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mediaPlayer != null) {
+            mediaPlayer.start();
+        }
     }
 
     @Override
